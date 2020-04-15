@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">kotlin-shop</string>
+    <string name="cart_header">Корзина</string>
+    <string name="price_header">Цена</string>
+    <string name="discount_price">Процент скидки</string>
+    <string name="price_with_discount">Итог</string>
+    <string name="discount_present">Процент скидки</string>
+    <string name="price">Цена</string>
+    <string name="product_title">Title</string>
+    <string name="second_name_title">Фамилия</string>
+    <string name="first_name_title">Имя</string>
+    <string name="third_name_title">Отчество</string>
+    <string name="phone_title">Телефон</string>
+    <string name="btn_buy_cart">Купить</string>
+</resources>
