@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/svMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,11 +9,9 @@
     android:isScrollContainer="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".MainActivity">
+        tools:context=".view.MainActivity">
 
         <TextView
             android:id="@+id/tvHeader"
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:layout_marginLeft="10dp"
-            android:text="Наименование"
+            android:text="@string/title_header"
             android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvHeader" />
@@ -42,12 +41,13 @@
             android:id="@+id/tvHeaderPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
             android:text="@string/price_header"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tvHeaderProductName"
             app:layout_constraintLeft_toRightOf="@id/tvHeaderProductName"
+            app:layout_constraintRight_toLeftOf="@id/tvHeaderDiscount"
             app:layout_constraintTop_toTopOf="@id/tvHeaderProductName" />
 
         <TextView
@@ -60,17 +60,19 @@
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tvHeaderPrice"
             app:layout_constraintLeft_toRightOf="@id/tvHeaderPrice"
+            app:layout_constraintRight_toLeftOf="@id/tvHeaderDiscountPrice"
             app:layout_constraintTop_toTopOf="@id/tvHeaderPrice" />
 
         <TextView
             android:id="@+id/tvHeaderDiscountPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Итог"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/total_price"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tvHeaderDiscount"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@id/tvHeaderDiscount"
             app:layout_constraintTop_toTopOf="@id/tvHeaderDiscount" />
 
@@ -217,6 +219,15 @@
             app:layout_constraintLeft_toRightOf="@id/tvPhoneTitle"
 
             app:layout_constraintTop_toTopOf="@id/tvPhoneTitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/phone_example"
+            app:layout_constraintLeft_toLeftOf="@id/etPhone"
+            app:layout_constraintRight_toRightOf="@id/etPhone"
+            app:layout_constraintTop_toBottomOf="@id/etPhone" />
 
         <Button
             android:id="@+id/btnApply"

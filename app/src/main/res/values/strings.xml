@@ -2,7 +2,7 @@
     <string name="app_name">kotlin-shop</string>
     <string name="cart_header">Корзина</string>
     <string name="price_header">Цена</string>
-    <string name="discount_price">Процент скидки</string>
+    <string name="discount_price">Скидка</string>
     <string name="price_with_discount">Итог</string>
     <string name="discount_present">Процент скидки</string>
     <string name="price">Цена</string>
@@ -12,4 +12,7 @@
     <string name="third_name_title">Отчество</string>
     <string name="phone_title">Телефон</string>
     <string name="btn_buy_cart">Купить</string>
+    <string name="total_price">Итог</string>
+    <string name="title_header">Наименование</string>
+    <string name="phone_example">Пример, 89999999999</string>
 </resources>
