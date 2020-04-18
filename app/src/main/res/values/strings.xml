@@ -23,4 +23,6 @@
     <string name="some_text">someText</string>
     <string name="detailed_header">Превью</string>
     <string name="btn_to_cart_from_catalog">Корзина</string>
+    <string name="buy_btn_title">Купить</string>
+    <string name="purchase_title">Оформление заказа</string>
 </resources>

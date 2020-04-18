@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/tvCatalogHeader"
-        style="@style/headerTitle"
+        style="@style/bigPrimaryBackground"
         android:text="@string/catalog_header"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,7 +25,7 @@
 
     <Button
         android:id="@+id/btnToCart"
-        style="@style/headerTitle"
+        style="@style/bigPrimaryBackground"
         android:text="@string/btn_to_cart_from_catalog"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -62,130 +62,15 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnApply"
             app:layout_constraintTop_toBottomOf="@id/tvHeaderProductName"
-            />
-        <TextView
-            android:id="@+id/tvSecondNameTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/second_name_title"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvCart" />
-
-        <EditText
-            android:id="@+id/etSecondName"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="@id/tvSecondNameTitle"
-            app:layout_constraintLeft_toRightOf="@id/tvSecondNameTitle"
-
-            app:layout_constraintTop_toTopOf="@id/tvSecondNameTitle" />
-
-        <TextView
-            android:id="@+id/tvFirstNameTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/first_name_title"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSecondNameTitle" />
-
-        <EditText
-            android:id="@+id/etFirstName"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="57dp"
-            android:layout_marginLeft="57dp"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="@id/tvFirstNameTitle"
-            app:layout_constraintLeft_toRightOf="@id/tvFirstNameTitle"
-
-            app:layout_constraintTop_toTopOf="@id/tvFirstNameTitle" />
-
-        <TextView
-            android:id="@+id/tvThirdNameTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/third_name_title"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFirstNameTitle" />
-
-        <EditText
-            android:id="@+id/etThirdName"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="@id/tvThirdNameTitle"
-            app:layout_constraintLeft_toRightOf="@id/tvThirdNameTitle"
-
-            app:layout_constraintTop_toTopOf="@id/tvThirdNameTitle" />
-
-        <TextView
-            android:id="@+id/tvPhoneTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/phone_title"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvThirdNameTitle" />
-
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:importantForAutofill="no"
-            android:inputType="phone"
-            app:layout_constraintBottom_toBottomOf="@id/tvPhoneTitle"
-            app:layout_constraintLeft_toRightOf="@id/tvPhoneTitle"
-
-            app:layout_constraintTop_toTopOf="@id/tvPhoneTitle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/phone_example"
-            app:layout_constraintLeft_toLeftOf="@id/etPhone"
-            app:layout_constraintRight_toRightOf="@id/etPhone"
-            app:layout_constraintTop_toBottomOf="@id/etPhone" />
+            tools:layout_editor_absoluteX="10dp" />
 
         <Button
             android:id="@+id/btnApply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/colorPrimaryDark"
+            style="@style/bigPrimaryBackground"
             android:text="@string/btn_buy_cart"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

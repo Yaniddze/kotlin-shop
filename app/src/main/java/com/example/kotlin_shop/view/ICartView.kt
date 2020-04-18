@@ -8,17 +8,6 @@ import moxy.viewstate.strategy.StateStrategyType
 interface ICartView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showErrorForSecondName(visible: Boolean)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showErrorForFirstName(visible: Boolean)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showErrorForSerName(visible: Boolean)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showErrorForPhone(visible: Boolean)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProducts(products: List<Product>)
+
 }
