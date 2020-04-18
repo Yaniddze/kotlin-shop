@@ -1,5 +1,6 @@
 package com.example.kotlin_shop.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,12 @@ class CatalogView : AppCompatActivity(), ICatalogView {
             layoutManager = viewManager
 
             adapter = recyclerAdapter
+        }
+
+        btnToCart.setOnClickListener {
+            val intent = Intent(this, CartView::class.java)
+
+            startActivity(intent)
         }
 
         presenter.showProducts()

@@ -5,28 +5,38 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.model.Product
 import com.example.kotlin_shop.presenter.CartPresenter
 import com.example.kotlin_shop.view.ICartView
+import com.example.kotlin_shop.view.recycler.CartAdapter
 import kotlinx.android.synthetic.main.cart_layout.*
 
 class CartView : AppCompatActivity(), ICartView {
 
+    private val recyclerAdapter: CartAdapter = CartAdapter()
+    private val viewManager = LinearLayoutManager(this)
     private val presenter = CartPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.cart_layout)
 
-        val product = Product("iphoneCase", 1200.0, 10, "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWVU2?wid=2000&hei=2000&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1566852696308")
-
         presenter.attachView(this)
 
-        tvProductName.text = product.title
-        tvPrice.text = product.price.toString()
-        tvDiscount.text = "${product.salePercent} %"
-        tvDiscountPrice.text = product.calcDiscountPrice().toString()
+        rvCart.apply {
+            setHasFixedSize(true)
+
+            layoutManager = viewManager
+
+            adapter = recyclerAdapter
+        }
+
+        supportActionBar?.title = getString(R.string.cart_header)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+
+        presenter.getProducts()
 
         setListeners()
     }
@@ -98,5 +108,19 @@ class CartView : AppCompatActivity(), ICartView {
 
     override fun showErrorForPhone(visible: Boolean){
         etPhone.showError(visible)
+    }
+
+    override fun showProducts(products: List<Product>) {
+        recyclerAdapter.changeItemSource(products)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

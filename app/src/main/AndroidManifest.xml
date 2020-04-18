@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activities.CartView">
+        <activity
+            android:name=".view.activities.CartView"
+            android:theme="@style/AppBack">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

@@ -14,13 +14,6 @@
         tools:context=".view.activities.CartView">
 
         <TextView
-            android:id="@+id/tvHeader"
-            style="@style/headerTitle"
-            android:text="@string/cart_header"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/tvHeaderProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,27 +22,23 @@
             android:text="@string/title_header"
             android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvHeader" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvHeaderPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="55dp"
             android:text="@string/price_header"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tvHeaderProductName"
             app:layout_constraintLeft_toRightOf="@id/tvHeaderProductName"
-            app:layout_constraintRight_toLeftOf="@id/tvHeaderDiscount"
             app:layout_constraintTop_toTopOf="@id/tvHeaderProductName" />
 
         <TextView
             android:id="@+id/tvHeaderDiscount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="10dp"
             android:text="@string/discount_price"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tvHeaderPrice"
@@ -61,55 +50,20 @@
             android:id="@+id/tvHeaderDiscountPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/total_price"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tvHeaderDiscount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tvHeaderDiscount"
             app:layout_constraintTop_toTopOf="@id/tvHeaderDiscount" />
 
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/product_title"
-            app:layout_constraintLeft_toLeftOf="@id/tvHeaderProductName"
-            app:layout_constraintRight_toRightOf="@id/tvHeaderProductName"
-            app:layout_constraintTop_toBottomOf="@id/tvHeaderProductName" />
-
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/price"
-            app:layout_constraintLeft_toLeftOf="@id/tvHeaderPrice"
-            app:layout_constraintRight_toRightOf="@id/tvHeaderPrice"
-            app:layout_constraintTop_toBottomOf="@id/tvHeaderPrice" />
-
-        <TextView
-            android:id="@+id/tvDiscount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/discount_present"
-            app:layout_constraintLeft_toLeftOf="@id/tvHeaderDiscount"
-            app:layout_constraintRight_toRightOf="@id/tvHeaderDiscount"
-            app:layout_constraintTop_toBottomOf="@id/tvHeaderDiscount" />
-
-        <TextView
-            android:id="@+id/tvDiscountPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/price_with_discount"
-            app:layout_constraintLeft_toLeftOf="@id/tvHeaderDiscountPrice"
-            app:layout_constraintRight_toRightOf="@id/tvHeaderDiscountPrice"
-            app:layout_constraintTop_toBottomOf="@id/tvHeaderDiscountPrice" />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvHeaderProductName"
+            />
         <TextView
             android:id="@+id/tvSecondNameTitle"
             android:layout_width="wrap_content"
@@ -121,7 +75,7 @@
             android:textColor="@android:color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHeaderProductName" />
+            app:layout_constraintTop_toBottomOf="@+id/rvCart" />
 
         <EditText
             android:id="@+id/etSecondName"
