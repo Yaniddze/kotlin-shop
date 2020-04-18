@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/cart_item_style"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/ivCatalogItemImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/product_image_descr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCatalogItemTitle"
+        app:layout_constraintLeft_toRightOf="@id/ivCatalogItemImage"
+        app:layout_constraintTop_toTopOf="@id/ivCatalogItemImage"
+        android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/product_title"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvCatalogItemPrice"
+        app:layout_constraintBottom_toBottomOf="@id/ivCatalogItemImage"
+        app:layout_constraintLeft_toRightOf="@id/ivCatalogItemImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"
+        android:text="@string/catalog_item_price_placeholder"
+        android:layout_margin="5dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

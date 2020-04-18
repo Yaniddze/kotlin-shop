@@ -15,4 +15,8 @@
     <string name="total_price">Итог</string>
     <string name="title_header">Наименование</string>
     <string name="phone_example">Пример, 89999999999</string>
+    <string name="catalog_header">Каталог</string>
+    <string name="footer_title">Футер</string>
+    <string name="product_image_descr">product</string>
+    <string name="catalog_item_price_placeholder">Price</string>
 </resources>

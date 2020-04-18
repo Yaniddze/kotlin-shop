@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.view
+package com.example.kotlin_shop.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,23 +8,24 @@ import android.widget.EditText
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.model.Product
 import com.example.kotlin_shop.presenter.CartPresenter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.kotlin_shop.view.ICartView
+import kotlinx.android.synthetic.main.cart_layout.*
 
-class MainActivity : AppCompatActivity(), ICartView {
+class CartView : AppCompatActivity(), ICartView {
 
     private val presenter = CartPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.cart_layout)
 
-        val product = Product("iphoneCase", 1200.0, 10)
+        val product = Product("iphoneCase", 1200.0, 10, "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWVU2?wid=2000&hei=2000&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1566852696308")
 
         presenter.attachView(this)
 
         tvProductName.text = product.title
         tvPrice.text = product.price.toString()
-        tvDiscount.text = "${product.salePercent.toString()} %"
+        tvDiscount.text = "${product.salePercent} %"
         tvDiscountPrice.text = product.calcDiscountPrice().toString()
 
         setListeners()

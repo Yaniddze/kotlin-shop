@@ -9,7 +9,7 @@ class ModelTests {
         val title = "123"
         val price = 1200.0
         val salePercent = 10
-        val product = Product(title, price, salePercent)
+        val product = Product(title, price, salePercent, "")
 
         assertEquals(product.title, title)
         assertEquals(product.price, price, 0.001)
@@ -21,7 +21,7 @@ class ModelTests {
         val title = ""
         val price = 1200.0
         val salePercent = 10
-        val product = Product(title, price, salePercent)
+        val product = Product(title, price, salePercent, "")
 
         val excepted = product.calcDiscountPrice()
         val actual = price * (1 - (salePercent / 100.0))

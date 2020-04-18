@@ -9,7 +9,8 @@ class Product(
     /**
      * [salePercent] must between 0 and 100
      */
-    val salePercent: Int
+    val salePercent: Int,
+    val imageUrl: String
 ) {
     fun calcDiscountPrice():Double{
         return price * (1 - (salePercent/100.0))
