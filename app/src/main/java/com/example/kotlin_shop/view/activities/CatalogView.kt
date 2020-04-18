@@ -10,7 +10,7 @@ import com.example.kotlin_shop.view.ICatalogView
 import com.example.kotlin_shop.view.recycler.CatalogAdapter
 import kotlinx.android.synthetic.main.catalog_layout.*
 
-class CatalogView: AppCompatActivity(), ICatalogView {
+class CatalogView : AppCompatActivity(), ICatalogView {
 
     private val recyclerAdapter: CatalogAdapter = CatalogAdapter()
     private val viewManager = LinearLayoutManager(this)

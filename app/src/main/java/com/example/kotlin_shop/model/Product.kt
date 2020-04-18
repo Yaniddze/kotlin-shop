@@ -1,5 +1,7 @@
 package com.example.kotlin_shop.model
 
+import java.io.Serializable
+
 class Product(
     val title: String,
     /**
@@ -11,7 +13,7 @@ class Product(
      */
     val salePercent: Int,
     val imageUrl: String
-) {
+): Serializable {
     fun calcDiscountPrice():Double{
         return price * (1 - (salePercent/100.0))
     }
