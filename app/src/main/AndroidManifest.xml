@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kotlin_shop">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,26 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.CatalogView">
+
+        <activity
+            android:name=".view.activities.NavActivity"
+            android:theme="@style/AppActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".view.activities.CartView"
-            android:theme="@style/AppBack">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".view.activities.DetailedView"
-            android:theme="@style/AppBack">
+            android:theme="@style/AppActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -37,12 +33,11 @@
 
         <activity
             android:name=".view.activities.PurchaseView"
-            android:theme="@style/AppBack">
+            android:theme="@style/AppActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 
     </application>
-
 </manifest>

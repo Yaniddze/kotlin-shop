@@ -2,7 +2,6 @@ package com.example.kotlin_shop.presenter
 
 import com.example.kotlin_shop.model.Product
 import com.example.kotlin_shop.view.ICatalogView
-import org.junit.Assert.*
 import org.junit.Test
 
 class CatalogPresenterTests {
@@ -22,7 +21,7 @@ class CatalogPresenterTests {
 
         presenter.attachView(view)
 
-        presenter.showProducts()
+        presenter.getProducts()
 
         assert(view.dataSet.isNotEmpty())
     }

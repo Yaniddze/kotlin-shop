@@ -15,7 +15,7 @@ class CatalogPresenter : MvpPresenter<ICatalogView>() {
         Product("someProd5", 1200.0, 0, "https://i.pinimg.com/736x/14/d1/c0/14d1c0fd755f10391c7b4fa62fccf754.jpg")
     )
 
-    fun showProducts() {
+    fun getProducts() {
         viewState.showProducts(myDataSet)
     }
 }

@@ -25,4 +25,9 @@
     <string name="btn_to_cart_from_catalog">Корзина</string>
     <string name="buy_btn_title">Купить</string>
     <string name="purchase_title">Оформление заказа</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="menu_catalog_title">Каталог</string>
+    <string name="menu_account_title">Аккаунт</string>
+    <string name="menu_cart_title">Корзина</string>
+    <string name="this_is_account_page_placeholder">This is account page</string>
 </resources>

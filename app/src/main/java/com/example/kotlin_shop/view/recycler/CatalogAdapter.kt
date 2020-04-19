@@ -51,7 +51,7 @@ class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         }
     }
 
-    fun changeItems(products: List<Product>) {
+    fun changeItemSource(products: List<Product>) {
         dataSet = products
         notifyDataSetChanged()
     }

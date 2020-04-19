@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_catalog">
+
+    <fragment
+        android:id="@+id/navigation_catalog"
+        android:name="com.example.kotlin_shop.view.fragments.CatalogFragment"
+        android:label="@string/menu_catalog_title"
+        tools:layout="@layout/fragment_catalog" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.example.kotlin_shop.view.fragments.AccountFragment"
+        android:label="@string/menu_account_title"
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.example.kotlin_shop.view.fragments.CartFragment"
+        android:label="@string/menu_cart_title"
+        tools:layout="@layout/fragment_cart" />
+</navigation>
