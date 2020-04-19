@@ -3,13 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+
     app:startDestination="@+id/navigation_catalog">
 
     <fragment
         android:id="@+id/navigation_catalog"
         android:name="com.example.kotlin_shop.view.fragments.CatalogFragment"
         android:label="@string/menu_catalog_title"
-        tools:layout="@layout/fragment_catalog" />
+        tools:layout="@layout/fragment_catalog"
+        app:startDestination="@id/action_navigation_catalog_to_naigation_detailed">
+        <action
+            android:id="@+id/action_navigation_catalog_to_naigation_detailed"
+            app:destination="@id/naigation_detailed" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"
@@ -22,4 +28,13 @@
         android:name="com.example.kotlin_shop.view.fragments.CartFragment"
         android:label="@string/menu_cart_title"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/naigation_detailed"
+        android:name="com.example.kotlin_shop.view.fragments.DetailedFragment"
+        android:label="Превью"
+        tools:layout="@layout/detailed_layout">
+        <argument
+            android:name="product"
+            app:argType="com.example.kotlin_shop.model.Product" />
+    </fragment>
 </navigation>

@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.model.Product
 import com.example.kotlin_shop.view.activities.DetailedView
+import com.example.kotlin_shop.view.activities.NavActivity
 
 class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
@@ -43,11 +44,12 @@ class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
             .into(imageView)
 
         holder.layout.setOnClickListener {
-            val context = imageView.context
-            val intent = Intent(context, DetailedView::class.java)
-            intent.putExtra("product", product)
-
-            context.startActivity(intent)
+            val context = imageView.context as NavActivity
+//            val intent = Intent(context, DetailedView::class.java)
+//            intent.putExtra("product", product)
+//
+//            context.startActivity(intent)
+            context.showDetailed(product)
         }
     }
 
