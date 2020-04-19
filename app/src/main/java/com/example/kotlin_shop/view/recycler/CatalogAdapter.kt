@@ -1,6 +1,5 @@
 package com.example.kotlin_shop.view.recycler
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.model.Product
-import com.example.kotlin_shop.view.activities.DetailedView
 import com.example.kotlin_shop.view.activities.NavActivity
 
 class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
@@ -45,10 +43,7 @@ class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
         holder.layout.setOnClickListener {
             val context = imageView.context as NavActivity
-//            val intent = Intent(context, DetailedView::class.java)
-//            intent.putExtra("product", product)
-//
-//            context.startActivity(intent)
+
             context.showDetailed(product)
         }
     }
