@@ -14,7 +14,9 @@
         app:startDestination="@id/action_navigation_catalog_to_naigation_detailed">
         <action
             android:id="@+id/action_navigation_catalog_to_naigation_detailed"
-            app:destination="@id/naigation_detailed" />
+            app:destination="@id/naigation_detailed"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -30,7 +32,9 @@
         tools:layout="@layout/fragment_cart" >
         <action
             android:id="@+id/action_navigation_cart_to_purchaseFragment"
-            app:destination="@id/navigation_purchase" />
+            app:destination="@id/navigation_purchase"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/naigation_detailed"
