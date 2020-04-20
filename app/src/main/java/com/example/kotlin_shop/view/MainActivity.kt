@@ -1,25 +1,25 @@
-package com.example.kotlin_shop.view.activities
+package com.example.kotlin_shop.view
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.model.Product
+import com.example.kotlin_shop.view.fragments.CartFragmentDirections
 import com.example.kotlin_shop.view.fragments.CatalogFragmentDirections
 
-class NavActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nav)
+        setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         navController = findNavController(R.id.nav_host_fragment)
@@ -34,6 +34,11 @@ class NavActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
 
     fun showDetailed(product: Product){
         val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(product)
@@ -41,8 +46,10 @@ class NavActivity : AppCompatActivity() {
         navController.navigate(action)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+    fun showPurchaseFragment(){
+        val action = CartFragmentDirections.actionNavigationCartToPurchaseFragment()
+
+        navController.navigate(action)
     }
+
 }

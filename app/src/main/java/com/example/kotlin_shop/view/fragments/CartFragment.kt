@@ -1,6 +1,5 @@
 package com.example.kotlin_shop.view.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.model.Product
 import com.example.kotlin_shop.presenter.CartPresenter
-import com.example.kotlin_shop.view.ICartView
-import com.example.kotlin_shop.view.activities.PurchaseView
+import com.example.kotlin_shop.view.interfaces.ICartView
+import com.example.kotlin_shop.view.MainActivity
 import com.example.kotlin_shop.view.recycler.CartAdapter
 
-class CartFragment : Fragment(), ICartView {
+class CartFragment : Fragment(),
+    ICartView {
 
     private val recyclerAdapter = CartAdapter()
 
@@ -47,8 +47,7 @@ class CartFragment : Fragment(), ICartView {
         }
 
         btnOrder.setOnClickListener {
-            val intent = Intent(btnOrder.context, PurchaseView::class.java)
-            startActivity(intent)
+            (context as MainActivity).showPurchaseFragment()
         }
 
         presenter.getProducts()

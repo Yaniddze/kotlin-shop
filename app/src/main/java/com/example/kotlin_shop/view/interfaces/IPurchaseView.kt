@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.view
+package com.example.kotlin_shop.view.interfaces
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

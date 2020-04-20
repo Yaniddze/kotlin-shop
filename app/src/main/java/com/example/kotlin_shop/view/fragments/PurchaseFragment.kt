@@ -1,30 +1,48 @@
-package com.example.kotlin_shop.view.activities
+package com.example.kotlin_shop.view.fragments
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.presenter.PurchasePresenter
-import com.example.kotlin_shop.view.IPurchaseView
-import kotlinx.android.synthetic.main.purchase_layout.*
+import com.example.kotlin_shop.view.interfaces.IPurchaseView
 
-class PurchaseView: AppCompatActivity(), IPurchaseView {
+class PurchaseFragment: Fragment(),
+    IPurchaseView {
 
     val presenter = PurchasePresenter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.purchase_layout)
+    private lateinit var etFirstName: EditText
+    private lateinit var etSecondName: EditText
+    private lateinit var etThirdName: EditText
+    private lateinit var etPhone: EditText
+    private lateinit var btnBuy: Button
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root = inflater.inflate(R.layout.fragment_purchase, container, false)
+
+        etFirstName = root.findViewById(R.id.etFirstName)
+        etSecondName = root.findViewById(R.id.etSecondName)
+        etThirdName = root.findViewById(R.id.etThirdName)
+        etPhone = root.findViewById(R.id.etPhone)
+        btnBuy = root.findViewById(R.id.btnBuy)
 
         presenter.attachView(this)
 
-        supportActionBar?.title = getString(R.string.purchase_title)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-
         setListeners()
+
+        return root
     }
 
     private fun setListeners() {
@@ -74,7 +92,7 @@ class PurchaseView: AppCompatActivity(), IPurchaseView {
         })
 
         btnBuy.setOnClickListener {
-            Toast.makeText(this, "Покупка...", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Покупка...", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -98,15 +116,5 @@ class PurchaseView: AppCompatActivity(), IPurchaseView {
 
     override fun showErrorForPhone(visible: Boolean){
         etPhone.showError(!visible)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        this.finish()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

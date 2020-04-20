@@ -20,7 +20,7 @@ class DetailedFragment(): Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.detailed_layout, container, false)
+        val root = inflater.inflate(R.layout.fragment_detailed, container, false)
 
         val imageView = root.findViewById<ImageView>(R.id.ivDetailedImage)
         val titleView = root.findViewById<TextView>(R.id.tvDetailedTitle)

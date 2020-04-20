@@ -1,6 +1,6 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.view.IPurchaseView
+import com.example.kotlin_shop.view.interfaces.IPurchaseView
 import org.junit.Assert.*
 import org.junit.Test
 

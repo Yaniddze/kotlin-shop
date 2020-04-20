@@ -1,7 +1,7 @@
 package com.example.kotlin_shop.presenter
 
 import com.example.kotlin_shop.model.Product
-import com.example.kotlin_shop.view.ICatalogView
+import com.example.kotlin_shop.view.interfaces.ICatalogView
 import moxy.MvpPresenter
 
 class CatalogPresenter : MvpPresenter<ICatalogView>() {

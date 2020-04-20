@@ -52,9 +52,10 @@ dependencies {
 
     // Moxy
     def moxyVersion = "2.1.1"
+    def moxyVersionAndroid = "2.1.2"
     implementation "com.github.moxy-community:moxy:$moxyVersion"
-    implementation "com.github.moxy-community:moxy-android:$moxyVersion"
-    implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
+    implementation "com.github.moxy-community:moxy-android:$moxyVersionAndroid"
+    implementation "com.github.moxy-community:moxy-androidx:$moxyVersionAndroid"
     kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
 
 

@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.view
+package com.example.kotlin_shop.view.interfaces
 
 import com.example.kotlin_shop.model.Product
 import moxy.MvpView

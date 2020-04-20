@@ -13,29 +13,12 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.activities.NavActivity"
+            android:name=".view.MainActivity"
             android:theme="@style/AppActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-        <activity
-            android:name=".view.activities.DetailedView"
-            android:theme="@style/AppActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".view.activities.PurchaseView"
-            android:theme="@style/AppActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 

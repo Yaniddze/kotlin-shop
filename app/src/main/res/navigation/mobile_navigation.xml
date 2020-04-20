@@ -27,14 +27,23 @@
         android:id="@+id/navigation_cart"
         android:name="com.example.kotlin_shop.view.fragments.CartFragment"
         android:label="@string/menu_cart_title"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_navigation_cart_to_purchaseFragment"
+            app:destination="@id/navigation_purchase" />
+    </fragment>
     <fragment
         android:id="@+id/naigation_detailed"
         android:name="com.example.kotlin_shop.view.fragments.DetailedFragment"
         android:label="Превью"
-        tools:layout="@layout/detailed_layout">
+        tools:layout="@layout/fragment_detailed">
         <argument
             android:name="product"
             app:argType="com.example.kotlin_shop.model.Product" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_purchase"
+        android:name="com.example.kotlin_shop.view.fragments.PurchaseFragment"
+        android:label="Оформление заказа"
+        tools:layout="@layout/fragment_purchase"/>
 </navigation>
