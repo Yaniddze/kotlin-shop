@@ -1,14 +1,14 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.model.Product
+import com.example.domain.Product
 import com.example.kotlin_shop.view.interfaces.ICartView
 import org.junit.Test
 
 class CartPresenterTests {
     class Tester: ICartView {
-        var products: List<Product> = listOf()
+        var products: List<com.example.domain.Product> = listOf()
 
-        override fun showProducts(products: List<Product>) {
+        override fun showProducts(products: List<com.example.domain.Product>) {
             this.products = products
         }
     }

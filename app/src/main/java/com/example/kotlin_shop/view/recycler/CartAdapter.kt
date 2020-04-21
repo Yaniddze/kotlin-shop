@@ -6,12 +6,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.model.Product
+import com.example.domain.Product
 
 class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     class ViewHolder(val layout: ConstraintLayout): RecyclerView.ViewHolder(layout)
 
-    private var dataSet: List<Product> = listOf()
+    private var dataSet: List<com.example.domain.Product> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context)
@@ -34,7 +34,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         return dataSet.size
     }
 
-    fun changeItemSource(products: List<Product>){
+    fun changeItemSource(products: List<com.example.domain.Product>){
         dataSet = products
         notifyDataSetChanged()
     }

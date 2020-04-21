@@ -1,6 +1,6 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.model.Product
+import com.example.domain.Product
 import com.example.kotlin_shop.view.interfaces.ICartView
 import moxy.MvpPresenter
 

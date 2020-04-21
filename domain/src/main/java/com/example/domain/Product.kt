@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.model
+package com.example.domain
 
 import java.io.Serializable
 

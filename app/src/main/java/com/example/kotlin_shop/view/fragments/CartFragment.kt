@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.model.Product
+import com.example.domain.Product
 import com.example.kotlin_shop.presenter.CartPresenter
 import com.example.kotlin_shop.view.interfaces.ICartView
 import com.example.kotlin_shop.view.MainActivity
@@ -55,7 +55,7 @@ class CartFragment : Fragment(),
         return root
     }
 
-    override fun showProducts(products: List<Product>) {
+    override fun showProducts(products: List<com.example.domain.Product>) {
         recyclerAdapter.changeItemSource(products)
     }
 }

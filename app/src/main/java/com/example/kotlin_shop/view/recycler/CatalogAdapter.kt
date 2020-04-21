@@ -8,12 +8,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.model.Product
+import com.example.domain.Product
 import com.example.kotlin_shop.view.MainActivity
 
 class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
-    private var dataSet: List<Product> = listOf()
+    private var dataSet: List<com.example.domain.Product> = listOf()
 
     class ViewHolder(val layout: ConstraintLayout) : RecyclerView.ViewHolder(layout)
 
@@ -48,7 +48,7 @@ class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         }
     }
 
-    fun changeItemSource(products: List<Product>) {
+    fun changeItemSource(products: List<com.example.domain.Product>) {
         dataSet = products
         notifyDataSetChanged()
     }

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.model.Product
+import com.example.domain.Product
 
 class DetailedFragment(): Fragment() {
 
@@ -27,7 +27,7 @@ class DetailedFragment(): Fragment() {
         val priceView = root.findViewById<TextView>(R.id.tvDetailedPrice)
 
 
-        val product = arguments?.get("product") as Product
+        val product = arguments?.get("product") as com.example.domain.Product
 
         Glide
             .with(imageView.context)
