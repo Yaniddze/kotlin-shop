@@ -2,19 +2,24 @@ package com.example.domain
 
 import java.io.Serializable
 
-class Product(
+class Product internal constructor(
+
+    override val id: Int,
     val title: String,
-    /**
-     * [price] must be positive
-     */
-    val price: Double,
-    /**
-     * [salePercent] must between 0 and 100
-     */
-    val salePercent: Int,
-    val imageUrl: String
-): Serializable {
-    fun calcDiscountPrice():Double{
-        return price * (1 - (salePercent/100.0))
+    val imageUrl: String,
+    val lot: Lot
+
+): Entity(id), Serializable {
+
+    override fun toString(): String {
+        return "$id: $title"
+    }
+
+}
+
+class ProductFactory {
+    fun createProduct(id: Int, title: String, imageUrl: String, price: Double, salePercent: Int): Product {
+        val lot = Lot(price, salePercent)
+        return Product(id, title, imageUrl, lot)
     }
 }

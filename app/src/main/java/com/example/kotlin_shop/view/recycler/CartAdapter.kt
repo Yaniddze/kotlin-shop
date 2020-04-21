@@ -11,7 +11,7 @@ import com.example.domain.Product
 class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     class ViewHolder(val layout: ConstraintLayout): RecyclerView.ViewHolder(layout)
 
-    private var dataSet: List<com.example.domain.Product> = listOf()
+    private var dataSet: List<Product> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context)
@@ -24,9 +24,9 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         val item = dataSet[position]
 
         holder.layout.findViewById<TextView>(R.id.tvCartItemTitle).text = item.title
-        holder.layout.findViewById<TextView>(R.id.tvCartItemPrice).text = item.price.toString()
-        holder.layout.findViewById<TextView>(R.id.tvCartItemDiscount).text = item.salePercent.toString() + " %"
-        holder.layout.findViewById<TextView>(R.id.tvCartItemDiscountPrice).text = item.calcDiscountPrice().toString()
+        holder.layout.findViewById<TextView>(R.id.tvCartItemPrice).text = item.lot.price.toString()
+        holder.layout.findViewById<TextView>(R.id.tvCartItemDiscount).text = item.lot.salePercent.toString() + " %"
+        holder.layout.findViewById<TextView>(R.id.tvCartItemDiscountPrice).text = item.lot.calcDiscountPrice().toString()
 
     }
 
@@ -34,7 +34,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         return dataSet.size
     }
 
-    fun changeItemSource(products: List<com.example.domain.Product>){
+    fun changeItemSource(products: List<Product>){
         dataSet = products
         notifyDataSetChanged()
     }

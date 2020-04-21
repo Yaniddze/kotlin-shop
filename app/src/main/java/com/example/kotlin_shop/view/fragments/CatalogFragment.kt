@@ -13,7 +13,7 @@ import com.example.kotlin_shop.presenter.CatalogPresenter
 import com.example.kotlin_shop.view.interfaces.ICatalogView
 import com.example.kotlin_shop.view.recycler.CatalogAdapter
 
-class CatalogFragment : Fragment(),
+class CatalogFragment : Fragment(R.layout.fragment_catalog),
     ICatalogView {
 
     private val recyclerAdapter = CatalogAdapter()
@@ -26,7 +26,7 @@ class CatalogFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_catalog, container, false)
+        val root = super.onCreateView(inflater, container, savedInstanceState)!!
 
         presenter.attachView(this)
 
@@ -47,7 +47,7 @@ class CatalogFragment : Fragment(),
         return root
     }
 
-    override fun showProducts(products: List<com.example.domain.Product>) {
+    override fun showProducts(products: List<Product>) {
         recyclerAdapter.changeItemSource(products)
     }
 }

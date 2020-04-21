@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.domain.Product
 
-class DetailedFragment(): Fragment() {
+class DetailedFragment(): Fragment(R.layout.fragment_detailed) {
 
 
     override fun onCreateView(
@@ -20,14 +20,14 @@ class DetailedFragment(): Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_detailed, container, false)
+        val root = super.onCreateView(inflater, container, savedInstanceState)!!
 
         val imageView = root.findViewById<ImageView>(R.id.ivDetailedImage)
         val titleView = root.findViewById<TextView>(R.id.tvDetailedTitle)
         val priceView = root.findViewById<TextView>(R.id.tvDetailedPrice)
 
 
-        val product = arguments?.get("product") as com.example.domain.Product
+        val product = arguments?.get("product") as Product
 
         Glide
             .with(imageView.context)
@@ -36,7 +36,7 @@ class DetailedFragment(): Fragment() {
             .into(imageView)
 
         titleView.text = product.title
-        priceView.text = product.calcDiscountPrice().toString()
+        priceView.text = product.lot.calcDiscountPrice().toString()
 
 
         return root

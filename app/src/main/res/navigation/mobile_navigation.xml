@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_detailed">
         <argument
             android:name="product"
-            app:argType="com.example.kotlin_shop.model.Product" />
+            app:argType="com.example.domain.Product" />
     </fragment>
     <fragment
         android:id="@+id/navigation_purchase"

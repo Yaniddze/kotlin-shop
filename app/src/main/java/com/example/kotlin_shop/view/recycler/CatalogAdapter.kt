@@ -13,7 +13,7 @@ import com.example.kotlin_shop.view.MainActivity
 
 class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
-    private var dataSet: List<com.example.domain.Product> = listOf()
+    private var dataSet: List<Product> = listOf()
 
     class ViewHolder(val layout: ConstraintLayout) : RecyclerView.ViewHolder(layout)
 
@@ -29,7 +29,7 @@ class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
         holder.layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.title
         holder.layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
-            product.calcDiscountPrice().toString()
+            product.lot.calcDiscountPrice().toString()
 
         val imageView = holder.layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
 
@@ -48,7 +48,7 @@ class CatalogAdapter() : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         }
     }
 
-    fun changeItemSource(products: List<com.example.domain.Product>) {
+    fun changeItemSource(products: List<Product>) {
         dataSet = products
         notifyDataSetChanged()
     }

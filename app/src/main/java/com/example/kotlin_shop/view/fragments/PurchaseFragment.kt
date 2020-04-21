@@ -14,7 +14,7 @@ import com.example.kotlin_shop.R
 import com.example.kotlin_shop.presenter.PurchasePresenter
 import com.example.kotlin_shop.view.interfaces.IPurchaseView
 
-class PurchaseFragment: Fragment(),
+class PurchaseFragment: Fragment(R.layout.fragment_purchase),
     IPurchaseView {
 
     val presenter = PurchasePresenter()
@@ -30,7 +30,7 @@ class PurchaseFragment: Fragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_purchase, container, false)
+        val root = super.onCreateView(inflater, container, savedInstanceState)!!
 
         etFirstName = root.findViewById(R.id.etFirstName)
         etSecondName = root.findViewById(R.id.etSecondName)

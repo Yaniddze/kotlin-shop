@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +15,9 @@ import com.example.kotlin_shop.presenter.CartPresenter
 import com.example.kotlin_shop.view.interfaces.ICartView
 import com.example.kotlin_shop.view.MainActivity
 import com.example.kotlin_shop.view.recycler.CartAdapter
+import kotlinx.android.synthetic.main.fragment_cart.*
 
-class CartFragment : Fragment(),
+class CartFragment : Fragment(R.layout.fragment_cart),
     ICartView {
 
     private val recyclerAdapter = CartAdapter()
@@ -28,7 +30,7 @@ class CartFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_cart, container, false)
+        val root = super.onCreateView(inflater, container, savedInstanceState)!!
 
         val recycler = root.findViewById<RecyclerView>(R.id.rvCart)
 
