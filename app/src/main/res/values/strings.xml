@@ -31,4 +31,7 @@
     <string name="menu_cart_title">Корзина</string>
     <string name="this_is_account_page_placeholder">This is account page</string>
     <string name="detailed_nav_title">Описание</string>
+    <string name="delete_icon_iv_description">delete icon</string>
+    <string name="add_catalog_item_btn_title">Добавить</string>
+    <string name="catalog_add_item_sign">+</string>
 </resources>

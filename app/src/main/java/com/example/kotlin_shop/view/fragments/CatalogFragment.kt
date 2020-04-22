@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,10 +45,18 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog),
 
         presenter.getProducts()
 
+        root.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
+            presenter.addItem()
+        }
+
         return root
     }
 
-    override fun showProducts(products: List<Product>) {
+    override fun showProducts(products: MutableList<Product>) {
         recyclerAdapter.changeItemSource(products)
+    }
+
+    override fun onAddItem(product: Product) {
+        recyclerAdapter.addItem(product)
     }
 }
