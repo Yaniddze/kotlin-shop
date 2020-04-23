@@ -1,12 +1,12 @@
 package com.example.kotlin_shop.presenter
 
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.view.interfaces.ICatalogView
+import com.example.kotlin_shop.view.interfaces.CatalogView
 import org.junit.Test
 
 class CatalogPresenterTests {
     private class TestClass:
-        ICatalogView {
+        CatalogView {
         var dataSet = mutableListOf<Product>()
 
         override fun showProducts(products: MutableList<Product>) {

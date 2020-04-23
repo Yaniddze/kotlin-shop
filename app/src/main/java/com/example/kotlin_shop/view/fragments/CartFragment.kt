@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presenter.CartPresenter
-import com.example.kotlin_shop.view.interfaces.ICartView
+import com.example.kotlin_shop.view.interfaces.CartView
 import com.example.kotlin_shop.view.MainActivity
 import com.example.kotlin_shop.view.recycler.CartAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), ICartView {
+class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
 
     private val recyclerAdapter = CartAdapter(::onDelete)
 

@@ -1,11 +1,11 @@
 package com.example.kotlin_shop.presenter
 
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.view.interfaces.ICartView
+import com.example.kotlin_shop.view.interfaces.CartView
 import org.junit.Test
 
 class CartPresenterTests {
-    class Tester: ICartView {
+    class Tester: CartView {
         var products: MutableList<Product> = mutableListOf()
 
         override fun showProducts(products: MutableList<Product>) {

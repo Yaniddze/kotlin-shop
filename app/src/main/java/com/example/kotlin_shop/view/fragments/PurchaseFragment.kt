@@ -3,20 +3,17 @@ package com.example.kotlin_shop.view.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.presenter.PurchasePresenter
-import com.example.kotlin_shop.view.interfaces.IPurchaseView
+import com.example.kotlin_shop.view.interfaces.PurchaseView
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class PurchaseFragment: MvpAppCompatFragment(R.layout.fragment_purchase), IPurchaseView {
+class PurchaseFragment: MvpAppCompatFragment(R.layout.fragment_purchase), PurchaseView {
 
     private val presenter by moxyPresenter { PurchasePresenter() }
 

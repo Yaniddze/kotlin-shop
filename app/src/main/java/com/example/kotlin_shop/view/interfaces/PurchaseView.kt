@@ -4,7 +4,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface IPurchaseView: MvpView {
+interface PurchaseView: MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showErrorForSecondName(visible: Boolean)
 

@@ -1,9 +1,9 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.view.interfaces.IPurchaseView
+import com.example.kotlin_shop.view.interfaces.PurchaseView
 import moxy.MvpPresenter
 
-class PurchasePresenter: MvpPresenter<IPurchaseView>() {
+class PurchasePresenter: MvpPresenter<PurchaseView>() {
 
     fun validatePhone(phone: String){
         val validationResult = if(phone.startsWith("8"))

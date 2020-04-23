@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presenter.CatalogPresenter
-import com.example.kotlin_shop.view.interfaces.ICatalogView
+import com.example.kotlin_shop.view.interfaces.CatalogView
 import com.example.kotlin_shop.view.recycler.CatalogAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), ICatalogView {
+class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), CatalogView {
 
     private val recyclerAdapter = CatalogAdapter()
 

@@ -10,11 +10,11 @@ import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presenter.DetailedPresenter
-import com.example.kotlin_shop.view.interfaces.IDetailedView
+import com.example.kotlin_shop.view.interfaces.DetailedView
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), IDetailedView {
+class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), DetailedView {
 
     private val presenter by moxyPresenter { DetailedPresenter() }
 

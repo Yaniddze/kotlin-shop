@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.kotlin_shop.data.dao.ICartItemDao
+import com.example.kotlin_shop.data.dao.CartItemDao
 import com.example.kotlin_shop.data.entities.CartItemDB
 
 @Database(
@@ -13,7 +13,7 @@ import com.example.kotlin_shop.data.entities.CartItemDB
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase(){
-    abstract fun cartItemDao(): ICartItemDao
+    abstract fun cartItemDao(): CartItemDao
 
 
     companion object{

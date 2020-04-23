@@ -4,7 +4,7 @@ import androidx.room.*
 import com.example.kotlin_shop.data.entities.CartItemDB
 
 @Dao
-interface ICartItemDao {
+interface CartItemDao {
 
     @Query("SELECT * FROM cart_item")
     suspend fun getCartItems(): List<CartItemDB>
