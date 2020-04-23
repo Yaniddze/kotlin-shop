@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,14 +14,17 @@ import com.example.kotlin_shop.presenter.CartPresenter
 import com.example.kotlin_shop.view.interfaces.ICartView
 import com.example.kotlin_shop.view.MainActivity
 import com.example.kotlin_shop.view.recycler.CartAdapter
-import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment(R.layout.fragment_cart),
     ICartView {
 
-    private val recyclerAdapter = CartAdapter()
+    private val recyclerAdapter = CartAdapter(::onDelete)
 
     private val presenter = CartPresenter()
+
+    private fun onDelete(product: Product){
+        presenter.deleteItem(product)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +59,11 @@ class CartFragment : Fragment(R.layout.fragment_cart),
         return root
     }
 
-    override fun showProducts(products: List<com.example.domain.Product>) {
+    override fun showProducts(products: MutableList<Product>) {
         recyclerAdapter.changeItemSource(products)
+    }
+
+    override fun onItemDeleted(product: Product) {
+        recyclerAdapter.deleteItem(product)
     }
 }

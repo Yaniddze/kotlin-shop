@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
 import com.example.domain.Product
 
-class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(
+    private val onDelete: (product: Product) -> Unit
+): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     class ViewHolder(val layout: ConstraintLayout): RecyclerView.ViewHolder(layout)
 
-    private var dataSet: List<Product> = listOf()
+    private var dataSet: MutableList<Product> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context)
@@ -27,14 +29,24 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         holder.layout.findViewById<TextView>(R.id.tvCartItemPrice).text = item.lot.price.toString()
         holder.layout.findViewById<TextView>(R.id.tvCartItemDiscount).text = item.lot.salePercent.toString() + " %"
         holder.layout.findViewById<TextView>(R.id.tvCartItemDiscountPrice).text = item.lot.calcDiscountPrice().toString()
-
+        holder.layout.findViewById<TextView>(R.id.tvDeleteCartItem).setOnClickListener {
+            onDelete(item)
+        }
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
 
-    fun changeItemSource(products: List<Product>){
+    fun deleteItem(product: Product){
+        val index = dataSet.indexOf(product)
+        if(index != -1){
+            dataSet.removeAt(index)
+            notifyItemRemoved(index)
+        }
+    }
+
+    fun changeItemSource(products: MutableList<Product>){
         dataSet = products
         notifyDataSetChanged()
     }

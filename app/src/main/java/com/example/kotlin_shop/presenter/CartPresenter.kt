@@ -1,24 +1,34 @@
 package com.example.kotlin_shop.presenter
 
+import com.example.data.repositories.CartItemRepository
+import com.example.domain.Product
 import com.example.domain.ProductFactory
 import com.example.kotlin_shop.view.interfaces.ICartView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import moxy.MvpPresenter
 
 class CartPresenter: MvpPresenter<ICartView>() {
 
+    private val repository = CartItemRepository
+
     private val factory = ProductFactory()
 
-    private val myDataSet = listOf(
-        factory.createProduct(1, "someProd0", "123321", 1200.0, 0),
-        factory.createProduct(2, "someProd1", "123321", 1200.0, 0),
-        factory.createProduct(3, "someProd2", "123321", 1200.0, 0),
-        factory.createProduct(4, "someProd3", "123321", 1200.0, 0),
-        factory.createProduct(5, "someProd4", "123321", 1200.0, 0),
-        factory.createProduct(6, "someProd5", "123321", 1200.0, 0)
-    )
-
-
     fun getProducts(){
-        viewState?.showProducts(myDataSet)
+
+        lateinit var items: MutableList<Product>
+        runBlocking(Dispatchers.IO){
+            items = repository.getItems()
+        }
+
+        viewState?.showProducts(items)
+    }
+
+    fun deleteItem(product: Product){
+        runBlocking(Dispatchers.IO){
+            repository.deleteItem(product)
+        }
+
+        viewState?.onItemDeleted(product)
     }
 }
