@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kotlin_shop.R
-import com.example.domain.Product
+import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.view.fragments.CartFragmentDirections
 import com.example.kotlin_shop.view.fragments.CatalogFragmentDirections
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showDetailed(product: com.example.domain.Product){
+    fun showDetailed(product: Product){
         val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(product)
 
         navController.navigate(action)

@@ -1,7 +1,7 @@
-package com.example.data.dao
+package com.example.kotlin_shop.data.dao
 
 import androidx.room.*
-import com.example.data.entities.CartItemDB
+import com.example.kotlin_shop.data.entities.CartItemDB
 
 @Dao
 interface ICartItemDao {

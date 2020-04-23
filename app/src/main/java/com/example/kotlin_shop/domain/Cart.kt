@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.kotlin_shop.domain
 
 import java.util.*
 
@@ -33,7 +33,7 @@ class Cart internal constructor(
 }
 
 class CartFactory{
-    fun createCart(items: MutableSet<Product>): Cart{
+    fun createCart(items: MutableSet<Product>): Cart {
         return Cart(
             items
         )

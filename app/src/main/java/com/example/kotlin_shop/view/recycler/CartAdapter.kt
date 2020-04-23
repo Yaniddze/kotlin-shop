@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
-import com.example.domain.Product
+import com.example.kotlin_shop.domain.Product
 
 class CartAdapter(
     private val onDelete: (product: Product) -> Unit

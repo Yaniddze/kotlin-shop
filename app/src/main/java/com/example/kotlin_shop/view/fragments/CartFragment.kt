@@ -1,14 +1,12 @@
 package com.example.kotlin_shop.view.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
-import com.example.domain.Product
+import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presenter.CartPresenter
 import com.example.kotlin_shop.view.interfaces.ICartView
 import com.example.kotlin_shop.view.MainActivity

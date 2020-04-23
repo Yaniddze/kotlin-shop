@@ -1,18 +1,19 @@
-package com.example.domain
+package com.example.kotlin_shop.domain
 
 import org.junit.Assert.*
 import org.junit.Test
 
 class ProductTests {
     @Test
-    fun create_product_success(){
+    fun create_product_success() {
         val title = "123"
         val imageUrl = "321"
         val id = 1
         val price = 123.0
         val salePercent = 22
 
-        val product = ProductFactory().createProduct(id, title, imageUrl, price, salePercent)
+        val product = ProductFactory()
+            .createProduct(id, title, imageUrl, price, salePercent)
 
         assertEquals(product.title, title)
         assertEquals(product.imageUrl, imageUrl)
@@ -22,7 +23,7 @@ class ProductTests {
     }
 
     @Test
-    fun equal_product_success(){
+    fun equal_product_success() {
         val title = "123"
         val imageUrl = "321"
         val id = 1
@@ -37,7 +38,7 @@ class ProductTests {
     }
 
     @Test
-    fun equal_product_failed(){
+    fun equal_product_failed() {
         val title = "123"
         val imageUrl = "321"
         val id = 1
@@ -52,7 +53,7 @@ class ProductTests {
     }
 
     @Test
-    fun calc_lot_price_success(){
+    fun calc_lot_price_success() {
         val price = 1200.0
         val salePercent = 10
 

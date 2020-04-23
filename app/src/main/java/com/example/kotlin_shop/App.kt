@@ -1,7 +1,7 @@
 package com.example.kotlin_shop
 
 import android.app.Application
-import com.example.data.AppDatabase
+import com.example.kotlin_shop.data.AppDatabase
 
 class App: Application() {
 

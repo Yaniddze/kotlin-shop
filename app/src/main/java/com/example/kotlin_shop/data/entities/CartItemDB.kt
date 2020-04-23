@@ -1,4 +1,4 @@
-package com.example.data.entities
+package com.example.kotlin_shop.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -35,7 +35,14 @@ class CartItemFactory(){
         imageUrl: String,
         price: Double,
         salePercent: Int
-    ): CartItemDB{
-        return CartItemDB(0, productId, title, imageUrl, price, salePercent)
+    ): CartItemDB {
+        return CartItemDB(
+            0,
+            productId,
+            title,
+            imageUrl,
+            price,
+            salePercent
+        )
     }
 }

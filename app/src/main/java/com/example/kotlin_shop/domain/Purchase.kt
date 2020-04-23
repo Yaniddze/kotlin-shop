@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.kotlin_shop.domain
 
 import java.util.*
 
@@ -10,7 +10,7 @@ class Purchase internal constructor(
 )
 
 class PurchaseFactory{
-    fun createPurchase(items: Set<Product>, date: Date): Purchase{
+    fun createPurchase(items: Set<Product>, date: Date): Purchase {
         return Purchase(
             items,
             date

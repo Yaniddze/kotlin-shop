@@ -1,10 +1,10 @@
-package com.example.domain
+package com.example.kotlin_shop.domain
 
 import org.junit.Test
 
 class CartTests {
-    private val productFactory = ProductFactory()
-    private val cartFactory = CartFactory()
+    private val productFactory = com.example.kotlin_shop.domain.ProductFactory()
+    private val cartFactory = com.example.kotlin_shop.domain.CartFactory()
 
     @Test
     fun create_cart_success() {
@@ -117,7 +117,7 @@ class CartTests {
 
         val sizeBefore = cart.getItems().size
 
-        val purchase: Purchase = cart.makePurchase()
+        val purchase: com.example.kotlin_shop.domain.Purchase = cart.makePurchase()
 
         // Created purchase object
         assert(purchase.items.size == sizeBefore)

@@ -1,15 +1,19 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.domain.Product
+import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.view.interfaces.ICartView
 import org.junit.Test
 
 class CartPresenterTests {
     class Tester: ICartView {
-        var products: List<com.example.domain.Product> = listOf()
+        var products: MutableList<Product> = mutableListOf()
 
-        override fun showProducts(products: List<com.example.domain.Product>) {
+        override fun showProducts(products: MutableList<Product>) {
             this.products = products
+        }
+
+        override fun onItemDeleted(product: Product) {
+            TODO("Not yet implemented")
         }
     }
 

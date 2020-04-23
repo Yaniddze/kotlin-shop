@@ -1,11 +1,11 @@
-package com.example.data
+package com.example.kotlin_shop.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.data.dao.ICartItemDao
-import com.example.data.entities.CartItemDB
+import com.example.kotlin_shop.data.dao.ICartItemDao
+import com.example.kotlin_shop.data.entities.CartItemDB
 
 @Database(
     entities = [CartItemDB::class],
@@ -22,8 +22,9 @@ abstract class AppDatabase: RoomDatabase(){
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(): AppDatabase{
-            val tempInstance = INSTANCE
+        fun getDatabase(): AppDatabase {
+            val tempInstance =
+                INSTANCE
             if(tempInstance != null)
                 return tempInstance
 
