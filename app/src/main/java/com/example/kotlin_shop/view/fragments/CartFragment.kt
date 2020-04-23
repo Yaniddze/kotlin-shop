@@ -13,6 +13,8 @@ import com.example.kotlin_shop.view.MainActivity
 import com.example.kotlin_shop.view.recycler.CartAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
 class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
 

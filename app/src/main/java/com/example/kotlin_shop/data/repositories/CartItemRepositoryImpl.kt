@@ -1,20 +1,22 @@
 package com.example.kotlin_shop.data.repositories
 
-import com.example.kotlin_shop.data.AppDatabase
 import com.example.kotlin_shop.data.dao.CartItemDao
 import com.example.kotlin_shop.data.entities.CartItemDB
 import com.example.kotlin_shop.data.entities.CartItemFactory
 import com.example.kotlin_shop.domain.CartItemRepository
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ProductFactory
+import javax.inject.Inject
 
-object CartItemRepositoryImpl : CartItemRepository {
-    private var dao: CartItemDao = AppDatabase.getDatabase().cartItemDao()
+class CartItemRepositoryImpl @Inject constructor(
 
-    private val productFactory: ProductFactory =
-        ProductFactory()
-    private val cartItemFactory: CartItemFactory =
-        CartItemFactory()
+    private val productFactory: ProductFactory,
+    private val cartItemFactory: CartItemFactory,
+    private val dao: CartItemDao
+
+) : CartItemRepository {
+
+
 
     private var items: MutableList<Product>? = null
 

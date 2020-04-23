@@ -1,16 +1,22 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.data.repositories.CartItemRepositoryImpl
+import com.example.kotlin_shop.di.DaggerCartItemRepositoryComponent
 import com.example.kotlin_shop.domain.CartItemRepository
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.view.interfaces.CartView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class CartPresenter : MvpPresenter<CartView>() {
 
-    private val repository: CartItemRepository = CartItemRepositoryImpl
+    init {
+        DaggerCartItemRepositoryComponent.create().inject(this)
+    }
+
+    @Inject
+    lateinit var repository: CartItemRepository
 
     fun getProducts() {
 
