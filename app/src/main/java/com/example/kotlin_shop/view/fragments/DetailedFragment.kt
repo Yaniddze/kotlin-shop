@@ -14,24 +14,18 @@ import com.example.kotlin_shop.R
 import com.example.domain.Product
 import com.example.kotlin_shop.presenter.DetailedPresenter
 import com.example.kotlin_shop.view.interfaces.IDetailedView
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class DetailedFragment():
-    Fragment(R.layout.fragment_detailed), IDetailedView {
+class DetailedFragment(): MvpAppCompatFragment(R.layout.fragment_detailed), IDetailedView {
 
-    private val presenter = DetailedPresenter()
+    private val presenter by moxyPresenter { DetailedPresenter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        val root = super.onCreateView(inflater, container, savedInstanceState)!!
-
-        presenter.attachView(this)
-        val imageView = root.findViewById<ImageView>(R.id.ivDetailedImage)
-        val titleView = root.findViewById<TextView>(R.id.tvDetailedTitle)
-        val priceView = root.findViewById<TextView>(R.id.tvDetailedPrice)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val imageView = view.findViewById<ImageView>(R.id.ivDetailedImage)
+        val titleView = view.findViewById<TextView>(R.id.tvDetailedTitle)
+        val priceView = view.findViewById<TextView>(R.id.tvDetailedPrice)
 
 
         val product = arguments?.get("product") as Product
@@ -45,11 +39,9 @@ class DetailedFragment():
         titleView.text = product.title
         priceView.text = product.lot.calcDiscountPrice().toString()
 
-        val btnToCart = root.findViewById<Button>(R.id.btnToCart).setOnClickListener {
+        view.findViewById<Button>(R.id.btnToCart).setOnClickListener {
             presenter.addToCart(product)
         }
-
-        return root
 
     }
 

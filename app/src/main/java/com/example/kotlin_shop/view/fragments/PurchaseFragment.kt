@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.presenter.PurchasePresenter
 import com.example.kotlin_shop.view.interfaces.IPurchaseView
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class PurchaseFragment: Fragment(R.layout.fragment_purchase),
-    IPurchaseView {
+class PurchaseFragment: MvpAppCompatFragment(R.layout.fragment_purchase), IPurchaseView {
 
-    val presenter = PurchasePresenter()
+    private val presenter by moxyPresenter { PurchasePresenter() }
 
     private lateinit var etFirstName: EditText
     private lateinit var etSecondName: EditText
@@ -25,24 +26,17 @@ class PurchaseFragment: Fragment(R.layout.fragment_purchase),
     private lateinit var etPhone: EditText
     private lateinit var btnBuy: Button
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = super.onCreateView(inflater, container, savedInstanceState)!!
-
-        etFirstName = root.findViewById(R.id.etFirstName)
-        etSecondName = root.findViewById(R.id.etSecondName)
-        etThirdName = root.findViewById(R.id.etThirdName)
-        etPhone = root.findViewById(R.id.etPhone)
-        btnBuy = root.findViewById(R.id.btnBuy)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        etFirstName = view.findViewById(R.id.etFirstName)
+        etSecondName = view.findViewById(R.id.etSecondName)
+        etThirdName = view.findViewById(R.id.etThirdName)
+        etPhone = view.findViewById(R.id.etPhone)
+        btnBuy = view.findViewById(R.id.btnBuy)
 
         presenter.attachView(this)
 
         setListeners()
-
-        return root
     }
 
     private fun setListeners() {

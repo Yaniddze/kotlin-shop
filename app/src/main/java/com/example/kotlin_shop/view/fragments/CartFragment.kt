@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
@@ -14,31 +13,27 @@ import com.example.kotlin_shop.presenter.CartPresenter
 import com.example.kotlin_shop.view.interfaces.ICartView
 import com.example.kotlin_shop.view.MainActivity
 import com.example.kotlin_shop.view.recycler.CartAdapter
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class CartFragment : Fragment(R.layout.fragment_cart),
-    ICartView {
+class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), ICartView {
 
     private val recyclerAdapter = CartAdapter(::onDelete)
 
-    private val presenter = CartPresenter()
+    private val presenter by moxyPresenter { CartPresenter() }
 
     private fun onDelete(product: Product){
         presenter.deleteItem(product)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val root = super.onCreateView(inflater, container, savedInstanceState)!!
-
-        val recycler = root.findViewById<RecyclerView>(R.id.rvCart)
+        val recycler = view.findViewById<RecyclerView>(R.id.rvCart)
 
         val viewManager = LinearLayoutManager(recycler.context)
 
-        val btnOrder = root.findViewById<Button>(R.id.btnApply)
+        val btnOrder = view.findViewById<Button>(R.id.btnApply)
 
         presenter.attachView(this)
 
@@ -55,8 +50,6 @@ class CartFragment : Fragment(R.layout.fragment_cart),
         }
 
         presenter.getProducts()
-
-        return root
     }
 
     override fun showProducts(products: MutableList<Product>) {

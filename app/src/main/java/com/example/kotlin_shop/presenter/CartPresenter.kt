@@ -7,6 +7,7 @@ import com.example.kotlin_shop.view.interfaces.ICartView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import moxy.MvpPresenter
+import moxy.presenterScope
 
 class CartPresenter: MvpPresenter<ICartView>() {
 

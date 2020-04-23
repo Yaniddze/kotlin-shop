@@ -13,25 +13,19 @@ import com.example.domain.Product
 import com.example.kotlin_shop.presenter.CatalogPresenter
 import com.example.kotlin_shop.view.interfaces.ICatalogView
 import com.example.kotlin_shop.view.recycler.CatalogAdapter
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class CatalogFragment : Fragment(R.layout.fragment_catalog),
-    ICatalogView {
+class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), ICatalogView {
 
     private val recyclerAdapter = CatalogAdapter()
 
-    private val presenter = CatalogPresenter()
+    private val presenter by moxyPresenter { CatalogPresenter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val root = super.onCreateView(inflater, container, savedInstanceState)!!
-
-        presenter.attachView(this)
-
-        val recycler = root.findViewById<RecyclerView>(R.id.rvCatalog)
+        val recycler = view.findViewById<RecyclerView>(R.id.rvCatalog)
 
         val viewManager = LinearLayoutManager(recycler.context)
 
@@ -45,11 +39,9 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog),
 
         presenter.getProducts()
 
-        root.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
+        view.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
             presenter.addItem()
         }
-
-        return root
     }
 
     override fun showProducts(products: MutableList<Product>) {
