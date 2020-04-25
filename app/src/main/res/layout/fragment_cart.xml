@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.CartFragment">
+    tools:context=".ui.fragments.CartFragment">
 
     <TextView
         android:id="@+id/tvHeaderProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/title_header"
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/tvHeaderPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp"
         android:text="@string/price_header"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@id/tvHeaderProductName"

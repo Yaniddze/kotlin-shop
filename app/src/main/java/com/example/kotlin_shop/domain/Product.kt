@@ -1,6 +1,8 @@
 package com.example.kotlin_shop.domain
 
 import java.io.Serializable
+import java.text.DecimalFormat
+import java.util.*
 
 class Product internal constructor(
 
@@ -40,4 +42,10 @@ class Lot internal constructor(
     fun calcDiscountPrice(): Double {
         return price * (1 - (salePercent / 100.0))
     }
+
+    fun getRoundedPrice(): String {
+        val format = DecimalFormat("#.##")
+        return format.format(calcDiscountPrice()).replace(',', '.')
+    }
+
 }

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_catalog"
-        android:name="com.example.kotlin_shop.view.fragments.CatalogFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.CatalogFragment"
         android:label="@string/menu_catalog_title"
         tools:layout="@layout/fragment_catalog"
         app:startDestination="@id/action_navigation_catalog_to_naigation_detailed">
@@ -21,13 +21,13 @@
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.kotlin_shop.view.fragments.AccountFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.AccountFragment"
         android:label="@string/menu_account_title"
         tools:layout="@layout/fragment_account" />
 
     <fragment
         android:id="@+id/navigation_cart"
-        android:name="com.example.kotlin_shop.view.fragments.CartFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.CartFragment"
         android:label="@string/menu_cart_title"
         tools:layout="@layout/fragment_cart" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_detailed"
-        android:name="com.example.kotlin_shop.view.fragments.DetailedFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.DetailedFragment"
         android:label="Превью"
         tools:layout="@layout/fragment_detailed">
         <argument
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_purchase"
-        android:name="com.example.kotlin_shop.view.fragments.PurchaseFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.PurchaseFragment"
         android:label="Оформление заказа"
         tools:layout="@layout/fragment_purchase"/>
 </navigation>

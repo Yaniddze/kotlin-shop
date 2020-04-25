@@ -1,16 +1,16 @@
 package com.example.kotlin_shop.di.modules
 
 import android.content.Context
-import com.example.kotlin_shop.data.AppDatabase
+import com.example.kotlin_shop.App
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DbModule() {
+class ContextModule {
 
     @Provides
     @Singleton
-    fun provideDB(context: Context): AppDatabase = AppDatabase.getDatabase(context)
+    fun provideContext(): Context = App.getContext()
 
 }

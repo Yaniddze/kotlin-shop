@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:layout_marginTop="5dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvViewedId"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tvViewedTitle"
+        app:layout_constraintRight_toRightOf="@id/tvViewedTitle"
+        tools:text = "id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvViewedTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvViewedId"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text = "placeholder"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvViewedPrice"
+        app:layout_constraintTop_toBottomOf="@id/tvViewedTitle"
+        app:layout_constraintLeft_toLeftOf="@id/tvViewedTitle"
+        app:layout_constraintRight_toRightOf="@id/tvViewedTitle"
+        android:layout_marginTop="5dp"
+        tools:text = "1200.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

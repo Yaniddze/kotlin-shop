@@ -1,0 +1,31 @@
+package com.example.kotlin_shop.di.modules
+
+import com.example.kotlin_shop.domain.repositories.CatalogRepository
+import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
+import com.example.kotlin_shop.domain.usecases.*
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
+
+@Module
+class CatalogPresenterUseCasesModule {
+
+    @Provides
+    @Singleton
+    fun provideGetViewedProductsUseCase(
+        repository: ViewedProductsRepository
+    ): GetViewedProductsUseCase = GetViewedProductsUseCaseImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetCatalogUseCase(
+        repository: CatalogRepository
+    ): GetCatalogUseCase = GetCatalogUseCaseImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideAddCatalogItemUseCase(
+        repository: CatalogRepository
+    ): AddCatalogItemUseCase = AddCatalogItemUseCaseImpl(repository)
+
+}
