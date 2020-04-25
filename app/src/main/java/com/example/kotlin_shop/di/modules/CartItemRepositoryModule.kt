@@ -4,7 +4,7 @@ import com.example.kotlin_shop.data.AppDatabase
 import com.example.kotlin_shop.data.dao.CartItemDao
 import com.example.kotlin_shop.data.entities.factories.CartItemFactory
 import com.example.kotlin_shop.data.repositories.CartItemRepositoryImpl
-import com.example.kotlin_shop.domain.CartItemRepository
+import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import dagger.Module
 import dagger.Provides

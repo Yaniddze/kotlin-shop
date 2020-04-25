@@ -1,6 +1,6 @@
 package com.example.kotlin_shop.di.modules
 
-import com.example.kotlin_shop.domain.CartItemRepository
+import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCase
 import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCaseImpl
 import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase

@@ -1,5 +1,6 @@
 package com.example.kotlin_shop.domain
 
+import com.example.kotlin_shop.domain.factories.ProductFactoryImpl
 import org.junit.Assert.*
 import org.junit.Test
 
