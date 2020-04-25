@@ -12,7 +12,7 @@ class ProductTests {
         val price = 123.0
         val salePercent = 22
 
-        val product = ProductFactory()
+        val product = ProductFactoryImpl()
             .createProduct(id, title, imageUrl, price, salePercent)
 
         assertEquals(product.title, title)
@@ -30,7 +30,7 @@ class ProductTests {
         val price = 0.0
         val salePercent = 0
 
-        val factory = ProductFactory()
+        val factory = ProductFactoryImpl()
         val product1 = factory.createProduct(id, title, imageUrl, price, salePercent)
         val product2 = factory.createProduct(id, title, imageUrl, price, salePercent)
         assertEquals(product1, product2)
@@ -45,7 +45,7 @@ class ProductTests {
         val price = 0.0
         val salePercent = 0
 
-        val factory = ProductFactory()
+        val factory = ProductFactoryImpl()
         val product1 = factory.createProduct(id, title, imageUrl, price, salePercent)
         val product2 = factory.createProduct(id + 1, title, imageUrl, price, salePercent)
         assertNotEquals(product1, product2)

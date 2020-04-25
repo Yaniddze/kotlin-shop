@@ -41,16 +41,3 @@ class Lot internal constructor(
         return price * (1 - (salePercent / 100.0))
     }
 }
-
-class ProductFactory {
-    fun createProduct(
-        id: Int,
-        title: String,
-        imageUrl: String,
-        price: Double,
-        salePercent: Int
-    ): Product {
-        val lot = Lot(price, salePercent)
-        return Product(id, title, imageUrl, lot)
-    }
-}

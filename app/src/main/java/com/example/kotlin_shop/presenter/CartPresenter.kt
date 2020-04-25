@@ -1,8 +1,9 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.di.DaggerCartItemRepositoryComponent
-import com.example.kotlin_shop.domain.CartItemRepository
+import com.example.kotlin_shop.di.components.DaggerCartPresenterComponent
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCase
+import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
 import com.example.kotlin_shop.view.interfaces.CartView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -12,17 +13,20 @@ import javax.inject.Inject
 class CartPresenter : MvpPresenter<CartView>() {
 
     init {
-        DaggerCartItemRepositoryComponent.create().inject(this)
+        DaggerCartPresenterComponent.create().inject(this)
     }
 
     @Inject
-    lateinit var repository: CartItemRepository
+    lateinit var deleter: DeleteCartItemUseCase
+
+    @Inject
+    lateinit var getter: GetCartItemsUseCase
 
     fun getProducts() {
 
         lateinit var items: MutableList<Product>
         runBlocking(Dispatchers.IO) {
-            items = repository.getItems()
+            items = getter.getItems()
         }
 
         viewState?.showProducts(items)
@@ -30,7 +34,7 @@ class CartPresenter : MvpPresenter<CartView>() {
 
     fun deleteItem(product: Product) {
         runBlocking(Dispatchers.IO) {
-            repository.deleteItem(product)
+            deleter.deleteCartItem(product)
         }
 
         viewState?.onItemDeleted(product)

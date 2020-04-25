@@ -1,14 +1,14 @@
 package com.example.kotlin_shop.presenter
 
-import com.example.kotlin_shop.domain.ProductFactory
+import com.example.kotlin_shop.domain.factories.ProductFactoryImpl
 import com.example.kotlin_shop.view.interfaces.CatalogView
 import moxy.MvpPresenter
 
 class CatalogPresenter : MvpPresenter<CatalogView>() {
 
-    private val factory = ProductFactory()
+    private val factory = ProductFactoryImpl()
 
-    private val images = listOf<String>(
+    private val images = listOf(
         "https://www.imago-images.de/imagoextern/bilder/stockfotos/imago-images-geniale-luftaufnahmen.jpg",
         "https://hindutrend.com/wp-content/uploads/2020/01/good-night-romantic-images-hd.jpg",
         "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fstartswithabang%2Ffiles%2F2019%2F11%2FBedin-Cover.jpg",
@@ -117,7 +117,6 @@ class CatalogPresenter : MvpPresenter<CatalogView>() {
             )
         )
     }
-
 
     fun getProducts() {
         viewState?.showProducts(myDataSet)

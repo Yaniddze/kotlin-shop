@@ -27,22 +27,3 @@ class CartItemDB internal constructor(
     val salePercent: Int
 
 )
-
-class CartItemFactory(){
-    fun createItem(
-        productId: Int,
-        title: String,
-        imageUrl: String,
-        price: Double,
-        salePercent: Int
-    ): CartItemDB {
-        return CartItemDB(
-            0,
-            productId,
-            title,
-            imageUrl,
-            price,
-            salePercent
-        )
-    }
-}

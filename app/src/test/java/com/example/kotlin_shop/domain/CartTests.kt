@@ -3,7 +3,7 @@ package com.example.kotlin_shop.domain
 import org.junit.Test
 
 class CartTests {
-    private val productFactory = com.example.kotlin_shop.domain.ProductFactory()
+    private val productFactory = com.example.kotlin_shop.domain.ProductFactoryImpl()
     private val cartFactory = com.example.kotlin_shop.domain.CartFactory()
 
     @Test
