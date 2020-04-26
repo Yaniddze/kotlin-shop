@@ -26,9 +26,7 @@ class CartAdapter(
         val item = dataSet[position]
 
         holder.layout.findViewById<TextView>(R.id.tvCartItemTitle).text = item.title
-        holder.layout.findViewById<TextView>(R.id.tvCartItemPrice).text = item.lot.price.toString()
-        holder.layout.findViewById<TextView>(R.id.tvCartItemDiscount).text = item.lot.salePercent.toString() + " %"
-        holder.layout.findViewById<TextView>(R.id.tvCartItemDiscountPrice).text = item.lot.getRoundedPrice()
+        holder.layout.findViewById<TextView>(R.id.tvCartItemPrice).text = item.lot.getRoundedPrice()
         holder.layout.findViewById<TextView>(R.id.tvDeleteCartItem).setOnClickListener {
             onDelete(item)
         }

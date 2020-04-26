@@ -18,36 +18,14 @@
 
     <TextView
         android:id="@+id/tvCartItemPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:text="@string/price"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tvCartItemTitle"
-        app:layout_constraintStart_toEndOf="@+id/tvCartItemTitle"
-        app:layout_constraintTop_toTopOf="@id/tvCartItemTitle" />
-
-    <TextView
-        android:id="@+id/tvCartItemDiscount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/discount_present"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tvCartItemPrice"
-        app:layout_constraintEnd_toStartOf="@+id/tvCartItemDiscountPrice"
-        app:layout_constraintStart_toEndOf="@+id/tvCartItemPrice"
-        app:layout_constraintTop_toTopOf="@id/tvCartItemPrice" />
-
-    <TextView
-        android:id="@+id/tvCartItemDiscountPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="@string/price_with_discount"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tvCartItemDiscount"
+        app:layout_constraintLeft_toRightOf="@id/tvCartItemTitle"
         app:layout_constraintRight_toLeftOf="@id/tvDeleteCartItem"
-        app:layout_constraintTop_toTopOf="@id/tvCartItemDiscount" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tvDeleteCartItem"

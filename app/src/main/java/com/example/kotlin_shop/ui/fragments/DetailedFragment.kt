@@ -36,7 +36,7 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
             .into(imageView)
 
         titleView.text = product.title
-        priceView.text = product.lot.calcDiscountPrice().toString()
+        priceView.text = product.lot.getRoundedPrice()
 
         view.findViewById<Button>(R.id.btnToCart).setOnClickListener {
             presenter.addToCart(product)
