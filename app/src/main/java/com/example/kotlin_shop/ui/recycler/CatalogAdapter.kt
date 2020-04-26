@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,12 +16,12 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
     private var dataSet: MutableList<Product> = mutableListOf()
 
-    inner class ViewHolder(val layout: ConstraintLayout) : RecyclerView.ViewHolder(layout)
+    inner class ViewHolder(val layout: CardView) : RecyclerView.ViewHolder(layout)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val layout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.catalog_item, parent, false) as ConstraintLayout
+            .inflate(R.layout.catalog_item_card, parent, false) as CardView
 
         return ViewHolder(layout)
 
@@ -30,11 +31,13 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
         val product = dataSet[position]
 
-        holder.layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.title
-        holder.layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
+        val layout = holder.layout.findViewById<ConstraintLayout>(R.id.clCartItemLayout)
+
+        layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.title
+        layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
             product.lot.getRoundedPrice()
 
-        val picture = holder.layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
+        val picture = layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
 
         Glide
             .with(holder.layout)
@@ -44,13 +47,13 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
             .error(R.mipmap.ic_launcher)
             .into(picture)
 
-        holder.layout.setOnClickListener {
+        layout.setOnClickListener {
             val context = picture.context as MainActivity
 
             context.showDetailed(product)
         }
 
-        holder.layout.findViewById<ImageView>(R.id.ivDeleteItem).setOnClickListener {
+        layout.findViewById<ImageView>(R.id.ivDeleteItem).setOnClickListener {
 
             val id = dataSet.indexOf(product)
 

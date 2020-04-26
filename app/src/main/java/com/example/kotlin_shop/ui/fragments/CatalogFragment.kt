@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
@@ -28,7 +29,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
         val catalogRecycler = view.findViewById<RecyclerView>(R.id.rvCatalog)
 
-        val catalogManager = LinearLayoutManager(context)
+        val catalogManager = GridLayoutManager(context, 2)
 
         catalogRecycler.apply {
             setHasFixedSize(true)
