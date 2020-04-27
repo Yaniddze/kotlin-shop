@@ -5,12 +5,10 @@ import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.usecases.AddCartItemUseCase
 import com.example.kotlin_shop.domain.usecases.AddViewedProductUseCase
 import com.example.kotlin_shop.ui.interfaces.DetailedView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import moxy.MvpPresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailedPresenter: MvpPresenter<DetailedView>(){
+class DetailedPresenter: BasePresenter<DetailedView>(){
 
     init {
         DaggerDetailedPresenterComponent.create().inject(this)
@@ -23,15 +21,14 @@ class DetailedPresenter: MvpPresenter<DetailedView>(){
     lateinit var viewedAdder: AddViewedProductUseCase
 
     fun addToCart(product: Product){
-        runBlocking(Dispatchers.IO) {
+        scope.launch {
             cartItemAdder.addCartItem(product)
+            viewState?.onAddToCart()
         }
-
-        viewState?.onAddToCart()
     }
 
     fun addToViewed(product: Product){
-        runBlocking {
+        scope.launch {
             viewedAdder.addViewedProduct(product)
         }
     }

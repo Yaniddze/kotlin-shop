@@ -1,17 +1,15 @@
 package com.example.kotlin_shop.presentation
 
 import com.example.kotlin_shop.di.components.DaggerCatalogPresenterComponent
-import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.usecases.AddCatalogItemUseCase
 import com.example.kotlin_shop.domain.usecases.GetCatalogUseCase
 import com.example.kotlin_shop.domain.usecases.GetViewedProductsUseCase
 import com.example.kotlin_shop.ui.interfaces.CatalogView
-import kotlinx.coroutines.runBlocking
-import moxy.MvpPresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CatalogPresenter : MvpPresenter<CatalogView>() {
+class CatalogPresenter : BasePresenter<CatalogView>() {
 
     init {
         DaggerCatalogPresenterComponent.create().inject(this)
@@ -40,24 +38,24 @@ class CatalogPresenter : MvpPresenter<CatalogView>() {
             0
         )
 
-        runBlocking {
+        scope.launch {
             catalogAdder.add(itemToAdd)
+            viewState?.onAddCatalogItem()
         }
 
-        viewState?.onAddCatalogItem()
     }
 
     fun getProducts() {
-        var items = mutableListOf<Product>()
-        runBlocking {
-            items = catalogGetter.get()
+        scope.launch {
+            val items = catalogGetter.get()
+            viewState?.showProducts(items)
         }
-        viewState?.showProducts(items)
     }
 
     fun getViewed() {
-        runBlocking {
-            viewState?.showViewed(viewedGetter.getViewedProducts())
+        scope.launch {
+            val products = viewedGetter.getViewedProducts()
+            viewState?.showViewed(products)
         }
     }
 }

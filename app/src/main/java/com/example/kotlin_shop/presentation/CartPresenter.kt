@@ -5,12 +5,10 @@ import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCase
 import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
 import com.example.kotlin_shop.ui.interfaces.CartView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import moxy.MvpPresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CartPresenter : MvpPresenter<CartView>() {
+class CartPresenter : BasePresenter<CartView>() {
 
     init {
         DaggerCartPresenterComponent.create().inject(this)
@@ -24,19 +22,18 @@ class CartPresenter : MvpPresenter<CartView>() {
 
     fun getProducts() {
 
-        lateinit var items: MutableList<Product>
-        runBlocking(Dispatchers.IO) {
-            items = getter.getItems()
+        scope.launch {
+            val items = getter.getItems()
+            viewState?.showProducts(items)
         }
 
-        viewState?.showProducts(items)
     }
 
     fun deleteItem(product: Product) {
-        runBlocking(Dispatchers.IO) {
+        scope.launch {
             deleter.deleteCartItem(product)
-        }
 
-        viewState?.onItemDeleted(product)
+            viewState?.onItemDeleted(product)
+        }
     }
 }
