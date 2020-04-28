@@ -5,6 +5,7 @@ import com.example.kotlin_shop.domain.Attribute
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.repositories.CatalogRepository
+import java.lang.Exception
 
 class CatalogRepositoryRetrofit(
 
@@ -32,6 +33,6 @@ class CatalogRepositoryRetrofit(
     }
 
     override suspend fun addItem(product: Product) {
-        TODO("Not yet implemented")
+        throw Exception()
     }
 }

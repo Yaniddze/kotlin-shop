@@ -52,7 +52,13 @@ class CatalogPresenter : BasePresenter<CatalogView>() {
         )
 
         scope.launch {
-            mainCatalogAdder.add(itemToAdd)
+            try{
+                mainCatalogAdder.add(itemToAdd)
+            }
+            catch (e: Exception){
+                viewState.showError("Add to server is not working")
+                subCatalogAdder.add(itemToAdd)
+            }
             viewState.onAddCatalogItem()
         }
 
@@ -64,7 +70,7 @@ class CatalogPresenter : BasePresenter<CatalogView>() {
             val items = try{
                 mainCatalogGetter.get()
             } catch (e: Exception){
-                viewState.showMainCatalogError()
+                viewState.showError("Server is currently offline")
                 subCatalogGetter.get()
             }
             viewState.showProducts(items)

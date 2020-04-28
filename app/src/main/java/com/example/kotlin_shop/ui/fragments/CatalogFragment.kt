@@ -85,9 +85,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         catalogAdapter.changeItemSource(products)
     }
 
-    override fun showMainCatalogError() {
-        Toast.makeText(context, "Server is currently offline", Toast.LENGTH_LONG).show()
-    }
+
 
     override fun onAddCatalogItem() {
         catalogAdapter.notifyItemAdded()
@@ -95,5 +93,9 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     override fun showViewed(products: MutableList<Product>) {
         viewedAdapter.changeItemSource(products)
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 }
