@@ -24,7 +24,7 @@ class CartPresenter : BasePresenter<CartView>() {
 
         scope.launch {
             val items = getter.getItems()
-            viewState?.showProducts(items)
+            viewState.showProducts(items)
         }
 
     }
@@ -33,7 +33,7 @@ class CartPresenter : BasePresenter<CartView>() {
         scope.launch {
             deleter.deleteCartItem(product)
 
-            viewState?.onItemDeleted(product)
+            viewState.onItemDeleted(product)
         }
     }
 }

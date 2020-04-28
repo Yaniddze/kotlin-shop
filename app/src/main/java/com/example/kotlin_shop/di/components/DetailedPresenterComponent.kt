@@ -7,13 +7,10 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    DbModule::class,
-    ContextModule::class,
-    FactoriesModule::class,
-    CartItemRepositoryModule::class,
-    ViewedProductsRepositoryModule::class,
     DetailedPresenterUseCasesModule::class
 ])
 interface DetailedPresenterComponent {
+
     fun inject(body: DetailedPresenter)
+
 }

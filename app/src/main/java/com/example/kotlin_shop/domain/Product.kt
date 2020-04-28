@@ -9,6 +9,8 @@ class Product internal constructor(
     val id: Int,
     val title: String,
     val imageUrl: String,
+    val description: String,
+    val attributes: List<Attribute>,
     val lot: Lot
 
 ):Serializable {
@@ -29,7 +31,12 @@ class Product internal constructor(
     }
 }
 
-class Lot internal constructor(
+data class Attribute(
+    val name: String,
+    val value: String
+)
+
+data class Lot internal constructor(
     /**
      * [price] must be positive
      */

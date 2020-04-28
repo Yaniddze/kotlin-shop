@@ -8,10 +8,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        ContextModule::class,
-        FactoriesModule::class,
-        ViewedProductsRepositoryModule::class,
-        CatalogRepositoryModule::class,
         CatalogPresenterUseCasesModule::class
     ]
 )

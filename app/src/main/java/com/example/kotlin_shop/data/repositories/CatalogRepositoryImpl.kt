@@ -21,93 +21,20 @@ class CatalogRepositoryImpl(
     }
 
     init {
-        if(myDataSet == null)
-            myDataSet = mutableListOf(
-                factory.createProduct(
-                    0,
-                    "someProd0",
+        if(myDataSet == null) {
+            myDataSet = mutableListOf()
+            for(i in 0..15){
+                myDataSet!!.add(factory.createProduct(
+                    i,
+                    "someProd$i",
                     images.random(),
+                    "some description $i",
+                    listOf(),
                     randomPrice(),
                     randomPercent()
-                ),
-                factory.createProduct(
-                    1,
-                    "someProd1",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    2,
-                    "someProd2",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    3,
-                    "someProd3",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    4,
-                    "someProd4",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    5,
-                    "someProd5",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    6,
-                    "someProd6",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    7,
-                    "someProd7",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    8,
-                    "someProd8",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    9,
-                    "someProd9",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    10,
-                    "someProd10",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                ),
-                factory.createProduct(
-                    11,
-                    "someProd11",
-                    images.random(),
-                    randomPrice(),
-                    randomPercent()
-                )
-            )
+                ))
+            }
+        }
     }
 
     private fun randomPrice() = (100..3000).random().toDouble()

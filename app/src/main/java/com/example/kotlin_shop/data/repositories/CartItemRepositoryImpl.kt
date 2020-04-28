@@ -29,6 +29,8 @@ class CartItemRepositoryImpl @Inject constructor(
                     it.productId,
                     it.title,
                     it.imageUrl,
+                    "",
+                    listOf(),
                     it.price,
                     it.salePercent
                 )

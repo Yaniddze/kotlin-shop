@@ -7,10 +7,6 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    FactoriesModule::class,
-    ContextModule::class,
-    DbModule::class,
-    CartItemRepositoryModule::class,
     CartPresenterUseCasesModule::class
 ])
 interface CartPresenterComponent {

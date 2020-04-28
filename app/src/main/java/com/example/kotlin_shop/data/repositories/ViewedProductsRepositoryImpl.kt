@@ -20,6 +20,8 @@ class ViewedProductsRepositoryImpl(
                         info[0].toInt(),
                         info[1],
                         info[2],
+                        "",
+                        listOf(),
                         info[3].toDouble(),
                         info[4].toInt()
                     )

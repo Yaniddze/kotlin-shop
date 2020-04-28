@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presentation.CatalogPresenter
@@ -22,10 +23,21 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     private val viewedAdapter = ViewedProductsAdapter()
 
+    private lateinit var refresher: SwipeRefreshLayout
+
     private val presenter by moxyPresenter { CatalogPresenter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        refresher = view.findViewById(R.id.srlCatalogRefresher)
+
+        refresher.setOnRefreshListener {
+            refresher.isRefreshing = true
+            presenter.getProducts()
+        }
+
+        refresher.isRefreshing = true
 
         val catalogRecycler = view.findViewById<RecyclerView>(R.id.rvCatalog)
 
@@ -69,7 +81,12 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showProducts(products: MutableList<Product>) {
+        refresher.isRefreshing = false
         catalogAdapter.changeItemSource(products)
+    }
+
+    override fun showMainCatalogError() {
+        Toast.makeText(context, "Server is currently offline", Toast.LENGTH_LONG).show()
     }
 
     override fun onAddCatalogItem() {

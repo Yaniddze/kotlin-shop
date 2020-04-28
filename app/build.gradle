@@ -66,6 +66,10 @@ dependencies {
     def recyclerVersion = "28.0.0"
     implementation "com.android.support:recyclerview-v7:$recyclerVersion"
 
+    // Swipe Refresh Layout
+    def swipeLayoutVersion = "1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeLayoutVersion"
+
     // Room
     def roomVersion = "2.2.5"
     implementation "androidx.room:room-runtime:$roomVersion"
@@ -84,6 +88,13 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // Retrofit
+    def retrofitVersion = "2.6.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+
 
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.navigation:navigation-fragment:2.2.2'

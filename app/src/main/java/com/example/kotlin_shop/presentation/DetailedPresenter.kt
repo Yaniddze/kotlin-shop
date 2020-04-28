@@ -23,7 +23,7 @@ class DetailedPresenter: BasePresenter<DetailedView>(){
     fun addToCart(product: Product){
         scope.launch {
             cartItemAdder.addCartItem(product)
-            viewState?.onAddToCart()
+            viewState.onAddToCart()
         }
     }
 
