@@ -1,8 +1,9 @@
 package com.example.kotlin_shop.presentation
 
 import com.example.kotlin_shop.ui.interfaces.PurchaseView
+import javax.inject.Inject
 
-class PurchasePresenter: BasePresenter<PurchaseView>() {
+class PurchasePresenter @Inject constructor(): BasePresenter<PurchaseView>() {
 
     fun validatePhone(phone: String){
         val validationResult = if(phone.startsWith("8"))

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.R
+import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presentation.CatalogPresenter
 import com.example.kotlin_shop.ui.interfaces.CatalogView
@@ -16,6 +17,8 @@ import com.example.kotlin_shop.ui.recycler.CatalogAdapter
 import com.example.kotlin_shop.ui.recycler.ViewedProductsAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
 class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), CatalogView {
 
@@ -25,7 +28,14 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     private lateinit var refresher: SwipeRefreshLayout
 
-    private val presenter by moxyPresenter { CatalogPresenter() }
+    @Inject
+    lateinit var presenterProvider: Provider<CatalogPresenter>
+
+    private val presenter by moxyPresenter { presenterProvider.get() }
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

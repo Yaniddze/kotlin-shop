@@ -8,14 +8,25 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.kotlin_shop.R
+import com.example.kotlin_shop.di.components.DaggerAppComponent
+import com.example.kotlin_shop.presentation.CartPresenter
 import com.example.kotlin_shop.presentation.PurchasePresenter
 import com.example.kotlin_shop.ui.interfaces.PurchaseView
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
 class PurchaseFragment: MvpAppCompatFragment(R.layout.fragment_purchase), PurchaseView {
 
-    private val presenter by moxyPresenter { PurchasePresenter() }
+    @Inject
+    lateinit var presenterProvider: Provider<PurchasePresenter>
+
+    private val presenter by moxyPresenter { presenterProvider.get() }
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     private lateinit var etFirstName: EditText
     private lateinit var etSecondName: EditText

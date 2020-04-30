@@ -8,15 +8,26 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
+import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.presentation.CartPresenter
 import com.example.kotlin_shop.presentation.DetailedPresenter
 import com.example.kotlin_shop.ui.interfaces.DetailedView
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
+import javax.inject.Provider
 
 class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), DetailedView {
 
-    private val presenter by moxyPresenter { DetailedPresenter() }
+    @Inject
+    lateinit var presenterProvider: Provider<DetailedPresenter>
+
+    private val presenter by moxyPresenter { presenterProvider.get() }
+
+    init {
+        DaggerAppComponent.create().inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,6 +1,5 @@
 package com.example.kotlin_shop.presentation
 
-import com.example.kotlin_shop.di.components.DaggerCatalogPresenterComponent
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.usecases.AddCatalogItemUseCase
 import com.example.kotlin_shop.domain.usecases.GetCatalogUseCase
@@ -8,35 +7,17 @@ import com.example.kotlin_shop.domain.usecases.GetViewedProductsUseCase
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Named
 
-class CatalogPresenter : BasePresenter<CatalogView>() {
+class CatalogPresenter @Inject constructor(
+    private val factory: ProductFactory,
 
-    init {
-        DaggerCatalogPresenterComponent.create().inject(this)
-    }
+    private val viewedGetter: GetViewedProductsUseCase,
 
-    @Inject
-    lateinit var factory: ProductFactory
+    private val mainCatalogGetter: GetCatalogUseCase,
 
-    @Inject
-    lateinit var viewedGetter: GetViewedProductsUseCase
+    private val mainCatalogAdder: AddCatalogItemUseCase
 
-
-    @field:[Inject Named("mainCatalogGetter")]
-    lateinit var mainCatalogGetter: GetCatalogUseCase
-
-
-    @field:[Inject Named("subCatalogGetter")]
-    lateinit var subCatalogGetter: GetCatalogUseCase
-
-
-    @field:[Inject Named("mainCatalogAdder")]
-    lateinit var mainCatalogAdder: AddCatalogItemUseCase
-
-
-    @field:[Inject Named("subCatalogAdder")]
-    lateinit var subCatalogAdder: AddCatalogItemUseCase
+) : BasePresenter<CatalogView>() {
 
     private var i = 11
 
@@ -54,12 +35,11 @@ class CatalogPresenter : BasePresenter<CatalogView>() {
         scope.launch {
             try{
                 mainCatalogAdder.add(itemToAdd)
+                viewState.onAddCatalogItem()
             }
             catch (e: Exception){
                 viewState.showError("Add to server is not working")
-                subCatalogAdder.add(itemToAdd)
             }
-            viewState.onAddCatalogItem()
         }
 
     }
@@ -67,13 +47,12 @@ class CatalogPresenter : BasePresenter<CatalogView>() {
     fun getProducts() {
         scope.launch {
 
-            val items = try{
-                mainCatalogGetter.get()
+            try{
+                val items = mainCatalogGetter.get()
+                viewState.showProducts(items)
             } catch (e: Exception){
                 viewState.showError("Server is currently offline")
-                subCatalogGetter.get()
             }
-            viewState.showProducts(items)
         }
     }
 
