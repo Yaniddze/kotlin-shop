@@ -10,10 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.ui.fragments.CartFragmentDirections
-import com.example.kotlin_shop.ui.fragments.CatalogFragmentDirections
-import com.example.kotlin_shop.ui.fragments.DetailedFragmentDirections
 
 class MainActivity : AppCompatActivity() {
 

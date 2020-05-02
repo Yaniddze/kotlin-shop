@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.ui.MainActivity
-import com.example.kotlin_shop.ui.fragments.CatalogFragmentDirections
+import com.example.kotlin_shop.ui.fragments.catalog.CatalogFragmentDirections
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 

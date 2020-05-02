@@ -16,4 +16,7 @@ interface CatalogView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showError(message: String)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun showNetworkError()
 }

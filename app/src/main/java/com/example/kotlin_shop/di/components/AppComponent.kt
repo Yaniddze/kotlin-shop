@@ -1,15 +1,10 @@
 package com.example.kotlin_shop.di.components
 
-import android.content.Context
 import com.example.kotlin_shop.di.modules.*
-import com.example.kotlin_shop.presentation.CartPresenter
-import com.example.kotlin_shop.presentation.CatalogPresenter
-import com.example.kotlin_shop.presentation.DetailedPresenter
 import com.example.kotlin_shop.ui.fragments.CartFragment
-import com.example.kotlin_shop.ui.fragments.CatalogFragment
+import com.example.kotlin_shop.ui.fragments.catalog.CatalogFragment
 import com.example.kotlin_shop.ui.fragments.DetailedFragment
 import com.example.kotlin_shop.ui.fragments.PurchaseFragment
-import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 

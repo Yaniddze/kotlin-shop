@@ -1,21 +1,18 @@
-package com.example.kotlin_shop.ui.fragments
+package com.example.kotlin_shop.ui.fragments.catalog
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.CatalogPresenter
+import com.example.kotlin_shop.ui.fragments.BadInternetFragment
+import com.example.kotlin_shop.ui.fragments.catalog.CatalogRecyclerFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import com.example.kotlin_shop.ui.recycler.CatalogAdapter
-import com.example.kotlin_shop.ui.recycler.ViewedProductsAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -36,6 +33,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         DaggerAppComponent.create().inject(this)
     }
 
+    private var isRecyclerShowed = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,17 +47,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
         refresher.isRefreshing = true
 
-        val catalogRecycler = view.findViewById<RecyclerView>(R.id.rvCatalog)
-
-        val catalogManager = GridLayoutManager(context, 2)
-
-        catalogRecycler.apply {
-            setHasFixedSize(true)
-
-            layoutManager = catalogManager
-
-            adapter = catalogAdapter
-        }
+        showRecycler()
 
         presenter.getProducts()
 
@@ -67,9 +56,25 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         }
     }
 
+    private fun showRecycler(){
+        childFragmentManager
+            .beginTransaction()
+            .replace(R.id.flCatalogFragment,
+                CatalogRecyclerFragment(
+                    catalogAdapter
+                )
+            )
+            .commit()
+        isRecyclerShowed = true
+    }
+
     override fun showProducts(products: MutableList<Product>) {
+        if(!isRecyclerShowed){
+            showRecycler()
+        }
         refresher.isRefreshing = false
         catalogAdapter.changeItemSource(products)
+
     }
 
     override fun onAddCatalogItem(product: Product) {
@@ -78,5 +83,19 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showNetworkError() {
+
+        refresher.isRefreshing = false
+
+        childFragmentManager
+            .beginTransaction()
+            .replace(R.id.flCatalogFragment,
+                BadInternetFragment()
+            )
+            .commit()
+        isRecyclerShowed = false
+
     }
 }

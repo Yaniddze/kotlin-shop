@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_catalog"
-        android:name="com.example.kotlin_shop.ui.fragments.CatalogFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.catalog.CatalogFragment"
         android:label="@string/menu_catalog_title"
         tools:layout="@layout/fragment_catalog"
         app:startDestination="@id/action_navigation_catalog_to_naigation_detailed">

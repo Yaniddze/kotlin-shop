@@ -44,7 +44,11 @@ class CatalogRepositoryRetrofit(
     }
 
     override suspend fun getById(id: Int): Product? {
-        val tempProduct = dao.getById(id) ?: return null
+        val tempProduct = try {
+            dao.getById(id)
+        } catch (e: Exception){
+            null
+        } ?: return null
 
         return factory.createProduct(
             tempProduct.id.toInt(),

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.CatalogFragment">
+    tools:context=".ui.fragments.catalog.CatalogFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlCatalogRefresher"
@@ -14,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCatalog"
+        <FrameLayout
+            android:id="@+id/flCatalogFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            />
+            android:layout_height="match_parent"/>
+
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

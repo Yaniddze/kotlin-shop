@@ -49,7 +49,7 @@ class CatalogPresenter @Inject constructor(
                 val items = catalogGetter()
                 viewState.showProducts(items)
             } catch (e: Exception){
-                viewState.showError("Server is currently offline")
+                viewState.showNetworkError()
             }
         }
     }
