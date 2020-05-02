@@ -4,6 +4,7 @@ import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.usecases.AddCartItemUseCase
 import com.example.kotlin_shop.domain.usecases.AddViewedProductUseCase
 import com.example.kotlin_shop.domain.usecases.GetProductByIdUseCase
+import com.example.kotlin_shop.domain.usecases.GetViewedProductsUseCase
 import com.example.kotlin_shop.ui.interfaces.DetailedView
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
@@ -15,7 +16,9 @@ class DetailedPresenter @Inject constructor(
 
     private val viewedAdder: AddViewedProductUseCase,
 
-    private val productGetter: GetProductByIdUseCase
+    private val productGetter: GetProductByIdUseCase,
+
+    private val viewedGetter: GetViewedProductsUseCase
 
 ): BasePresenter<DetailedView>(){
 
@@ -45,6 +48,14 @@ class DetailedPresenter @Inject constructor(
             }catch (e: UnknownHostException){
                 viewState.showNetworkError()
             }
+        }
+    }
+
+    fun getViewed(notInclude: Int){
+        scope.launch {
+            val viewed = viewedGetter()
+
+            viewState.showViewed(viewed.filter { it.productId != notInclude }.toMutableList())
         }
     }
 }

@@ -11,8 +11,6 @@ import javax.inject.Inject
 class CatalogPresenter @Inject constructor(
     private val factory: ProductFactory,
 
-    private val viewedGetter: GetViewedProductsUseCase,
-
     private val catalogGetter: GetCatalogUseCase,
 
     private val catalogAdder: AddCatalogItemUseCase
@@ -53,13 +51,6 @@ class CatalogPresenter @Inject constructor(
             } catch (e: Exception){
                 viewState.showError("Server is currently offline")
             }
-        }
-    }
-
-    fun getViewed() {
-        scope.launch {
-            val products = viewedGetter()
-            viewState.showViewed(products)
         }
     }
 }

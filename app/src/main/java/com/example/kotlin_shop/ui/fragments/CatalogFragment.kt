@@ -25,8 +25,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     private val catalogAdapter = CatalogAdapter()
 
-    private val viewedAdapter = ViewedProductsAdapter()
-
     private lateinit var refresher: SwipeRefreshLayout
 
     @Inject
@@ -64,31 +62,9 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
         presenter.getProducts()
 
-        val viewedRecycler = view.findViewById<RecyclerView>(R.id.rvViewedItems)
-
-        val viewedManager = LinearLayoutManager(context)
-
-        viewedManager.orientation = LinearLayoutManager.HORIZONTAL
-
-        viewedRecycler.apply{
-            setHasFixedSize(true)
-
-            layoutManager = viewedManager
-
-            adapter = viewedAdapter
-        }
-
-        presenter.getViewed()
-
         view.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
             presenter.addItem()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        presenter.getViewed()
     }
 
     override fun showProducts(products: MutableList<Product>) {
@@ -96,14 +72,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         catalogAdapter.changeItemSource(products)
     }
 
-
-
     override fun onAddCatalogItem() {
         catalogAdapter.notifyItemAdded()
-    }
-
-    override fun showViewed(products: MutableList<ViewedProduct>) {
-        viewedAdapter.changeItemSource(products)
     }
 
     override fun showError(message: String) {

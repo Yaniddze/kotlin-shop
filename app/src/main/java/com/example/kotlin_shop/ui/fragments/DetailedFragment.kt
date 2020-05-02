@@ -6,14 +6,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.presentation.CartPresenter
+import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.DetailedPresenter
 import com.example.kotlin_shop.ui.interfaces.DetailedView
+import com.example.kotlin_shop.ui.recycler.ViewedProductsAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -36,6 +39,8 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     private lateinit var btnToCart: Button
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
+    private val recyclerAdapter = ViewedProductsAdapter()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,7 +58,24 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         swipeRefreshLayout.setOnRefreshListener {
             presenter.getProduct(productId)
         }
+
         presenter.getProduct(productId)
+
+        val viewedManager = LinearLayoutManager(context)
+
+        viewedManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        val recycler =  swipeRefreshLayout.findViewById<RecyclerView>(R.id.rvDetailedViewed)
+        
+        recycler.apply {
+            setHasFixedSize(true)
+
+            layoutManager = viewedManager
+
+            adapter = recyclerAdapter
+        }
+
+        presenter.getViewed(productId)
     }
 
     override fun onAddToCart() {
@@ -86,5 +108,9 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     override fun showError(text: String) {
         swipeRefreshLayout.isRefreshing = false
         Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showViewed(viewed: MutableList<ViewedProduct>) {
+        recyclerAdapter.changeItemSource(viewed)
     }
 }

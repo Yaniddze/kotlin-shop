@@ -15,8 +15,5 @@ interface CatalogView: MvpView {
     fun onAddCatalogItem()
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showViewed(products: MutableList<ViewedProduct>)
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
     fun showError(message: String)
 }
