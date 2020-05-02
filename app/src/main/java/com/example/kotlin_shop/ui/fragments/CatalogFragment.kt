@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.CatalogPresenter
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import com.example.kotlin_shop.ui.recycler.CatalogAdapter
@@ -101,7 +102,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         catalogAdapter.notifyItemAdded()
     }
 
-    override fun showViewed(products: MutableList<Product>) {
+    override fun showViewed(products: MutableList<ViewedProduct>) {
         viewedAdapter.changeItemSource(products)
     }
 

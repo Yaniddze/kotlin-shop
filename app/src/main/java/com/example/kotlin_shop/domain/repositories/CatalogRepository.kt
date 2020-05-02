@@ -5,4 +5,5 @@ import com.example.kotlin_shop.domain.Product
 interface CatalogRepository {
     suspend fun getCatalog(): MutableList<Product>
     suspend fun addItem(product: Product)
+    suspend fun getById(id: Int): Product?
 }

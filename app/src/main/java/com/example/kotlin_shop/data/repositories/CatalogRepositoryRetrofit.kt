@@ -35,4 +35,8 @@ class CatalogRepositoryRetrofit(
     override suspend fun addItem(product: Product) {
         throw Exception()
     }
+
+    override suspend fun getById(id: Int): Product? {
+        TODO("Not yet implemented")
+    }
 }

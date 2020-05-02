@@ -7,7 +7,9 @@ import com.example.kotlin_shop.data.dao.ProductsDao
 import com.example.kotlin_shop.data.entities.factories.CartItemFactory
 import com.example.kotlin_shop.data.repositories.CartItemRepositoryImpl
 import com.example.kotlin_shop.data.repositories.CatalogRepositoryRetrofit
-import com.example.kotlin_shop.data.repositories.ViewedProductsRepositoryImpl
+import com.example.kotlin_shop.data.repositories.ViewedProductsRepositoryRoom
+import com.example.kotlin_shop.data.repositories.ViewedProductsRepositoryShared
+import com.example.kotlin_shop.domain.ViewedProductFactory
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.repositories.CatalogRepository
@@ -34,10 +36,10 @@ class RepositoriesModule {
     @Provides
     @Singleton
     fun provideViewedProductsRepository(
-        factory: ProductFactory,
-        context: Context
-    ): ViewedProductsRepository = ViewedProductsRepositoryImpl(
-        context.getSharedPreferences("my_viewed_products", Context.MODE_PRIVATE),
+        factory: ViewedProductFactory,
+        db: AppDatabase
+    ): ViewedProductsRepository = ViewedProductsRepositoryRoom(
+        db.viewedProductsDao(),
         factory
     )
 

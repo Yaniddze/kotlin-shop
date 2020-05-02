@@ -2,12 +2,13 @@ package com.example.kotlin_shop.data.repositories
 
 import android.content.SharedPreferences
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.domain.factories.ProductFactory
+import com.example.kotlin_shop.domain.ViewedProduct
+import com.example.kotlin_shop.domain.ViewedProductFactory
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 
-class ViewedProductsRepositoryImpl(
+class ViewedProductsRepositoryShared(
     private val sharedPreferences: SharedPreferences,
-    private val productFactory: ProductFactory
+    private val factory: ViewedProductFactory
 ): ViewedProductsRepository {
 
     init {
@@ -16,25 +17,21 @@ class ViewedProductsRepositoryImpl(
                 ?.split("|")
                 ?.map {
                     val info = it.split(';')
-                    productFactory.createProduct(
+                    factory(
                         info[0].toInt(),
                         info[1],
-                        info[2],
-                        "",
-                        listOf(),
-                        info[3].toDouble(),
-                        info[4].toInt()
+                        info[2]
                     )
                 }?.toMutableList() ?: mutableListOf()
     }
 
-    override suspend fun getAll(): MutableList<Product> = savedProducts!!
+    override suspend fun getAll(): MutableList<ViewedProduct> = savedProducts!!
 
     override suspend fun add(product: Product) {
 
         val sharedValue = sharedPreferences.getString(PRODUCT_TAG, null)
 
-        val productInList = savedProducts?.firstOrNull { it.id == product.id }
+        val productInList = savedProducts?.firstOrNull { it.productId == product.id }
 
         var currentValue = ""
 
@@ -46,24 +43,24 @@ class ViewedProductsRepositoryImpl(
                         currentValue = "$currentValue|$it"
                 }
 
-            savedProducts?.remove(product)
+            savedProducts?.remove(productInList)
         }
         else{
             currentValue = if(sharedValue == null) "" else "|$sharedValue"
         }
 
-        val productString = "${product.id};${product.title};${product.imageUrl};${product.lot.price};${product.lot.salePercent}"
+        val productString = "${product.id};${product.imageUrl};${product.title}"
 
         sharedPreferences.edit().putString(PRODUCT_TAG, "$productString$currentValue").apply()
 
-        savedProducts?.add(0, product)
+        savedProducts?.add(0, factory(product.id, product.imageUrl, product.title))
     }
 
     companion object{
 
         private const val PRODUCT_TAG: String = "PRODUCT_TAG"
 
-        private var savedProducts: MutableList<Product>? = null
+        private var savedProducts: MutableList<ViewedProduct>? = null
 
     }
 }

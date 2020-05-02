@@ -1,6 +1,7 @@
 package com.example.kotlin_shop.ui.interfaces
 
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.ViewedProduct
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
@@ -14,7 +15,7 @@ interface CatalogView: MvpView {
     fun onAddCatalogItem()
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showViewed(products: MutableList<Product>)
+    fun showViewed(products: MutableList<ViewedProduct>)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showError(message: String)

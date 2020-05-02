@@ -7,13 +7,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.ViewedProduct
 import java.util.*
 
 class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHolder>() {
 
     inner class ViewHolder(val layout: ConstraintLayout): RecyclerView.ViewHolder(layout)
 
-    private var dataSet: MutableList<Product> = mutableListOf()
+    private var dataSet: MutableList<ViewedProduct> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val result = LayoutInflater.from(parent.context)
@@ -25,15 +26,14 @@ class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHold
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = dataSet[position]
 
-        holder.layout.findViewById<TextView>(R.id.tvViewedId).text = product.id.toString()
+        holder.layout.findViewById<TextView>(R.id.tvViewedId).text = product.productId.toString()
         holder.layout.findViewById<TextView>(R.id.tvViewedTitle).text = product.title
-        holder.layout.findViewById<TextView>(R.id.tvViewedPrice).text =
-            "${product.lot.getRoundedPrice()} P"
+
     }
 
     override fun getItemCount(): Int = dataSet.size
 
-    fun changeItemSource(products: MutableList<Product>){
+    fun changeItemSource(products: MutableList<ViewedProduct>){
         dataSet = products
         notifyDataSetChanged()
     }

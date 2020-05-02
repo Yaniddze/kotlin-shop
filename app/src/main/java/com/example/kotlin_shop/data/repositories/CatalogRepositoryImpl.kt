@@ -46,4 +46,8 @@ class CatalogRepositoryImpl(
     override suspend fun addItem(product: Product) {
         myDataSet?.add(product)
     }
+
+    override suspend fun getById(id: Int): Product? {
+        return myDataSet!!.firstOrNull { it.id == id }
+    }
 }
