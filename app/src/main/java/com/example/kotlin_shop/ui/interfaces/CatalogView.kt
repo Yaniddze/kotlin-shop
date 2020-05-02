@@ -12,7 +12,7 @@ interface CatalogView: MvpView {
     fun showProducts(products: MutableList<Product>)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun onAddCatalogItem()
+    fun onAddCatalogItem(product: Product)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showError(message: String)

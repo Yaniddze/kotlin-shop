@@ -73,7 +73,8 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun notifyItemAdded(){
+    fun addItem(product: Product){
+        dataSet.add(product)
         notifyItemInserted(dataSet.size - 1)
     }
 

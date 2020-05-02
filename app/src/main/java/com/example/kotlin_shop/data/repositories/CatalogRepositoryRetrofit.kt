@@ -1,6 +1,7 @@
 package com.example.kotlin_shop.data.repositories
 
 import com.example.kotlin_shop.data.dao.ProductsDao
+import com.example.kotlin_shop.data.entities.RetrofitAnswer
 import com.example.kotlin_shop.domain.Attribute
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.factories.ProductFactory
@@ -24,14 +25,22 @@ class CatalogRepositoryRetrofit(
                 it.imageUrl,
                 it.description,
                 it.attributes.map { attr -> Attribute(attr.name, attr.value) },
-                it.price.toDouble(),
+                it.price,
                 it.discountPercent
             )
         }.toMutableList()
     }
 
     override suspend fun addItem(product: Product) {
-        throw Exception()
+        dao.addProduct("default", RetrofitAnswer(
+            product.id.toString(),
+            product.title,
+            product.lot.price,
+            product.lot.salePercent,
+            product.description,
+            product.imageUrl,
+            product.attributes.map { com.example.kotlin_shop.data.entities.Attribute(it.name, it.value) }
+        ))
     }
 
     override suspend fun getById(id: Int): Product? {
@@ -43,7 +52,7 @@ class CatalogRepositoryRetrofit(
             tempProduct.imageUrl,
             tempProduct.description,
             tempProduct.attributes.map { attr -> Attribute(attr.name, attr.value) },
-            tempProduct.price.toDouble(),
+            tempProduct.price,
             tempProduct.discountPercent
         )
     }

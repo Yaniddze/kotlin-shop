@@ -33,7 +33,7 @@ class CatalogPresenter @Inject constructor(
         scope.launch {
             try{
                 catalogAdder(itemToAdd)
-                viewState.onAddCatalogItem()
+                viewState.onAddCatalogItem(itemToAdd)
             }
             catch (e: Exception){
                 viewState.showError("Add to server is not working")

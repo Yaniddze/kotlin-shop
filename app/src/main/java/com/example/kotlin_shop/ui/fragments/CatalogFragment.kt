@@ -72,8 +72,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         catalogAdapter.changeItemSource(products)
     }
 
-    override fun onAddCatalogItem() {
-        catalogAdapter.notifyItemAdded()
+    override fun onAddCatalogItem(product: Product) {
+        catalogAdapter.addItem(product)
     }
 
     override fun showError(message: String) {
