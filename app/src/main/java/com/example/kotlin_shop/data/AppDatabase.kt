@@ -46,6 +46,8 @@ abstract class AppDatabase : RoomDatabase() {
             if(INSTANCE != null)
                 return INSTANCE!!
 
+
+
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -56,6 +58,7 @@ abstract class AppDatabase : RoomDatabase() {
                 .build()
 
                 INSTANCE = instance
+
                 return instance
             }
         }

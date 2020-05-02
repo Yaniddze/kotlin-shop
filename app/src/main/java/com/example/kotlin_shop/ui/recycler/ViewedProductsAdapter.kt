@@ -2,12 +2,16 @@ package com.example.kotlin_shop.ui.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
+import com.example.kotlin_shop.ui.MainActivity
+import com.example.kotlin_shop.ui.fragments.DetailedFragmentDirections
 import java.util.*
 
 class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHolder>() {
@@ -26,9 +30,21 @@ class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHold
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = dataSet[position]
 
-        holder.layout.findViewById<TextView>(R.id.tvViewedId).text = product.productId.toString()
+        val image = holder.layout.findViewById<ImageView>(R.id.ivViewedPhoto)
         holder.layout.findViewById<TextView>(R.id.tvViewedTitle).text = product.title
 
+        Glide.with(image.context)
+            .load(product.imageUrl)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(image)
+
+        holder.layout.setOnClickListener {
+            val activity = image.context as MainActivity
+
+            val action = DetailedFragmentDirections.actionNavigationDetailedSelf(product.productId)
+
+            activity.navigate(action)
+        }
     }
 
     override fun getItemCount(): Int = dataSet.size

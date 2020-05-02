@@ -16,4 +16,7 @@ interface ViewedProductsDao {
 
     @Query("DELETE FROM viewed_products WHERE productId = :productId")
     suspend fun delete(productId: Int)
+
+    @Query("DELETE FROM viewed_products")
+    suspend fun deleteAll()
 }

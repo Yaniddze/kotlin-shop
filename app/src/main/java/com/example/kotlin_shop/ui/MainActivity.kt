@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,6 +13,7 @@ import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.ui.fragments.CartFragmentDirections
 import com.example.kotlin_shop.ui.fragments.CatalogFragmentDirections
+import com.example.kotlin_shop.ui.fragments.DetailedFragmentDirections
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,17 +41,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
-    fun showDetailed(productId: Int){
-        val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(productId)
-
-        navController.navigate(action)
+    fun navigate(directions: NavDirections){
+        navController.navigate(directions)
     }
-
-    fun showPurchaseFragment(){
-        val action = CartFragmentDirections.actionNavigationCartToPurchaseFragment()
-
-        navController.navigate(action)
-    }
-
 }

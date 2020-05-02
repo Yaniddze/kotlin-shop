@@ -55,7 +55,9 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
         }
 
         btnOrder.setOnClickListener {
-            (context as MainActivity).showPurchaseFragment()
+            val action = CartFragmentDirections.actionNavigationCartToPurchaseFragment()
+
+            (context as MainActivity).navigate(action)
         }
 
         presenter.getProducts()

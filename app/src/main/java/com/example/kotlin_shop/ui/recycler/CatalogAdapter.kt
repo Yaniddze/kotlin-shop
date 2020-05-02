@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.ui.MainActivity
+import com.example.kotlin_shop.ui.fragments.CatalogFragmentDirections
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
@@ -50,7 +51,9 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         layout.setOnClickListener {
             val context = picture.context as MainActivity
 
-            context.showDetailed(product.id)
+            val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(product.id)
+
+            context.navigate(action)
         }
 
         layout.findViewById<ImageView>(R.id.ivDeleteItem).setOnClickListener {

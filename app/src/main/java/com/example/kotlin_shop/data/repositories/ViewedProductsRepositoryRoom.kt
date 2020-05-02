@@ -23,6 +23,7 @@ class ViewedProductsRepositoryRoom(
                 factory(it.productId, it.imageUrl, it.title)
             }.toMutableList()
         }
+//        dao.deleteAdd()
 
         return products!!
     }

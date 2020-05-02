@@ -42,8 +42,10 @@ class DetailedPresenter @Inject constructor(
 
                 if(product == null)
                     viewState.showError("Product not found")
-                else
+                else {
+                    viewedAdder(product)
                     viewState.showProduct(product)
+                }
 
             }catch (e: UnknownHostException){
                 viewState.showNetworkError()
@@ -54,7 +56,6 @@ class DetailedPresenter @Inject constructor(
     fun getViewed(notInclude: Int){
         scope.launch {
             val viewed = viewedGetter()
-
             viewState.showViewed(viewed.filter { it.productId != notInclude }.toMutableList())
         }
     }
