@@ -6,6 +6,8 @@ import com.example.kotlin_shop.domain.usecases.GetCatalogUseCase
 import com.example.kotlin_shop.domain.usecases.GetViewedProductsUseCase
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class CatalogPresenter @Inject constructor(
@@ -48,7 +50,9 @@ class CatalogPresenter @Inject constructor(
             try{
                 val items = catalogGetter()
                 viewState.showProducts(items)
-            } catch (e: Exception){
+            } catch (e: UnknownHostException){
+                viewState.showNetworkError()
+            } catch (e: SocketTimeoutException){
                 viewState.showNetworkError()
             }
         }
