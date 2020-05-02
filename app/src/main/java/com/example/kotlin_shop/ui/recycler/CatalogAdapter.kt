@@ -50,7 +50,7 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         layout.setOnClickListener {
             val context = picture.context as MainActivity
 
-            context.showDetailed(product)
+            context.showDetailed(product.id)
         }
 
         layout.findViewById<ImageView>(R.id.ivDeleteItem).setOnClickListener {

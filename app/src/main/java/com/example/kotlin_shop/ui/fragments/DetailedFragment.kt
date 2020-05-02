@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.di.components.DaggerAppComponent
@@ -29,16 +30,39 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         DaggerAppComponent.create().inject(this)
     }
 
+    private lateinit var imageView: ImageView
+    private lateinit var titleView: TextView
+    private lateinit var priceView: TextView
+    private lateinit var btnToCart: Button
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val imageView = view.findViewById<ImageView>(R.id.ivDetailedImage)
-        val titleView = view.findViewById<TextView>(R.id.tvDetailedTitle)
-        val priceView = view.findViewById<TextView>(R.id.tvDetailedPrice)
 
+        swipeRefreshLayout = view.findViewById(R.id.swipeDetailed)
 
-        val product = arguments?.get("product") as Product
+        imageView = swipeRefreshLayout.findViewById(R.id.ivDetailedImage)
+        titleView = swipeRefreshLayout.findViewById(R.id.tvDetailedTitle)
+        priceView = swipeRefreshLayout.findViewById(R.id.tvDetailedPrice)
+        btnToCart =  swipeRefreshLayout.findViewById(R.id.btnToCart)
 
+        val productId = arguments?.get("productId") as Int
+
+        swipeRefreshLayout.isRefreshing = true
+
+        swipeRefreshLayout.setOnRefreshListener {
+            presenter.getProduct(productId)
+        }
+        presenter.getProduct(productId)
+    }
+
+    override fun onAddToCart() {
+        Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showProduct(product: Product) {
         presenter.addToViewed(product)
+        swipeRefreshLayout.isRefreshing = false
 
         Glide
             .with(imageView.context)
@@ -49,13 +73,18 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         titleView.text = product.title
         priceView.text = product.lot.getRoundedPrice()
 
-        view.findViewById<Button>(R.id.btnToCart).setOnClickListener {
+       btnToCart.setOnClickListener {
             presenter.addToCart(product)
         }
-
     }
 
-    override fun onAddToCart() {
-        Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+    override fun showNetworkError() {
+        swipeRefreshLayout.isRefreshing = false
+        Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show()
+    }
+
+    override fun showError(text: String) {
+        swipeRefreshLayout.isRefreshing = false
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
 }

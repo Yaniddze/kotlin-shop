@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showDetailed(product: Product){
-        val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(product)
+    fun showDetailed(productId: Int){
+        val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(productId)
 
         navController.navigate(action)
     }

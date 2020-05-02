@@ -14,8 +14,6 @@ class CatalogRepositoryRetrofit(
 
 ): CatalogRepository {
 
-
-
     override suspend fun getCatalog(): MutableList<Product>{
         val items = dao.allProducts()
 
@@ -37,6 +35,16 @@ class CatalogRepositoryRetrofit(
     }
 
     override suspend fun getById(id: Int): Product? {
-        TODO("Not yet implemented")
+        val tempProduct = dao.getById(id) ?: return null
+
+        return factory.createProduct(
+            tempProduct.id.toInt(),
+            tempProduct.name,
+            tempProduct.imageUrl,
+            tempProduct.description,
+            tempProduct.attributes.map { attr -> Attribute(attr.name, attr.value) },
+            tempProduct.price.toDouble(),
+            tempProduct.discountPercent
+        )
     }
 }
