@@ -1,7 +1,10 @@
 package com.example.kotlin_shop.domain.usecases
 
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.repositories.CartItemRepository
 
-interface AddCartItemUseCase {
-    suspend fun addCartItem(product: Product)
+class AddCartItemUseCase(private val repository: CartItemRepository) {
+    suspend operator fun invoke(product: Product) {
+        repository.addItem(product)
+    }
 }

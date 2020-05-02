@@ -8,20 +8,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailedPresenter @Inject constructor(
+
     private val cartItemAdder: AddCartItemUseCase,
+
     private val viewedAdder: AddViewedProductUseCase
+
 ): BasePresenter<DetailedView>(){
 
     fun addToCart(product: Product){
         scope.launch {
-            cartItemAdder.addCartItem(product)
+            cartItemAdder(product)
             viewState.onAddToCart()
         }
     }
 
     fun addToViewed(product: Product){
         scope.launch {
-            viewedAdder.addViewedProduct(product)
+            viewedAdder(product)
         }
     }
 }

@@ -13,9 +13,9 @@ class CatalogPresenter @Inject constructor(
 
     private val viewedGetter: GetViewedProductsUseCase,
 
-    private val mainCatalogGetter: GetCatalogUseCase,
+    private val catalogGetter: GetCatalogUseCase,
 
-    private val mainCatalogAdder: AddCatalogItemUseCase
+    private val catalogAdder: AddCatalogItemUseCase
 
 ) : BasePresenter<CatalogView>() {
 
@@ -34,7 +34,7 @@ class CatalogPresenter @Inject constructor(
 
         scope.launch {
             try{
-                mainCatalogAdder.add(itemToAdd)
+                catalogAdder(itemToAdd)
                 viewState.onAddCatalogItem()
             }
             catch (e: Exception){
@@ -48,7 +48,7 @@ class CatalogPresenter @Inject constructor(
         scope.launch {
 
             try{
-                val items = mainCatalogGetter.get()
+                val items = catalogGetter()
                 viewState.showProducts(items)
             } catch (e: Exception){
                 viewState.showError("Server is currently offline")
@@ -58,7 +58,7 @@ class CatalogPresenter @Inject constructor(
 
     fun getViewed() {
         scope.launch {
-            val products = viewedGetter.getViewedProducts()
+            val products = viewedGetter()
             viewState.showViewed(products)
         }
     }

@@ -14,7 +14,7 @@ class CatalogPresenterUseCasesModule {
     @Singleton
     fun provideGetViewedProductsUseCase(
         repository: ViewedProductsRepository
-    ): GetViewedProductsUseCase = GetViewedProductsUseCaseImpl(repository)
+    ): GetViewedProductsUseCase = GetViewedProductsUseCase(repository)
 
 
 
@@ -22,11 +22,11 @@ class CatalogPresenterUseCasesModule {
     @Singleton
     fun provideMainGetCatalogUseCase(
         repository: CatalogRepository
-    ): GetCatalogUseCase = GetCatalogUseCaseImpl(repository)
+    ): GetCatalogUseCase = GetCatalogUseCase(repository)
 
     @Provides
     @Singleton
     fun provideMainAddCatalogItemUseCase(
         repository: CatalogRepository
-    ): AddCatalogItemUseCase = AddCatalogItemUseCaseImpl(repository)
+    ): AddCatalogItemUseCase = AddCatalogItemUseCase(repository)
 }

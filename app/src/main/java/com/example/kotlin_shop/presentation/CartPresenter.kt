@@ -1,6 +1,5 @@
 package com.example.kotlin_shop.presentation
 
-import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCase
 import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
@@ -16,7 +15,7 @@ class CartPresenter @Inject constructor(
     fun getProducts() {
 
         scope.launch {
-            val items = getter.getItems()
+            val items = getter()
             viewState.showProducts(items)
         }
 
@@ -24,7 +23,7 @@ class CartPresenter @Inject constructor(
 
     fun deleteItem(product: Product) {
         scope.launch {
-            deleter.deleteCartItem(product)
+            deleter(product)
 
             viewState.onItemDeleted(product)
         }
