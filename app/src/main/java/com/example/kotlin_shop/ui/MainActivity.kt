@@ -1,6 +1,9 @@
 package com.example.kotlin_shop.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.view.KeyEvent
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -32,7 +35,27 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    private var doubleTap: Boolean = false
+
+    override fun onBackPressed() {
+        currentFocus?.clearFocus()
+
+        if(doubleTap){
+            super.onBackPressed()
+            doubleTap = false
+            return
+        }
+
+        this.doubleTap = true
+        Toast.makeText(this, "Click BACK again to exit", Toast.LENGTH_LONG).show()
+        Handler().postDelayed({
+            doubleTap = false
+        }, 2000)
+
+    }
+
     override fun onSupportNavigateUp(): Boolean {
+        doubleTap = true
         onBackPressed()
         return true
     }

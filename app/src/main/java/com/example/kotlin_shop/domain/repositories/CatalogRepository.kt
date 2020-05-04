@@ -6,4 +6,5 @@ interface CatalogRepository {
     suspend fun getCatalog(): MutableList<Product>
     suspend fun addItem(product: Product)
     suspend fun getById(id: Int): Product?
+    suspend fun getHints(author: String, query: String, maxSize: Int): List<String>
 }

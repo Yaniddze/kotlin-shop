@@ -60,4 +60,8 @@ class CatalogRepositoryRetrofit(
             tempProduct.discountPercent
         )
     }
+
+    override suspend fun getHints(author: String, query: String, maxSize: Int): List<String> {
+        return dao.getHints(author, query, maxSize)
+    }
 }

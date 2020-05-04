@@ -8,7 +8,7 @@ import moxy.MvpView
 
 abstract class BasePresenter<T : MvpView>: MvpPresenter<T>() {
 
-    private val job = SupervisorJob()
+    protected val job = SupervisorJob()
 
     protected val scope = CoroutineScope(Dispatchers.Main + job)
 

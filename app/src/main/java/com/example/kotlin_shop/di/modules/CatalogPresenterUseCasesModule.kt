@@ -29,4 +29,10 @@ class CatalogPresenterUseCasesModule {
     fun provideMainAddCatalogItemUseCase(
         repository: CatalogRepository
     ): AddCatalogItemUseCase = AddCatalogItemUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetHintsUseCase(
+        repository: CatalogRepository
+    ): GetHintsUseCase = GetHintsUseCase(repository)
 }

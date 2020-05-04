@@ -50,4 +50,8 @@ class CatalogRepositoryImpl(
     override suspend fun getById(id: Int): Product? {
         return myDataSet!!.firstOrNull { it.id == id }
     }
+
+    override suspend fun getHints(author: String, query: String, maxSize: Int): List<String> {
+        return listOf()
+    }
 }

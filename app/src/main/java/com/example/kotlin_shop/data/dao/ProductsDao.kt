@@ -16,4 +16,11 @@ interface ProductsDao {
 
     @POST("products/all/{author}/")
     suspend fun addProduct(@Path("author") author: String, @Body request: RetrofitAnswer)
+
+    @GET("products/hints/{author}/{query}/{maxSize}")
+    suspend fun getHints(
+        @Path("author") author: String,
+        @Path("query") query: String,
+        @Path("maxSize") maxSize: Int
+    ): List<String>
 }

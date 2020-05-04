@@ -50,6 +50,8 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
         val productId = arguments?.get("productId") as Int
 
+        btnToCart.isActivated = false
+
         presenter.getProduct(productId)
 
         val viewedManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
@@ -72,6 +74,8 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     }
 
     override fun showProduct(product: Product) {
+
+        btnToCart.isActivated = true
 
         Glide
             .with(imageView.context)

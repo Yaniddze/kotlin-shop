@@ -3,6 +3,7 @@ package com.example.kotlin_shop.presentation
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.usecases.AddCatalogItemUseCase
 import com.example.kotlin_shop.domain.usecases.GetCatalogUseCase
+import com.example.kotlin_shop.domain.usecases.GetHintsUseCase
 import com.example.kotlin_shop.domain.usecases.GetViewedProductsUseCase
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import kotlinx.coroutines.launch
@@ -15,11 +16,17 @@ class CatalogPresenter @Inject constructor(
 
     private val catalogGetter: GetCatalogUseCase,
 
-    private val catalogAdder: AddCatalogItemUseCase
+    private val catalogAdder: AddCatalogItemUseCase,
+
+    private val hintsGetter: GetHintsUseCase
 
 ) : BasePresenter<CatalogView>() {
 
     private var i = 11
+
+    companion object{
+        private const val MAX_RESULTS = 5
+    }
 
     fun addItem() {
         val itemToAdd = factory.createProduct(
@@ -44,15 +51,27 @@ class CatalogPresenter @Inject constructor(
 
     }
 
-    fun getProducts() {
+    fun getProducts(query: String = "") {
         scope.launch {
-
             try{
-                val items = catalogGetter()
+                val items = catalogGetter().filter { it.title.contains(query) }.toMutableList()
                 viewState.showProducts(items)
             } catch (e: UnknownHostException){
                 viewState.showNetworkError()
             } catch (e: SocketTimeoutException){
+                viewState.showNetworkError()
+            }
+        }
+    }
+
+    fun getHints(query: String){
+
+        scope.launch {
+            try{
+                val hints = hintsGetter("default", query, MAX_RESULTS)
+
+                viewState.showHints(hints)
+            }catch (e: Exception){
                 viewState.showNetworkError()
             }
         }
