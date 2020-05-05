@@ -1,44 +1,42 @@
 package com.example.kotlin_shop.ui.fragments.catalog
 
-import android.content.res.Configuration
 import android.os.Bundle
-import android.view.KeyEvent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
-import android.widget.SearchView
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presentation.CatalogPresenter
-import com.example.kotlin_shop.ui.MainActivity
+import com.example.kotlin_shop.ui.HintsAdapter
 import com.example.kotlin_shop.ui.fragments.BadInternetFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import com.example.kotlin_shop.ui.recycler.CatalogAdapter
-import com.example.kotlin_shop.ui.recycler.HintAdapter
+import com.mancj.materialsearchbar.MaterialSearchBar
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
+
 class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), CatalogView {
 
     private val catalogAdapter = CatalogAdapter()
-
-    private val hintAdapter = HintAdapter(::onSelect)
 
     private var isRecyclerShowed = true
 
     private var searchQuery: String = ""
 
+    private var wasShown: Boolean = false
+
     private lateinit var refresher: SwipeRefreshLayout
 
-    private lateinit var searchBar: SearchView
+    private lateinit var searchBar: MaterialSearchBar
 
-    private lateinit var recyclerHints: RecyclerView
+    private lateinit var hintAdapter: HintsAdapter
 
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
@@ -52,6 +50,10 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+        hintAdapter = HintsAdapter(requireContext(),::onSelect)
+
         refresher = view.findViewById(R.id.srlCatalogRefresher)
         searchBar = view.findViewById(R.id.svSearchProducts)
 
@@ -64,47 +66,60 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
         showRecycler()
 
-        presenter.getProducts()
-
         view.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
             presenter.addItem()
         }
 
-        recyclerHints = view.findViewById<RecyclerView>(R.id.rvProductSearchHints)
-
-        recyclerHints.apply {
-            setHasFixedSize(true)
-
-            layoutManager = LinearLayoutManager(context)
-
-            adapter = hintAdapter
-        }
-
-        recyclerHints.visibility = View.INVISIBLE
-
-        searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchBar.clearFocus()
-                if(query!= null)
-                    presenter.getProducts(searchQuery)
-                return false
+        searchBar.setHint("Найти...")
+        searchBar.setSpeechMode(true)
+        searchBar.setOnSearchActionListener(object: MaterialSearchBar.OnSearchActionListener{
+            override fun onButtonClicked(buttonCode: Int) {
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText != null && newText != "")
-                    presenter.getHints(newText)
-                searchQuery = newText ?: ""
-                return true
+            override fun onSearchStateChanged(enabled: Boolean) {
+                if(!enabled)
+                    presenter.getProducts("")
+            }
+
+            override fun onSearchConfirmed(text: CharSequence?) {
+                refresher.isRefreshing = true
+                presenter.getProducts(text?.toString() ?: "")
             }
         })
 
-        searchBar.setOnQueryTextFocusChangeListener { _, hasFocus ->
-            recyclerHints.visibility = if(hasFocus) View.VISIBLE else View.INVISIBLE
+        searchBar.setCustomSuggestionAdapter(hintAdapter)
+        hintAdapter.suggestions = listOf("", "", "")
+
+        searchBar.setCardViewElevation(3)
+
+        searchBar.addTextChangeListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s != null && s != ""){
+                    searchQuery = s.toString()
+                    presenter.getHints(s.toString())
+                }
+            }
+        })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(!wasShown){
+            wasShown = true
+            presenter.getProducts("")
         }
     }
 
     private fun onSelect(title: String){
-        searchBar.setQuery(title as CharSequence, false)
+        searchBar.text = title
     }
 
     private fun showRecycler(){
@@ -136,7 +151,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showNetworkError() {
-
         refresher.isRefreshing = false
 
         childFragmentManager
@@ -150,6 +164,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showHints(hints: List<String>) {
-        hintAdapter.loadData(hints)
+        hintAdapter.suggestions = hints
+        hintAdapter.notifyDataSetChanged()
     }
 }

@@ -8,6 +8,7 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlCatalogRefresher"
+        style="@style/MaterialSearchBarLight"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,8 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <SearchView
+            <com.mancj.materialsearchbar.MaterialSearchBar
                 android:id="@+id/svSearchProducts"
+                app:mt_hint="Custom hint"
+                app:mt_maxSuggestionsCount="10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/flCatalogFragment"
@@ -37,18 +40,6 @@
                 android:id="@+id/flCatalogFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvProductSearchHints"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/svSearchProducts" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

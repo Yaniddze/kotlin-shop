@@ -51,7 +51,7 @@ class CatalogPresenter @Inject constructor(
 
     }
 
-    fun getProducts(query: String = "") {
+    fun getProducts(query: String) {
         scope.launch {
             try{
                 val items = catalogGetter().filter { it.title.contains(query) }.toMutableList()
@@ -66,14 +66,15 @@ class CatalogPresenter @Inject constructor(
 
     fun getHints(query: String){
 
-        scope.launch {
-            try{
-                val hints = hintsGetter("default", query, MAX_RESULTS)
+        if(query != "")
+            scope.launch {
+                try{
+                    val hints = hintsGetter("default", query, MAX_RESULTS)
 
-                viewState.showHints(hints)
-            }catch (e: Exception){
-                viewState.showNetworkError()
+                    viewState.showHints(hints)
+                }catch (e: Exception){
+                    viewState.showNetworkError()
+                }
             }
-        }
     }
 }
