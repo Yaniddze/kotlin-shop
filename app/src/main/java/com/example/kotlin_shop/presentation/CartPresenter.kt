@@ -1,10 +1,9 @@
 package com.example.kotlin_shop.presentation
 
-import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.CartItem
 import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCase
 import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
 import com.example.kotlin_shop.ui.interfaces.CartView
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CartPresenter @Inject constructor(
@@ -14,18 +13,18 @@ class CartPresenter @Inject constructor(
 
     fun getProducts() {
 
-        scope.launch {
+        launch {
             val items = getter()
             viewState.showProducts(items)
         }
 
     }
 
-    fun deleteItem(product: Product) {
-        scope.launch {
-            deleter(product)
+    fun deleteItem(item: CartItem) {
+        launch {
+            deleter(item)
 
-            viewState.onItemDeleted(product)
+            viewState.onItemDeleted(item)
         }
     }
 }

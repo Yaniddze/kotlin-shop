@@ -3,14 +3,13 @@ package com.example.kotlin_shop.data.repositories
 import com.example.kotlin_shop.data.dao.CartItemDao
 import com.example.kotlin_shop.data.entities.CartItemDB
 import com.example.kotlin_shop.data.entities.factories.CartItemFactory
+import com.example.kotlin_shop.domain.CartItem
 import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.domain.factories.ProductFactory
 import javax.inject.Inject
 
 class CartItemRepositoryImpl @Inject constructor(
 
-    private val productFactory: ProductFactory,
     private val cartItemFactory: CartItemFactory,
     private val dao: CartItemDao
 
@@ -18,19 +17,17 @@ class CartItemRepositoryImpl @Inject constructor(
 
 
 
-    private var items: MutableList<Product>? = null
+    private var items: MutableList<CartItem>? = null
 
-    override suspend fun getItems(): MutableList<Product>{
+    override suspend fun getItems(): MutableList<CartItem>{
         if(items == null){
             val itemsDB = dao.getCartItems()
 
             items = itemsDB.map {
-                productFactory.createProduct(
-                    it.productId,
+                CartItem(
+                    it.id.toString(),
                     it.title,
                     it.imageUrl,
-                    "",
-                    listOf(),
                     it.price,
                     it.salePercent
                 )
@@ -42,25 +39,33 @@ class CartItemRepositoryImpl @Inject constructor(
 
     override suspend fun addItem(product: Product){
 
+        val item = CartItem(
+            product.id,
+            product.name,
+            product.imageUrl,
+            product.price,
+            product.discountPercent
+        )
+
         val index = getItems()
-            .indexOf(product)
+            .indexOf(item)
 
         if(index != -1)
             return
 
-        val productToAdd: CartItemDB = cartItemFactory.createItem(
-            product.id,
-            product.title,
-            product.imageUrl,
-            product.lot.price,
-            product.lot.salePercent
+        val productToAdd: CartItemDB = cartItemFactory(
+            item.id.toInt(),
+            item.title,
+            item.image,
+            item.price,
+            item.discountPercent
         )
 
         dao.insert(productToAdd)
-        getItems().add(product)
+        getItems().add(item)
     }
 
-    override suspend fun deleteItem(product: Product){
-        dao.delete(product.id)
+    override suspend fun deleteItem(product: CartItem){
+        dao.delete(product.id.toInt())
     }
 }

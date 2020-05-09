@@ -3,16 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginBottom="50dp">
+    android:layout_margin="5dp"
+    android:background="@drawable/catalog_item_style">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clCartItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/catalog_item_style"
         android:orientation="horizontal"
         android:paddingBottom="10dp">
 
@@ -50,12 +47,11 @@
             app:layout_constraintTop_toBottomOf="@id/tvCatalogItemTitle" />
 
         <ImageView
-            android:id="@+id/ivDeleteItem"
+            android:id="@+id/ivCatalogFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/ic_close"
-            android:contentDescription="@string/delete_icon_iv_description"
+            android:contentDescription="@string/favorite_icon_description"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

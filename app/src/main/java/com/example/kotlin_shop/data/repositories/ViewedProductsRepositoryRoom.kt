@@ -20,7 +20,7 @@ class ViewedProductsRepositoryRoom(
         if(products == null){
             val dbItems = dao.getAll()
             products = dbItems.map {
-                factory(it.productId, it.imageUrl, it.title)
+                factory(it.productId.toString(), it.imageUrl, it.title)
             }.toMutableList()
         }
 //        dao.deleteAdd()
@@ -38,19 +38,19 @@ class ViewedProductsRepositoryRoom(
         val founded = tempProducts.firstOrNull { it.productId == product.id }
 
         if(founded != null){
-            dao.delete(founded.productId)
+            dao.delete(founded.productId.toInt())
             tempProducts.remove(founded)
         }
 
-        dao.insert(ViewedProductDB(0, product.id, product.title, product.imageUrl))
-        tempProducts.add(0, factory(product.id, product.imageUrl, product.title))
+        dao.insert(ViewedProductDB(0, product.id.toInt(), product.name, product.imageUrl))
+        tempProducts.add(0, factory(product.id, product.imageUrl, product.name))
 
 
         // Max - 7 viewed products
         while(tempProducts.size > 7){
             val lastProduct = tempProducts.last()
 
-            dao.delete(lastProduct.productId)
+            dao.delete(lastProduct.productId.toInt())
             tempProducts.remove(lastProduct)
         }
     }

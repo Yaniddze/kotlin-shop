@@ -8,7 +8,6 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlCatalogRefresher"
-        style="@style/MaterialSearchBarLight"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,8 +20,9 @@
 
             <com.mancj.materialsearchbar.MaterialSearchBar
                 android:id="@+id/svSearchProducts"
-                app:mt_hint="Custom hint"
+                app:mt_hint="Найти ..."
                 app:mt_maxSuggestionsCount="10"
+                style="@style/MaterialSearchBarLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/flCatalogFragment"

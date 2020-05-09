@@ -7,9 +7,9 @@
         android:title="@string/menu_catalog_title" />
 
     <item
-        android:id="@+id/navigation_account"
-        android:icon="@drawable/ic_account"
-        android:title="@string/menu_account_title" />
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/ic_favorite_nav"
+        android:title="@string/favorite_menu_title" />
 
     <item
         android:id="@+id/navigation_cart"

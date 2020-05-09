@@ -7,13 +7,15 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.kotlin_shop.data.dao.CartItemDao
+import com.example.kotlin_shop.data.dao.FavoriteProductsDao
 import com.example.kotlin_shop.data.dao.ViewedProductsDao
 import com.example.kotlin_shop.data.entities.CartItemDB
+import com.example.kotlin_shop.data.entities.FavoriteProductDB
 import com.example.kotlin_shop.data.entities.ViewedProductDB
 
 @Database(
-    entities = [CartItemDB::class, ViewedProductDB::class],
-    version = 2,
+    entities = [CartItemDB::class, ViewedProductDB::class, FavoriteProductDB::class],
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -22,11 +24,11 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun viewedProductsDao(): ViewedProductsDao
 
-
+    abstract fun favoriteDao(): FavoriteProductsDao
 
     companion object{
 
-        private val MIGRAGION_1_2 = object: Migration(1, 2){
+        private val MIGRATION_1_2 = object: Migration(1, 2){
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "CREATE TABLE IF NOT EXISTS viewed_products(" +
@@ -37,6 +39,23 @@ abstract class AppDatabase : RoomDatabase() {
                             "PRIMARY KEY(id))")
             }
 
+        }
+
+        private val MIGRATION_2_3 = object: Migration(2, 3){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS favorites(" +
+                        "id INTEGER NOT NULL, " +
+                        "productId INTEGER NOT NULL," +
+                        "PRIMARY KEY(id))")
+            }
+
+        }
+
+        private val MIGRATION_3_4 = object: Migration(3, 4){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE favorites ADD COLUMN image TEXT NOT NULL DEFAULT '0'")
+                database.execSQL("ALTER TABLE favorites ADD COLUMN title TEXT NOT NULL DEFAULT '0'")
+            }
         }
 
         @Volatile
@@ -54,7 +73,11 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "app_database"
                 )
-                .addMigrations(MIGRAGION_1_2)
+                .addMigrations(
+                    MIGRATION_1_2,
+                    MIGRATION_2_3,
+                    MIGRATION_3_4
+                )
                 .build()
 
                 INSTANCE = instance

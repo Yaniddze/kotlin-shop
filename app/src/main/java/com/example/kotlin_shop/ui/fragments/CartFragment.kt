@@ -5,14 +5,13 @@ import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.di.components.DaggerAppComponent
-import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.CartItem
 import com.example.kotlin_shop.presentation.CartPresenter
-import com.example.kotlin_shop.presentation.CatalogPresenter
 import com.example.kotlin_shop.ui.interfaces.CartView
 import com.example.kotlin_shop.ui.MainActivity
-import com.example.kotlin_shop.ui.recycler.CartAdapter
+import com.example.kotlin_shop.ui.adapters.CartAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -28,11 +27,11 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     init {
-        DaggerAppComponent.create().inject(this)
+        App.appComponent.inject(this)
     }
 
-    private fun onDelete(product: Product){
-        presenter.deleteItem(product)
+    private fun onDelete(item: CartItem){
+        presenter.deleteItem(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,11 +62,11 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
         presenter.getProducts()
     }
 
-    override fun showProducts(products: MutableList<Product>) {
+    override fun showProducts(products: MutableList<CartItem>) {
         recyclerAdapter.changeItemSource(products)
     }
 
-    override fun onItemDeleted(product: Product) {
-        recyclerAdapter.deleteItem(product)
+    override fun onItemDeleted(item: CartItem) {
+        recyclerAdapter.deleteItem(item)
     }
 }

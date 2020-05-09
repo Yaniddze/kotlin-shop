@@ -1,12 +1,8 @@
 package com.example.kotlin_shop.presentation
 
 import com.example.kotlin_shop.domain.Product
-import com.example.kotlin_shop.domain.usecases.AddCartItemUseCase
-import com.example.kotlin_shop.domain.usecases.AddViewedProductUseCase
-import com.example.kotlin_shop.domain.usecases.GetProductByIdUseCase
-import com.example.kotlin_shop.domain.usecases.GetViewedProductsUseCase
+import com.example.kotlin_shop.domain.usecases.*
 import com.example.kotlin_shop.ui.interfaces.DetailedView
-import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -18,25 +14,29 @@ class DetailedPresenter @Inject constructor(
 
     private val productGetter: GetProductByIdUseCase,
 
-    private val viewedGetter: GetViewedProductsUseCase
+    private val viewedGetter: GetViewedProductsUseCase,
+
+    private val favoriteAdder: AddFavoriteUseCase,
+
+    private val favoriteDeleter: DeleteFavoriteUseCase
 
 ): BasePresenter<DetailedView>(){
 
     fun addToCart(product: Product){
-        scope.launch {
+        launch {
             cartItemAdder(product)
             viewState.onAddToCart()
         }
     }
 
     fun addToViewed(product: Product){
-        scope.launch {
+        launch {
             viewedAdder(product)
         }
     }
 
-    fun getProduct(productId: Int){
-        scope.launch {
+    fun getProduct(productId: String){
+        launch {
             try{
                 val product = productGetter(productId)
 
@@ -53,10 +53,26 @@ class DetailedPresenter @Inject constructor(
         }
     }
 
-    fun getViewed(notInclude: Int){
-        scope.launch {
+    fun getViewed(notInclude: String){
+        launch {
             val viewed = viewedGetter()
             viewState.showViewed(viewed.filter { it.productId != notInclude }.toMutableList())
+        }
+    }
+
+    fun addToFavorite(product: Product){
+        launch {
+            favoriteAdder(product)
+            product.isFavorite = true
+            viewState.onFavoriteChanged(product)
+        }
+    }
+
+    fun deleteFromFavorite(product: Product){
+        launch {
+            favoriteDeleter(product)
+            product.isFavorite = false
+            viewState.onFavoriteChanged(product)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.ui.recycler
+package com.example.kotlin_shop.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,9 +13,11 @@ import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.ui.MainActivity
 import com.example.kotlin_shop.ui.fragments.catalog.CatalogFragmentDirections
 
-class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
+class CatalogAdapter(
+    private val onFavoriteClick: (product: Product) -> Unit
+) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
-    private var dataSet: MutableList<Product> = mutableListOf()
+    var dataSet: MutableList<Product> = mutableListOf()
 
     inner class ViewHolder(val layout: CardView) : RecyclerView.ViewHolder(layout)
 
@@ -34,9 +36,9 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
         val layout = holder.layout.findViewById<ConstraintLayout>(R.id.clCartItemLayout)
 
-        layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.title
+        layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.name
         layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
-            product.lot.getRoundedPrice()
+            product.getRoundedPrice()
 
         val picture = layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
 
@@ -51,21 +53,20 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         layout.setOnClickListener {
             val context = picture.context as MainActivity
 
-            val action = CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(product.id)
+            val action =
+                CatalogFragmentDirections.actionNavigationCatalogToNaigationDetailed(product.id)
 
             context.navigate(action)
         }
 
-        layout.findViewById<ImageView>(R.id.ivDeleteItem).setOnClickListener {
-
-            val id = dataSet.indexOf(product)
-
-            if(id != -1){
-                dataSet.removeAt(id)
-                notifyItemRemoved(id)
+        layout.findViewById<ImageView>(R.id.ivCatalogFavorite).apply {
+            background = picture.context.getDrawable(if(product.isFavorite) R.drawable.ic_favorite else R.drawable.ic_unfavorite)
+            setOnClickListener {
+                onFavoriteClick(product)
             }
-
         }
+
+
     }
 
     fun changeItemSource(products: MutableList<Product>) {
@@ -80,5 +81,13 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return dataSet.size
+    }
+
+    fun notifyProductChanged(product: Product) {
+        val index = dataSet.indexOf(product)
+
+        if(index != -1){
+            notifyItemChanged(index)
+        }
     }
 }

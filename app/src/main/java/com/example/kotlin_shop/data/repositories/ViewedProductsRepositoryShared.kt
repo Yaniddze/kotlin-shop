@@ -18,7 +18,7 @@ class ViewedProductsRepositoryShared(
                 ?.map {
                     val info = it.split(';')
                     factory(
-                        info[0].toInt(),
+                        info[0],
                         info[1],
                         info[2]
                     )
@@ -39,7 +39,7 @@ class ViewedProductsRepositoryShared(
             sharedValue
                 ?.split("|")
                 ?.forEach {
-                    if(it.split(";")[0].toInt() != product.id)
+                    if(it.split(";")[0] != product.id)
                         currentValue = "$currentValue|$it"
                 }
 
@@ -49,11 +49,11 @@ class ViewedProductsRepositoryShared(
             currentValue = if(sharedValue == null) "" else "|$sharedValue"
         }
 
-        val productString = "${product.id};${product.imageUrl};${product.title}"
+        val productString = "${product.id};${product.imageUrl};${product.name}"
 
         sharedPreferences.edit().putString(PRODUCT_TAG, "$productString$currentValue").apply()
 
-        savedProducts?.add(0, factory(product.id, product.imageUrl, product.title))
+        savedProducts?.add(0, factory(product.id, product.imageUrl, product.name))
     }
 
     companion object{

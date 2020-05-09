@@ -1,6 +1,7 @@
 package com.example.kotlin_shop.di.modules
 
 import com.example.kotlin_shop.domain.repositories.CatalogRepository
+import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 import com.example.kotlin_shop.domain.usecases.*
 import dagger.Module
@@ -16,13 +17,12 @@ class CatalogPresenterUseCasesModule {
         repository: ViewedProductsRepository
     ): GetViewedProductsUseCase = GetViewedProductsUseCase(repository)
 
-
-
     @Provides
     @Singleton
     fun provideMainGetCatalogUseCase(
-        repository: CatalogRepository
-    ): GetCatalogUseCase = GetCatalogUseCase(repository)
+        catalogRepository: CatalogRepository,
+        favoriteProductsRepository: FavoriteProductsRepository
+    ): GetCatalogUseCase = GetCatalogUseCase(catalogRepository, favoriteProductsRepository)
 
     @Provides
     @Singleton
@@ -35,4 +35,10 @@ class CatalogPresenterUseCasesModule {
     fun provideGetHintsUseCase(
         repository: CatalogRepository
     ): GetHintsUseCase = GetHintsUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun provideRefreshFavoriteUseCase(
+        repository: FavoriteProductsRepository
+    ): RefreshFavoriteUseCase = RefreshFavoriteUseCase(repository)
 }

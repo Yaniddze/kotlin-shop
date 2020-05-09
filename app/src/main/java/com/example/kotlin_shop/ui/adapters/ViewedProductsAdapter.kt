@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.ui.recycler
+package com.example.kotlin_shop.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,11 +8,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.ui.MainActivity
 import com.example.kotlin_shop.ui.fragments.DetailedFragmentDirections
-import java.util.*
 
 class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHolder>() {
 

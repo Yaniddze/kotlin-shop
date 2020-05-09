@@ -3,14 +3,21 @@ package com.example.kotlin_shop.presentation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import moxy.MvpPresenter
 import moxy.MvpView
 
 abstract class BasePresenter<T : MvpView>: MvpPresenter<T>() {
 
-    protected val job = SupervisorJob()
+    private val job = SupervisorJob()
 
-    protected val scope = CoroutineScope(Dispatchers.Main + job)
+    private val scope = CoroutineScope(Dispatchers.Main + job)
+
+    protected fun launch(action: suspend () -> Unit){
+        scope.launch {
+            action()
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

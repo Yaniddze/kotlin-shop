@@ -1,9 +1,10 @@
 package com.example.kotlin_shop.domain.repositories
 
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.CartItem
 
 interface CartItemRepository {
-    suspend fun getItems(): MutableList<Product>
+    suspend fun getItems(): MutableList<CartItem>
     suspend fun addItem(product: Product)
-    suspend fun deleteItem(product: Product)
+    suspend fun deleteItem(product: CartItem)
 }

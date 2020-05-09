@@ -7,14 +7,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presentation.CatalogPresenter
-import com.example.kotlin_shop.ui.HintsAdapter
 import com.example.kotlin_shop.ui.fragments.BadInternetFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
-import com.example.kotlin_shop.ui.recycler.CatalogAdapter
+import com.example.kotlin_shop.ui.adapters.CatalogAdapter
 import com.mancj.materialsearchbar.MaterialSearchBar
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -24,7 +23,7 @@ import javax.inject.Provider
 
 class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), CatalogView {
 
-    private val catalogAdapter = CatalogAdapter()
+    private val catalogAdapter = CatalogAdapter(::onFavoriteClick)
 
     private var isRecyclerShowed = true
 
@@ -36,23 +35,17 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     private lateinit var searchBar: MaterialSearchBar
 
-    private lateinit var hintAdapter: HintsAdapter
-
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
 
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     init {
-        DaggerAppComponent.create().inject(this)
+        App.appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        hintAdapter = HintsAdapter(requireContext(),::onSelect)
 
         refresher = view.findViewById(R.id.srlCatalogRefresher)
         searchBar = view.findViewById(R.id.svSearchProducts)
@@ -70,8 +63,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             presenter.addItem()
         }
 
-        searchBar.setHint("Найти...")
-        searchBar.setSpeechMode(true)
         searchBar.setOnSearchActionListener(object: MaterialSearchBar.OnSearchActionListener{
             override fun onButtonClicked(buttonCode: Int) {
             }
@@ -86,11 +77,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
                 presenter.getProducts(text?.toString() ?: "")
             }
         })
-
-        searchBar.setCustomSuggestionAdapter(hintAdapter)
-        hintAdapter.suggestions = listOf("", "", "")
-
-        searchBar.setCardViewElevation(3)
 
         searchBar.addTextChangeListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
@@ -116,10 +102,17 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             wasShown = true
             presenter.getProducts("")
         }
+
+        presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
     }
 
-    private fun onSelect(title: String){
-        searchBar.text = title
+    private fun onFavoriteClick(product: Product){
+        if(!product.isFavorite){
+            presenter.addToFavorite(product)
+        }
+        else{
+            presenter.deleteFromFavorite(product)
+        }
     }
 
     private fun showRecycler(){
@@ -164,7 +157,21 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showHints(hints: List<String>) {
-        hintAdapter.suggestions = hints
-        hintAdapter.notifyDataSetChanged()
+        searchBar.updateLastSuggestions(hints)
+    }
+
+    override fun onFavoriteAdded(product: Product) {
+        catalogAdapter.notifyProductChanged(product)
+    }
+
+    override fun onFavoriteDeleted(product: Product) {
+        catalogAdapter.notifyProductChanged(product)
+    }
+
+    override fun onFavoriteRefreshed(changedIds: List<Int>) {
+        changedIds.forEach { id ->
+            val founded = catalogAdapter.dataSet.first{ it.id == id.toString()}
+            catalogAdapter.notifyProductChanged(founded)
+        }
     }
 }

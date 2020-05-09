@@ -2,10 +2,9 @@ package com.example.kotlin_shop.di.modules
 
 import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.repositories.CatalogRepository
+import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
-import com.example.kotlin_shop.domain.usecases.AddCartItemUseCase
-import com.example.kotlin_shop.domain.usecases.AddViewedProductUseCase
-import com.example.kotlin_shop.domain.usecases.GetProductByIdUseCase
+import com.example.kotlin_shop.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,7 +26,8 @@ class DetailedPresenterUseCasesModule {
     @Provides
     @Singleton
     fun provideGetProductByIdUseCase(
-        repository: CatalogRepository
-    ): GetProductByIdUseCase = GetProductByIdUseCase(repository)
+        catalogRepository: CatalogRepository,
+        favoriteRepository: FavoriteProductsRepository
+    ): GetProductByIdUseCase = GetProductByIdUseCase(catalogRepository, favoriteRepository)
 
 }

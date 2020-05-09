@@ -22,4 +22,7 @@ interface DetailedView: MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showViewed(viewed: MutableList<ViewedProduct>)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun onFavoriteChanged(product: Product)
 }

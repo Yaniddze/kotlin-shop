@@ -38,4 +38,7 @@
     <string name="product">product</string>
     <string name="viewed_products_title">Просмотренные товары</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="favorite_menu_title">Избранное</string>
+    <string name="to_iv_favorite_placeholder">toFavorite</string>
+    <string name="favorite_icon_description">favorite icon</string>
 </resources>

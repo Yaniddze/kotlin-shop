@@ -1,6 +1,8 @@
 package com.example.kotlin_shop.data.repositories
 
+import com.example.kotlin_shop.domain.MainCategory
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.SubCategory
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.repositories.CatalogRepository
 
@@ -24,14 +26,16 @@ class CatalogRepositoryImpl(
         if(myDataSet == null) {
             myDataSet = mutableListOf()
             for(i in 0..15){
-                myDataSet!!.add(factory.createProduct(
+                myDataSet!!.add(factory(
                     i,
                     "someProd$i",
                     images.random(),
                     "some description $i",
                     listOf(),
                     randomPrice(),
-                    randomPercent()
+                    randomPercent(),
+                    SubCategory("other", MainCategory("other")),
+                    listOf()
                 ))
             }
         }
@@ -47,11 +51,11 @@ class CatalogRepositoryImpl(
         myDataSet?.add(product)
     }
 
-    override suspend fun getById(id: Int): Product? {
+    override suspend fun getById(id: String): Product? {
         return myDataSet!!.firstOrNull { it.id == id }
     }
 
-    override suspend fun getHints(author: String, query: String, maxSize: Int): List<String> {
+    override suspend fun getHints(query: String, maxSize: Int): List<String> {
         return listOf()
     }
 }

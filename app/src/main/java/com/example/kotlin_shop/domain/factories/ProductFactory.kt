@@ -1,32 +1,21 @@
 package com.example.kotlin_shop.domain.factories
 
 import com.example.kotlin_shop.domain.Attribute
-import com.example.kotlin_shop.domain.Lot
 import com.example.kotlin_shop.domain.Product
+import com.example.kotlin_shop.domain.SubCategory
 
-interface ProductFactory{
-    fun createProduct(
+class ProductFactory {
+    operator fun invoke(
         id: Int,
         title: String,
         imageUrl: String,
         description: String,
         attributes: List<Attribute>,
         price: Double,
-        salePercent: Int
-    ): Product
-}
-
-class ProductFactoryImpl: ProductFactory {
-    override fun createProduct(
-        id: Int,
-        title: String,
-        imageUrl: String,
-        description: String,
-        attributes: List<Attribute>,
-        price: Double,
-        salePercent: Int
+        salePercent: Int,
+        category: SubCategory,
+        otherPhotos: List<String>
     ): Product {
-        val lot = Lot(price, salePercent)
-        return Product(id, title, imageUrl, description, attributes, lot)
+        return Product(id.toString(), title, price, salePercent, description, imageUrl, attributes, category, otherPhotos)
     }
 }

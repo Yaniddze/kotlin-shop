@@ -2,7 +2,6 @@ package com.example.kotlin_shop.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.KeyEvent
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,34 +27,34 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_catalog, R.id.navigation_account, R.id.navigation_cart
+                R.id.navigation_catalog, R.id.navigation_favorite, R.id.navigation_cart
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    private var doubleTap: Boolean = false
+//    private var doubleTap: Boolean = false
 
     override fun onBackPressed() {
         currentFocus?.clearFocus()
 
-        if(doubleTap){
-            super.onBackPressed()
-            doubleTap = false
-            return
-        }
-
-        this.doubleTap = true
-        Toast.makeText(this, "Click BACK again to exit", Toast.LENGTH_LONG).show()
-        Handler().postDelayed({
-            doubleTap = false
-        }, 2000)
+//        if(doubleTap){
+        super.onBackPressed()
+//            doubleTap = false
+//            return
+//        }
+//
+//        this.doubleTap = true
+//        Toast.makeText(this, "Click BACK again to exit", Toast.LENGTH_LONG).show()
+//        Handler().postDelayed({
+//            doubleTap = false
+//        }, 2000)
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        doubleTap = true
+//        doubleTap = true
         onBackPressed()
         return true
     }

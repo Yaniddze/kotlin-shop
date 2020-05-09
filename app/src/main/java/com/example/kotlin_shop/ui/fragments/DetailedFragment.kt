@@ -7,16 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.di.components.DaggerAppComponent
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.DetailedPresenter
 import com.example.kotlin_shop.ui.interfaces.DetailedView
-import com.example.kotlin_shop.ui.recycler.ViewedProductsAdapter
+import com.example.kotlin_shop.ui.adapters.ViewedProductsAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -30,29 +29,30 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     init {
-        DaggerAppComponent.create().inject(this)
+        App.appComponent.inject(this)
     }
 
-    private lateinit var imageView: ImageView
+    private lateinit var picture: ImageView
     private lateinit var titleView: TextView
     private lateinit var priceView: TextView
     private lateinit var btnToCart: Button
+    private lateinit var ivFavorite: ImageView
 
     private val recyclerAdapter = ViewedProductsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imageView = view.findViewById(R.id.ivDetailedImage)
+        picture = view.findViewById(R.id.ivDetailedImage)
         titleView = view.findViewById(R.id.tvDetailedTitle)
         priceView = view.findViewById(R.id.tvDetailedPrice)
         btnToCart =  view.findViewById(R.id.btnToCart)
+        ivFavorite = view.findViewById(R.id.ivFavoriteDetailed)
 
-        val productId = arguments?.get("productId") as Int
+        val productId = arguments?.get("productId") as String
 
         btnToCart.isActivated = false
 
-        presenter.getProduct(productId)
 
         val viewedManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
 
@@ -66,6 +66,9 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
             adapter = recyclerAdapter
         }
 
+        presenter.getProduct(productId)
+
+
         presenter.getViewed(productId)
     }
 
@@ -78,16 +81,36 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         btnToCart.isActivated = true
 
         Glide
-            .with(imageView.context)
+            .with(picture.context)
             .load(product.imageUrl)
             .error(R.mipmap.ic_launcher)
-            .into(imageView)
+            .into(picture)
 
-        titleView.text = product.title
-        priceView.text = product.lot.getRoundedPrice()
+        titleView.text = product.name
+        priceView.text = product.getRoundedPrice()
 
        btnToCart.setOnClickListener {
             presenter.addToCart(product)
+        }
+
+        ivFavorite.background = context?.getDrawable(
+            if(product.isFavorite)
+                R.drawable.ic_favorite
+            else
+                R.drawable.ic_unfavorite
+        )
+
+        ivFavorite.setOnClickListener {
+            onFavoriteClick(product)
+        }
+    }
+
+    private fun onFavoriteClick(product: Product){
+        if(!product.isFavorite){
+            presenter.addToFavorite(product)
+        }
+        else{
+            presenter.deleteFromFavorite(product)
         }
     }
 
@@ -101,5 +124,14 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
     override fun showViewed(viewed: MutableList<ViewedProduct>) {
         recyclerAdapter.changeItemSource(viewed)
+    }
+
+    override fun onFavoriteChanged(product: Product) {
+        ivFavorite.background = context?.getDrawable(
+            if(product.isFavorite)
+                R.drawable.ic_favorite
+            else
+                R.drawable.ic_unfavorite
+        )
     }
 }
