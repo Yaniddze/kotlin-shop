@@ -106,6 +106,12 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        searchBar.hideSuggestionsList()
+    }
+
     private fun onFavoriteClick(product: Product){
         if(!product.isFavorite){
             presenter.addToFavorite(product)

@@ -18,12 +18,17 @@ data class Product (
     ):Serializable {
     var isFavorite = false
 
+    companion object{
+        private val format = DecimalFormat("#.##")
+    }
+
     fun calcDiscountPrice(): Double {
         return price * (1 - (discountPercent / 100.0))
     }
 
-    fun getRoundedPrice(): String {
-        val format = DecimalFormat("#.##")
+    fun getRoundedFullPrice(): String = format.format(price).replace(',', '.')
+
+    fun getRoundedDiscountPrice(): String {
         return format.format(calcDiscountPrice()).replace(',', '.')
     }
 }

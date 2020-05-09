@@ -8,6 +8,7 @@ import com.example.kotlin_shop.domain.usecases.*
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.*
 import javax.inject.Inject
 
 class CatalogPresenter @Inject constructor(
@@ -62,7 +63,10 @@ class CatalogPresenter @Inject constructor(
     fun getProducts(query: String) {
         launch {
             try{
-                val items = catalogGetter().filter { it.name.contains(query) }.toMutableList()
+                val items = catalogGetter().filter {
+                    it.name.toLowerCase(Locale.getDefault())
+                        .contains(query.toLowerCase(Locale.getDefault()))
+                }.toMutableList()
                 viewState.showProducts(items)
             } catch (e: UnknownHostException){
                 viewState.showNetworkError()

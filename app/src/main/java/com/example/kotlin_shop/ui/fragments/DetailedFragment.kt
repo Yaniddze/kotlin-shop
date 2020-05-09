@@ -1,5 +1,6 @@
 package com.example.kotlin_shop.ui.fragments
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -14,8 +15,8 @@ import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.DetailedPresenter
-import com.example.kotlin_shop.ui.interfaces.DetailedView
 import com.example.kotlin_shop.ui.adapters.ViewedProductsAdapter
+import com.example.kotlin_shop.ui.interfaces.DetailedView
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -35,6 +36,8 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     private lateinit var picture: ImageView
     private lateinit var titleView: TextView
     private lateinit var priceView: TextView
+    private lateinit var fullPriceView: TextView
+    private lateinit var discountView: TextView
     private lateinit var btnToCart: Button
     private lateinit var ivFavorite: ImageView
 
@@ -46,7 +49,9 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         picture = view.findViewById(R.id.ivDetailedImage)
         titleView = view.findViewById(R.id.tvDetailedTitle)
         priceView = view.findViewById(R.id.tvDetailedPrice)
-        btnToCart =  view.findViewById(R.id.btnToCart)
+        fullPriceView = view.findViewById(R.id.tvDetailedFullPrice)
+        discountView = view.findViewById(R.id.tvDetailedDiscount)
+        btnToCart = view.findViewById(R.id.btnToCart)
         ivFavorite = view.findViewById(R.id.ivFavoriteDetailed)
 
         val productId = arguments?.get("productId") as String
@@ -56,8 +61,8 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
         val viewedManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
 
-        val recycler =  view.findViewById<RecyclerView>(R.id.rvDetailedViewed)
-        
+        val recycler = view.findViewById<RecyclerView>(R.id.rvDetailedViewed)
+
         recycler.apply {
             setHasFixedSize(true)
 
@@ -87,14 +92,23 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
             .into(picture)
 
         titleView.text = product.name
-        priceView.text = product.getRoundedPrice()
 
-       btnToCart.setOnClickListener {
+        if (product.discountPercent > 0) {
+            fullPriceView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            fullPriceView.text = product.getRoundedFullPrice()
+            discountView.text = "- ${product.discountPercent} %"
+            discountView.background =
+                discountView.resources.getDrawable(R.drawable.sale_layout, null)
+        }
+
+        priceView.text = "${product.getRoundedDiscountPrice()} руб"
+
+        btnToCart.setOnClickListener {
             presenter.addToCart(product)
         }
 
         ivFavorite.background = context?.getDrawable(
-            if(product.isFavorite)
+            if (product.isFavorite)
                 R.drawable.ic_favorite
             else
                 R.drawable.ic_unfavorite
@@ -105,11 +119,10 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         }
     }
 
-    private fun onFavoriteClick(product: Product){
-        if(!product.isFavorite){
+    private fun onFavoriteClick(product: Product) {
+        if (!product.isFavorite) {
             presenter.addToFavorite(product)
-        }
-        else{
+        } else {
             presenter.deleteFromFavorite(product)
         }
     }
@@ -128,7 +141,7 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
     override fun onFavoriteChanged(product: Product) {
         ivFavorite.background = context?.getDrawable(
-            if(product.isFavorite)
+            if (product.isFavorite)
                 R.drawable.ic_favorite
             else
                 R.drawable.ic_unfavorite

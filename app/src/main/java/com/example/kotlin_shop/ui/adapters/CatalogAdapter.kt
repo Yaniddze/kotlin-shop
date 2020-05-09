@@ -38,7 +38,7 @@ class CatalogAdapter(
 
         layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.name
         layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
-            product.getRoundedPrice()
+            product.getRoundedDiscountPrice()
 
         val picture = layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
 
