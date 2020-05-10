@@ -16,27 +16,32 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
-            <com.mancj.materialsearchbar.MaterialSearchBar
-                android:id="@+id/svSearchProducts"
-                app:mt_hint="Найти ..."
-                app:mt_maxSuggestionsCount="10"
-                style="@style/MaterialSearchBarLight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/flCatalogFragment"
+            <AutoCompleteTextView
+                android:id="@+id/actvSearch"
+                android:hint="@string/find_search_placeholder"
+                android:completionThreshold="1"
+                android:layout_margin="5dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                android:completionHint="@string/find_search_placeholder"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/flCatalogFragment"
+                android:layout_width="match_parent"
+                android:imeOptions="actionSearch"
+                android:imeActionLabel="Search"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:layout_height="wrap_content"/>
 
 
             <FrameLayout
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/svSearchProducts"
+                app:layout_constraintTop_toBottomOf="@id/actvSearch"
                 android:id="@+id/flCatalogFragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>

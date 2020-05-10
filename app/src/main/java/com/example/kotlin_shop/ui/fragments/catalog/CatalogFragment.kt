@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
+import android.view.inputmethod.EditorInfo
+import android.widget.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
@@ -14,32 +14,26 @@ import com.example.kotlin_shop.presentation.CatalogPresenter
 import com.example.kotlin_shop.ui.fragments.BadInternetFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import com.example.kotlin_shop.ui.adapters.CatalogAdapter
-import com.mancj.materialsearchbar.MaterialSearchBar
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
-
 
 class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), CatalogView {
 
     private val catalogAdapter = CatalogAdapter(::onFavoriteClick)
 
     private var isRecyclerShowed = true
-
     private var searchQuery: String = ""
-
     private var wasShown: Boolean = false
 
     private lateinit var refresher: SwipeRefreshLayout
-
-    private lateinit var searchBar: MaterialSearchBar
+    private lateinit var actvSearch: AutoCompleteTextView
+    private lateinit var suggestionAdapter: ArrayAdapter<String>
 
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
-
     private val presenter by moxyPresenter { presenterProvider.get() }
-
     init {
         App.appComponent.inject(this)
     }
@@ -48,8 +42,30 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         super.onViewCreated(view, savedInstanceState)
 
         refresher = view.findViewById(R.id.srlCatalogRefresher)
-        searchBar = view.findViewById(R.id.svSearchProducts)
+        actvSearch = view.findViewById(R.id.actvSearch)
+        suggestionAdapter = ArrayAdapter<String>(
+            requireContext(), android.R.layout.simple_expandable_list_item_1)
 
+        actvSearch.setAdapter(suggestionAdapter)
+        actvSearch.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s != null && s != ""){
+                    searchQuery = s.toString()
+                    presenter.getHints(s.toString())
+                }
+            }
+        })
+        actvSearch.setOnEditorActionListener { _, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                presenter.getProducts(searchQuery)
+                true
+            }
+            false
+        }
         refresher.setOnRefreshListener {
             refresher.isRefreshing = true
             presenter.getProducts(searchQuery)
@@ -63,37 +79,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             presenter.addItem()
         }
 
-        searchBar.setOnSearchActionListener(object: MaterialSearchBar.OnSearchActionListener{
-            override fun onButtonClicked(buttonCode: Int) {
-            }
-
-            override fun onSearchStateChanged(enabled: Boolean) {
-                if(!enabled)
-                    presenter.getProducts("")
-            }
-
-            override fun onSearchConfirmed(text: CharSequence?) {
-                refresher.isRefreshing = true
-                presenter.getProducts(text?.toString() ?: "")
-            }
-        })
-
-        searchBar.addTextChangeListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s != null && s != ""){
-                    searchQuery = s.toString()
-                    presenter.getHints(s.toString())
-                }
-            }
-        })
     }
 
     override fun onStart() {
@@ -102,14 +87,9 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             wasShown = true
             presenter.getProducts("")
         }
+        view?.clearFocus()
 
         presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        searchBar.hideSuggestionsList()
     }
 
     private fun onFavoriteClick(product: Product){
@@ -163,7 +143,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showHints(hints: List<String>) {
-        searchBar.updateLastSuggestions(hints)
+        suggestionAdapter.clear()
+        suggestionAdapter.addAll(hints)
     }
 
     override fun onFavoriteAdded(product: Product) {
