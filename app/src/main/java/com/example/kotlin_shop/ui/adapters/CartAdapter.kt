@@ -7,12 +7,19 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.CartItem
-import com.example.kotlin_shop.domain.Product
 
 class CartAdapter(
     private val onDelete: (item: CartItem) -> Unit
 ): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-    class ViewHolder(val layout: ConstraintLayout): RecyclerView.ViewHolder(layout)
+    inner class ViewHolder(private val layout: ConstraintLayout): RecyclerView.ViewHolder(layout){
+        fun bind(product: CartItem){
+            layout.findViewById<TextView>(R.id.tvCartItemTitle).text = product.title
+            layout.findViewById<TextView>(R.id.tvCartItemPrice).text = product.getRoundedPrice()
+            layout.findViewById<TextView>(R.id.tvDeleteCartItem).setOnClickListener {
+                onDelete(product)
+            }
+        }
+    }
 
     private var dataSet: MutableList<CartItem> = mutableListOf()
 
@@ -24,13 +31,9 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = dataSet[position]
+        val product = dataSet[position]
 
-        holder.layout.findViewById<TextView>(R.id.tvCartItemTitle).text = item.title
-        holder.layout.findViewById<TextView>(R.id.tvCartItemPrice).text = item.getRoundedPrice()
-        holder.layout.findViewById<TextView>(R.id.tvDeleteCartItem).setOnClickListener {
-            onDelete(item)
-        }
+        holder.bind(product)
     }
 
     override fun getItemCount(): Int {

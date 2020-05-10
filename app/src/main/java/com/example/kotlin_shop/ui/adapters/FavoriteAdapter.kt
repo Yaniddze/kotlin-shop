@@ -22,6 +22,7 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.Holder>() {
             Glide
                 .with(imageView)
                 .load(product.imageUrl)
+                .centerCrop()
                 .error(R.drawable.ic_launcher_foreground)
                 .into(imageView)
 
