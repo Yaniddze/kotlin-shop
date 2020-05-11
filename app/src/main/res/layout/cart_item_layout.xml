@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCartItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/ivCartPhoto"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/product_title" />
+
+        <ImageView
+            android:id="@+id/ivCartPhoto"
+            android:layout_width="135dp"
+            android:layout_height="200dp"
+            android:layout_margin="5dp"
+            android:contentDescription="@string/product"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCartItemTitle" />
+
+        <TextView
+            android:id="@+id/tvCartItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintLeft_toRightOf="@id/ivCartPhoto"
+            app:layout_constraintRight_toLeftOf="@id/tvCartDiscount"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="price" />
+
+        <TextView
+            android:id="@+id/tvCartDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="2dp"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tvCartItemPrice"
+            app:layout_constraintTop_toTopOf="@id/tvCartItemPrice"
+            tools:text="- 10%" />
+
+        <TextView
+            android:id="@+id/tvCartFullPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            app:layout_constraintBottom_toBottomOf="@id/tvCartItemPrice"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@id/ivCartPhoto"
+            app:layout_constraintRight_toLeftOf="@id/tvCartItemPrice"
+            app:layout_constraintTop_toTopOf="@id/tvCartItemPrice"
+            tools:text="fullPrice" />
+
+        <TextView
+            android:id="@+id/tvCartCountTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/count_text_cart"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/etCartCount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@id/ivCartPhoto"
+            app:layout_constraintRight_toLeftOf="@id/etCartCount"
+            app:layout_constraintTop_toTopOf="@id/etCartCount" />
+
+        <EditText
+            android:id="@+id/etCartCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:autofillHints="Count"
+            android:hint="@string/count"
+            android:inputType="number"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tvCartCountTitle"
+            app:layout_constraintRight_toLeftOf="@id/btnCartAddCount"
+            app:layout_constraintTop_toBottomOf="@id/tvCartItemPrice" />
+
+        <Button
+            android:id="@+id/btnCartAddCount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_plus"
+            app:layout_constraintBottom_toTopOf="@id/btnCartDeleteCount"
+            app:layout_constraintLeft_toRightOf="@id/etCartCount"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/etCartCount" />
+
+        <Button
+            android:id="@+id/btnCartDeleteCount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_remove"
+            app:layout_constraintBottom_toBottomOf="@+id/etCartCount"
+            app:layout_constraintLeft_toLeftOf="@id/btnCartAddCount"
+            app:layout_constraintRight_toRightOf="@id/btnCartAddCount"
+            app:layout_constraintTop_toBottomOf="@id/btnCartAddCount" />
+
+        <TextView
+            android:id="@+id/tvDeleteCartItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_delete"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@id/tvCartItemTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

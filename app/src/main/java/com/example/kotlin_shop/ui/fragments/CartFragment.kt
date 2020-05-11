@@ -19,7 +19,7 @@ import javax.inject.Provider
 
 class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
 
-    private val recyclerAdapter = CartAdapter(::onDelete)
+    private lateinit var recyclerAdapter: CartAdapter
 
     @Inject
     lateinit var presenterProvider: Provider<CartPresenter>
@@ -38,6 +38,8 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
         super.onViewCreated(view, savedInstanceState)
 
         val viewManager = LinearLayoutManager(rvCart.context)
+
+        recyclerAdapter = CartAdapter(::onDelete, presenter::updateCartItem)
 
         presenter.attachView(this)
 
@@ -64,5 +66,9 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
 
     override fun onItemDeleted(item: CartItem) {
         recyclerAdapter.deleteItem(item)
+    }
+
+    override fun onUpdateItem() {
+
     }
 }

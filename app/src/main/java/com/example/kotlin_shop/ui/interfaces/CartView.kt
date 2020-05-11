@@ -10,8 +10,9 @@ interface CartView: MvpView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProducts(products: MutableList<CartItem>)
 
-
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun onItemDeleted(item: CartItem)
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun onUpdateItem()
 }

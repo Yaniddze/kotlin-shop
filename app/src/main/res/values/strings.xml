@@ -43,4 +43,6 @@
     <string name="favorite_icon_description">favorite icon</string>
     <string name="find_search_placeholder">Найти …</string>
     <string name="back">back</string>
+    <string name="count">count</string>
+    <string name="count_text_cart">Кол-во</string>
 </resources>

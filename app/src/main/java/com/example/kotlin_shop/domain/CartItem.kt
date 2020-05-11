@@ -8,14 +8,38 @@ data class CartItem(
     val image: String,
     val price: Double,
     val discountPercent: Int,
-    val count: Int
+    var count: Int
 ){
+    companion object{
+        private val format = DecimalFormat("#.##")
+
+    }
     private fun calcDiscountPrice(): Double {
         return price * (1 - (discountPercent / 100.0))
     }
 
     fun getRoundedPrice(): String {
-        val format = DecimalFormat("#.##")
         return format.format(calcDiscountPrice()).replace(',', '.')
+    }
+
+    fun getRoundedFullPrice(): String {
+        return format.format(price).replace(',', '.')
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if(other is String){
+            return other == id
+        }
+        if(other is Int){
+            return other == id.toInt()
+        }
+        if(other is CartItem){
+            return other.id == id
+        }
+        return super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return "$id ".hashCode()
     }
 }
