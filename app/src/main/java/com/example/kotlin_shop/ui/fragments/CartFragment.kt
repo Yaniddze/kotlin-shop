@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.CartItem
@@ -12,6 +11,7 @@ import com.example.kotlin_shop.presentation.CartPresenter
 import com.example.kotlin_shop.ui.interfaces.CartView
 import com.example.kotlin_shop.ui.MainActivity
 import com.example.kotlin_shop.ui.adapters.CartAdapter
+import kotlinx.android.synthetic.main.fragment_cart.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -37,15 +37,11 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recycler = view.findViewById<RecyclerView>(R.id.rvCart)
-
-        val viewManager = LinearLayoutManager(recycler.context)
-
-        val btnOrder = view.findViewById<Button>(R.id.btnApply)
+        val viewManager = LinearLayoutManager(rvCart.context)
 
         presenter.attachView(this)
 
-        recycler.apply {
+        rvCart.apply {
             setHasFixedSize(true)
 
             layoutManager = viewManager
@@ -53,7 +49,7 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
             adapter = recyclerAdapter
         }
 
-        btnOrder.setOnClickListener {
+        btnApply.setOnClickListener {
             val action = CartFragmentDirections.actionNavigationCartToPurchaseFragment()
 
             (context as MainActivity).navigate(action)

@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.di.DaggerAppComponent
-import com.example.kotlin_shop.presentation.CartPresenter
 import com.example.kotlin_shop.presentation.PurchasePresenter
 import com.example.kotlin_shop.ui.interfaces.PurchaseView
+import kotlinx.android.synthetic.main.fragment_purchase.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -22,28 +20,15 @@ class PurchaseFragment: MvpAppCompatFragment(R.layout.fragment_purchase), Purcha
 
     @Inject
     lateinit var presenterProvider: Provider<PurchasePresenter>
-
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     init {
         App.appComponent.inject(this)
     }
 
-    private lateinit var etFirstName: EditText
-    private lateinit var etSecondName: EditText
-    private lateinit var etThirdName: EditText
-    private lateinit var etPhone: EditText
-    private lateinit var btnBuy: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        etFirstName = view.findViewById(R.id.etFirstName)
-        etSecondName = view.findViewById(R.id.etSecondName)
-        etThirdName = view.findViewById(R.id.etThirdName)
-        etPhone = view.findViewById(R.id.etPhone)
-        btnBuy = view.findViewById(R.id.btnBuy)
-
-        presenter.attachView(this)
 
         setListeners()
     }
