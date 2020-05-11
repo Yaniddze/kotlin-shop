@@ -24,6 +24,8 @@ class CartItemDB internal constructor(
     val price: Double,
 
     @ColumnInfo(name="sale_percent")
-    val salePercent: Int
+    val salePercent: Int,
 
+    @ColumnInfo(name="count")
+    val count: Int
 )

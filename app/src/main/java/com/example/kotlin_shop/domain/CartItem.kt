@@ -7,7 +7,8 @@ data class CartItem(
     val title: String,
     val image: String,
     val price: Double,
-    val discountPercent: Int
+    val discountPercent: Int,
+    val count: Int
 ){
     private fun calcDiscountPrice(): Double {
         return price * (1 - (discountPercent / 100.0))

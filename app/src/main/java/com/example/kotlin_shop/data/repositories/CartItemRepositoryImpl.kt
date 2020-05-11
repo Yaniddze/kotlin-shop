@@ -29,7 +29,8 @@ class CartItemRepositoryImpl @Inject constructor(
                     it.title,
                     it.imageUrl,
                     it.price,
-                    it.salePercent
+                    it.salePercent,
+                    it.count
                 )
             }.toMutableList()
         }
@@ -44,7 +45,8 @@ class CartItemRepositoryImpl @Inject constructor(
             product.name,
             product.imageUrl,
             product.price,
-            product.discountPercent
+            product.discountPercent,
+            1
         )
 
         val index = getItems()
@@ -58,7 +60,8 @@ class CartItemRepositoryImpl @Inject constructor(
             item.title,
             item.image,
             item.price,
-            item.discountPercent
+            item.discountPercent,
+            item.count
         )
 
         dao.insert(productToAdd)

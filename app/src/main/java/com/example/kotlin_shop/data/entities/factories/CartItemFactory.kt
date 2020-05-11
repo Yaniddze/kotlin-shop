@@ -8,7 +8,8 @@ class CartItemFactory{
         title: String,
         imageUrl: String,
         price: Double,
-        salePercent: Int
+        salePercent: Int,
+        count: Int
     ): CartItemDB {
         return CartItemDB(
             0,
@@ -16,7 +17,8 @@ class CartItemFactory{
             title,
             imageUrl,
             price,
-            salePercent
+            salePercent,
+            count
         )
     }
 }
