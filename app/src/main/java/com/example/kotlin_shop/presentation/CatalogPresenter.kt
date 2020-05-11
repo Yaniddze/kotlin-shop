@@ -60,7 +60,7 @@ class CatalogPresenter @Inject constructor(
 
     }
 
-    fun getProducts(query: String) {
+    fun getProducts(query: String = "") {
         launch {
             try{
                 val items = catalogGetter().filter {

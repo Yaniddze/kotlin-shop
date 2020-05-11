@@ -12,12 +12,13 @@ import kotlinx.android.synthetic.main.search_active_layout.*
 
 class ActiveSearchFragment(
     private val onDisable: () -> Unit,
-    private var query: String,
-    private val saveQuery: (query: String) -> Unit,
     private val getProducts: (query: String) -> Unit,
     private val getHints: (query: String) -> Unit,
     private val searchAdapter: ArrayAdapter<String>
 ): Fragment(R.layout.search_active_layout) {
+    companion object{
+        var query = ""
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +30,6 @@ class ActiveSearchFragment(
         ivCloseButton.setOnClickListener {
             actvSearch.setText("")
             query = ""
-            saveQuery("")
         }
 
         actvSearch.addTextChangedListener(object: TextWatcher{
@@ -52,11 +52,5 @@ class ActiveSearchFragment(
         }
         actvSearch.setAdapter(searchAdapter)
         actvSearch.requestFocus()
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        saveQuery(query)
     }
 }

@@ -23,7 +23,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     private var isRecyclerShowed = true
     private var isSearchShowed = false
     private var wasFragmentShown: Boolean = false
-    private var searchQuery: String = ""
     private lateinit var suggestionAdapter: ArrayAdapter<String>
 
     @Inject
@@ -41,7 +40,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
         srlCatalogRefresher.setOnRefreshListener {
             srlCatalogRefresher.isRefreshing = true
-            presenter.getProducts(searchQuery)
+            presenter.getProducts(ActiveSearchFragment.query)
         }
 
         srlCatalogRefresher.isRefreshing = true
@@ -70,16 +69,14 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     private fun onSearchBtn(query: String){
-        searchQuery = query
         srlCatalogRefresher.isRefreshing = true
         presenter.getProducts(query)
     }
 
     private fun onDisableSearch(){
         hideSearchBar()
-        searchQuery = ""
         srlCatalogRefresher.isRefreshing = true
-        presenter.getProducts(searchQuery)
+        presenter.getProducts()
     }
 
     private fun hideSearchBar() {
@@ -109,8 +106,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             .replace(flCatalogSearch.id,
                 ActiveSearchFragment(
                     ::onDisableSearch,
-                    searchQuery,
-                    ::saveSearchQuery,
                     ::onSearchBtn,
                     presenter::getHints,
                     suggestionAdapter
@@ -119,10 +114,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             .commit()
 
         isSearchShowed = true
-    }
-
-    private fun saveSearchQuery(query: String){
-        searchQuery = query
     }
 
     private fun onFavoriteClick(product: Product){
