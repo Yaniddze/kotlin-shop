@@ -42,4 +42,5 @@
     <string name="to_iv_favorite_placeholder">toFavorite</string>
     <string name="favorite_icon_description">favorite icon</string>
     <string name="find_search_placeholder">Найти …</string>
+    <string name="back">back</string>
 </resources>

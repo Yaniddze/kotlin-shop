@@ -1,10 +1,7 @@
 package com.example.kotlin_shop.ui.fragments.catalog
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.App
@@ -14,6 +11,7 @@ import com.example.kotlin_shop.presentation.CatalogPresenter
 import com.example.kotlin_shop.ui.fragments.BadInternetFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import com.example.kotlin_shop.ui.adapters.CatalogAdapter
+import kotlinx.android.synthetic.main.fragment_catalog.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -28,7 +26,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     private var wasShown: Boolean = false
 
     private lateinit var refresher: SwipeRefreshLayout
-    private lateinit var actvSearch: AutoCompleteTextView
+//    private lateinit var actvSearch: AutoCompleteTextView
+    private lateinit var searchFrame: FrameLayout
     private lateinit var suggestionAdapter: ArrayAdapter<String>
 
     @Inject
@@ -42,30 +41,38 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         super.onViewCreated(view, savedInstanceState)
 
         refresher = view.findViewById(R.id.srlCatalogRefresher)
-        actvSearch = view.findViewById(R.id.actvSearch)
+//        actvSearch = view.findViewById(R.id.actvSearch)
+
+        childFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.exit_opacity_on, R.anim.enter_opacity_off, R.anim.exit_opacity_on, R.anim.enter_opacity_off)
+            .replace(flCatalogSearch.id, DisabledSearchLayout())
+            .commit()
+
+
         suggestionAdapter = ArrayAdapter<String>(
             requireContext(), android.R.layout.simple_expandable_list_item_1)
 
-        actvSearch.setAdapter(suggestionAdapter)
-        actvSearch.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s != null && s != ""){
-                    searchQuery = s.toString()
-                    presenter.getHints(s.toString())
-                }
-            }
-        })
-        actvSearch.setOnEditorActionListener { _, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                presenter.getProducts(searchQuery)
-                true
-            }
-            false
-        }
+//        actvSearch.setAdapter(suggestionAdapter)
+//        actvSearch.addTextChangedListener(object: TextWatcher{
+//            override fun afterTextChanged(s: Editable?) {}
+//
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if(s != null && s != ""){
+//                    searchQuery = s.toString()
+//                    presenter.getHints(s.toString())
+//                }
+//            }
+//        })
+//        actvSearch.setOnEditorActionListener { _, actionId, _ ->
+//            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+//                presenter.getProducts(searchQuery)
+//                true
+//            }
+//            false
+//        }
         refresher.setOnRefreshListener {
             refresher.isRefreshing = true
             presenter.getProducts(searchQuery)
@@ -119,6 +126,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         }
         refresher.isRefreshing = false
         catalogAdapter.changeItemSource(products)
+
     }
 
     override fun onAddCatalogItem(product: Product) {
