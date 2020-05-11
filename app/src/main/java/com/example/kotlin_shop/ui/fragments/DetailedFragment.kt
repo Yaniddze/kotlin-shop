@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.App
@@ -15,6 +16,7 @@ import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.DetailedPresenter
+import com.example.kotlin_shop.ui.adapters.PhotosAdapter
 import com.example.kotlin_shop.ui.adapters.ViewedProductsAdapter
 import com.example.kotlin_shop.ui.interfaces.DetailedView
 import moxy.MvpAppCompatFragment
@@ -33,7 +35,6 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         App.appComponent.inject(this)
     }
 
-    private lateinit var picture: ImageView
     private lateinit var titleView: TextView
     private lateinit var priceView: TextView
     private lateinit var fullPriceView: TextView
@@ -41,13 +42,15 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     private lateinit var genreTitle: TextView
     private lateinit var btnToCart: Button
     private lateinit var ivFavorite: ImageView
+    private lateinit var rvPhotos: RecyclerView
 
-    private val recyclerAdapter = ViewedProductsAdapter()
+    private val viewedAdapter = ViewedProductsAdapter()
+    private val photosAdapter = PhotosAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        picture = view.findViewById(R.id.ivDetailedImage)
+        rvPhotos = view.findViewById(R.id.rvDetailedPhotos)
         titleView = view.findViewById(R.id.tvDetailedTitle)
         priceView = view.findViewById(R.id.tvDetailedPrice)
         fullPriceView = view.findViewById(R.id.tvDetailedFullPrice)
@@ -60,22 +63,29 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
         btnToCart.isActivated = false
 
-
         val viewedManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
+        val recyclerViewed = view.findViewById<RecyclerView>(R.id.rvDetailedViewed)
 
-        val recycler = view.findViewById<RecyclerView>(R.id.rvDetailedViewed)
-
-        recycler.apply {
+        recyclerViewed.apply {
             setHasFixedSize(true)
 
             layoutManager = viewedManager
 
-            adapter = recyclerAdapter
+            adapter = viewedAdapter
+        }
+
+        val photosManager = LinearLayoutManager(requireContext())
+        photosManager.orientation = LinearLayoutManager.HORIZONTAL
+
+        rvPhotos.apply {
+            setHasFixedSize(true)
+
+            layoutManager = photosManager
+
+            adapter = photosAdapter
         }
 
         presenter.getProduct(productId)
-
-
         presenter.getViewed(productId)
     }
 
@@ -87,11 +97,13 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
         btnToCart.isActivated = true
 
-        Glide
-            .with(picture.context)
-            .load(product.imageUrl)
-            .error(R.mipmap.ic_launcher)
-            .into(picture)
+        val photos = mutableListOf(product.imageUrl)
+
+        product.otherPhotos.forEach {
+            photos.add(it)
+        }
+
+        photosAdapter.loadItems(photos)
 
         titleView.text = product.name
         genreTitle.text = "${product.category.mainCategory.name}, ${product.category.name}"
@@ -139,7 +151,7 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     }
 
     override fun showViewed(viewed: MutableList<ViewedProduct>) {
-        recyclerAdapter.changeItemSource(viewed)
+        viewedAdapter.changeItemSource(viewed)
     }
 
     override fun onFavoriteChanged(product: Product) {
