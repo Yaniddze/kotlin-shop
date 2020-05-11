@@ -3,7 +3,6 @@ package com.example.kotlin_shop.ui.fragments.catalog
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
@@ -22,12 +21,9 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     private val catalogAdapter = CatalogAdapter(::onFavoriteClick)
 
     private var isRecyclerShowed = true
+    private var isSearchShowed = false
+    private var wasFragmentShown: Boolean = false
     private var searchQuery: String = ""
-    private var wasShown: Boolean = false
-
-    private lateinit var refresher: SwipeRefreshLayout
-//    private lateinit var actvSearch: AutoCompleteTextView
-    private lateinit var searchFrame: FrameLayout
     private lateinit var suggestionAdapter: ArrayAdapter<String>
 
     @Inject
@@ -40,63 +36,75 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        refresher = view.findViewById(R.id.srlCatalogRefresher)
-//        actvSearch = view.findViewById(R.id.actvSearch)
-
-        childFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.exit_opacity_on, R.anim.enter_opacity_off, R.anim.exit_opacity_on, R.anim.enter_opacity_off)
-            .replace(flCatalogSearch.id, DisabledSearchLayout())
-            .commit()
-
-
         suggestionAdapter = ArrayAdapter<String>(
             requireContext(), android.R.layout.simple_expandable_list_item_1)
 
-//        actvSearch.setAdapter(suggestionAdapter)
-//        actvSearch.addTextChangedListener(object: TextWatcher{
-//            override fun afterTextChanged(s: Editable?) {}
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                if(s != null && s != ""){
-//                    searchQuery = s.toString()
-//                    presenter.getHints(s.toString())
-//                }
-//            }
-//        })
-//        actvSearch.setOnEditorActionListener { _, actionId, _ ->
-//            if(actionId == EditorInfo.IME_ACTION_SEARCH){
-//                presenter.getProducts(searchQuery)
-//                true
-//            }
-//            false
-//        }
-        refresher.setOnRefreshListener {
-            refresher.isRefreshing = true
+        srlCatalogRefresher.setOnRefreshListener {
+            srlCatalogRefresher.isRefreshing = true
             presenter.getProducts(searchQuery)
         }
 
-        refresher.isRefreshing = true
+        srlCatalogRefresher.isRefreshing = true
 
         showRecycler()
+        if(isSearchShowed){
+            showSearchBar()
+        } else {
+            hideSearchBar()
+        }
 
         view.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
             presenter.addItem()
         }
-
     }
 
     override fun onStart() {
         super.onStart()
-        if(!wasShown){
-            wasShown = true
+        if(!wasFragmentShown){
+            wasFragmentShown = true
             presenter.getProducts("")
         }
         view?.clearFocus()
 
         presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
+    }
+
+    private fun hideSearchBar() {
+        childFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(
+                R.anim.hide_from_top,
+                R.anim.show_from_bottom,
+                R.anim.show_from_bottom,
+                R.anim.hide_from_top
+            )
+            .replace(flCatalogSearch.id, DisabledSearchLayout(::showSearchBar))
+            .commit()
+
+        isSearchShowed = false
+    }
+
+    private fun showSearchBar() {
+        childFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(
+                R.anim.hide_from_top,
+                R.anim.show_from_bottom,
+                R.anim.show_from_bottom,
+                R.anim.hide_from_top
+            )
+            .replace(flCatalogSearch.id,
+                ActiveSearchFragment(
+                    ::hideSearchBar,
+                    searchQuery,
+                    presenter::getProducts,
+                    presenter::getHints,
+                    suggestionAdapter
+                )
+            )
+            .commit()
+
+        isSearchShowed = true
     }
 
     private fun onFavoriteClick(product: Product){
@@ -124,7 +132,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         if(!isRecyclerShowed){
             showRecycler()
         }
-        refresher.isRefreshing = false
+        srlCatalogRefresher.isRefreshing = false
         catalogAdapter.changeItemSource(products)
 
     }
@@ -138,7 +146,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showNetworkError() {
-        refresher.isRefreshing = false
+        srlCatalogRefresher.isRefreshing = false
 
         childFragmentManager
             .beginTransaction()
