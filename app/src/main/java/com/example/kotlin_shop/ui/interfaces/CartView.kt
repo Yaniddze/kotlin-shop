@@ -14,5 +14,5 @@ interface CartView: MvpView {
     fun onItemDeleted(item: CartItem)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun onUpdateItem()
+    fun onUpdateItem(productId: Int, count: Int)
 }

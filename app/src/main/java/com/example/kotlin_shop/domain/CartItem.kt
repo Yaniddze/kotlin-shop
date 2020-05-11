@@ -12,9 +12,9 @@ data class CartItem(
 ){
     companion object{
         private val format = DecimalFormat("#.##")
-
     }
-    private fun calcDiscountPrice(): Double {
+
+    fun calcDiscountPrice(): Double {
         return price * (1 - (discountPercent / 100.0))
     }
 

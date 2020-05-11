@@ -33,7 +33,7 @@ class CartPresenter @Inject constructor(
     fun updateCartItem(productId: Int, count: Int){
         launch {
             updater(productId, count)
-            viewState.onUpdateItem()
+            viewState.onUpdateItem(productId, count)
         }
     }
 }

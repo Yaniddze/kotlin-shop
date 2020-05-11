@@ -14,6 +14,7 @@ import com.example.kotlin_shop.ui.adapters.CartAdapter
 import kotlinx.android.synthetic.main.fragment_cart.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import java.text.DecimalFormat
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -60,15 +61,26 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
         presenter.getProducts()
     }
 
+    private fun calcTotalPrice(){
+        val totalPrice = recyclerAdapter.dataSet.map {it.calcDiscountPrice() * it.count}.sum()
+        val format = DecimalFormat("#.##")
+
+        tvCartTotalPrice.text =
+            "${format.format(totalPrice).replace(',', '.')} руб"
+    }
+
     override fun showProducts(products: MutableList<CartItem>) {
         recyclerAdapter.changeItemSource(products)
+        calcTotalPrice()
     }
 
     override fun onItemDeleted(item: CartItem) {
         recyclerAdapter.deleteItem(item)
+        calcTotalPrice()
     }
 
-    override fun onUpdateItem() {
-
+    override fun onUpdateItem(productId: Int, count: Int) {
+        recyclerAdapter.updateCount(productId, count)
+        calcTotalPrice()
     }
 }

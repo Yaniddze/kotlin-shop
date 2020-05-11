@@ -20,7 +20,8 @@ class CartAdapter(
     inner class ViewHolder(private val layout: View): RecyclerView.ViewHolder(layout){
         fun bind(product: CartItem){
             layout.findViewById<TextView>(R.id.tvCartItemTitle).text = product.title
-            layout.findViewById<TextView>(R.id.tvCartItemPrice).text = product.getRoundedPrice()
+            layout.findViewById<TextView>(R.id.tvCartItemPrice).text =
+                "${product.getRoundedPrice()} Р"
             layout.findViewById<TextView>(R.id.tvDeleteCartItem).setOnClickListener {
                 onDelete(product)
             }
@@ -57,7 +58,6 @@ class CartAdapter(
             layout.findViewById<Button>(R.id.btnCartAddCount).setOnClickListener {
                 val value = count.text.toString().toInt()
                 if(value < 10){
-                    count.setText((value + 1).toString())
                     saveCartItemCount(product.id.toInt(), value + 1)
                 }
             }
@@ -65,14 +65,13 @@ class CartAdapter(
             layout.findViewById<Button>(R.id.btnCartDeleteCount).setOnClickListener {
                 val value = count.text.toString().toInt()
                 if(value > 1){
-                    count.setText((value - 1).toString())
                     saveCartItemCount(product.id.toInt(), value - 1)
                 }
             }
         }
     }
 
-    private var dataSet: MutableList<CartItem> = mutableListOf()
+    var dataSet: MutableList<CartItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater.from(parent.context)
@@ -102,5 +101,14 @@ class CartAdapter(
     fun changeItemSource(products: MutableList<CartItem>){
         dataSet = products
         notifyDataSetChanged()
+    }
+
+    fun updateCount(productId: Int, count: Int) {
+        val item = dataSet.firstOrNull { it.id == productId.toString() }
+
+        if(item != null){
+            item.count = count
+            notifyItemChanged(dataSet.indexOf(item))
+        }
     }
 }
