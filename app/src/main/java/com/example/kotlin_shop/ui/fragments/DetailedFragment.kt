@@ -38,6 +38,7 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
     private lateinit var priceView: TextView
     private lateinit var fullPriceView: TextView
     private lateinit var discountView: TextView
+    private lateinit var genreTitle: TextView
     private lateinit var btnToCart: Button
     private lateinit var ivFavorite: ImageView
 
@@ -51,6 +52,7 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         priceView = view.findViewById(R.id.tvDetailedPrice)
         fullPriceView = view.findViewById(R.id.tvDetailedFullPrice)
         discountView = view.findViewById(R.id.tvDetailedDiscount)
+        genreTitle = view.findViewById(R.id.tvDetailedGenre)
         btnToCart = view.findViewById(R.id.btnToCart)
         ivFavorite = view.findViewById(R.id.ivFavoriteDetailed)
 
@@ -92,6 +94,7 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
             .into(picture)
 
         titleView.text = product.name
+        genreTitle.text = "${product.category.mainCategory.name}, ${product.category.name}"
 
         if (product.discountPercent > 0) {
             fullPriceView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG

@@ -40,13 +40,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/tvDetailedGenre"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailedTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/clDetailedPrice"
+                android:layout_width="match_parent"
+                tools:text = "Жанр"
+                android:textColor="@android:color/black"
+                android:padding="10dp"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clDetailedPrice"
                 android:paddingBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_bottom_layout"
-                app:layout_constraintTop_toBottomOf="@id/tvDetailedTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailedGenre"
                 app:layout_constraintLeft_toLeftOf="parent">
 
                 <TextView
