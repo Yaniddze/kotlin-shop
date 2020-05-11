@@ -6,9 +6,9 @@ class Cart internal constructor(
 
     private val items: MutableSet<Product>
 
-){
+) {
 
-    fun getItems(): Set<Product>{
+    fun getItems(): Set<Product> {
         return items
     }
 
@@ -32,7 +32,7 @@ class Cart internal constructor(
     }
 }
 
-class CartFactory{
+class CartFactory {
     fun createCart(items: MutableSet<Product>): Cart {
         return Cart(
             items

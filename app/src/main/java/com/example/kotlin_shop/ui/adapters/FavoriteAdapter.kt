@@ -12,9 +12,9 @@ import com.example.kotlin_shop.domain.FavoriteProduct
 import com.example.kotlin_shop.ui.MainActivity
 import com.example.kotlin_shop.ui.fragments.FavoriteFragmentDirections
 
-class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.Holder>() {
-    inner class Holder(private val view: View): RecyclerView.ViewHolder(view){
-        fun bind(product: FavoriteProduct){
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.Holder>() {
+    inner class Holder(private val view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(product: FavoriteProduct) {
             view.findViewById<TextView>(R.id.tvFavoriteItem).text = product.title
 
             val imageView = view.findViewById<ImageView>(R.id.ivFavoriteItem)
@@ -27,7 +27,8 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.Holder>() {
                 .into(imageView)
 
             view.setOnClickListener {
-                val action = FavoriteFragmentDirections.actionNavigationFavoriteToNavigationDetailed(product.productId)
+                val action =
+                    FavoriteFragmentDirections.actionNavigationFavoriteToNavigationDetailed(product.productId)
 
                 val activity = imageView.context as MainActivity
 
@@ -53,7 +54,7 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.Holder>() {
 
     override fun getItemCount(): Int = dataSet.size
 
-    fun changeItems(favorites: List<FavoriteProduct>){
+    fun changeItems(favorites: List<FavoriteProduct>) {
         dataSet = favorites
         notifyDataSetChanged()
     }

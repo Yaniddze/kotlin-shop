@@ -9,9 +9,9 @@ class CatalogRepositoryRetrofit(
 
     private val dao: ProductsDao
 
-): CatalogRepository {
+) : CatalogRepository {
 
-    override suspend fun getCatalog(): MutableList<Product>{
+    override suspend fun getCatalog(): MutableList<Product> {
         val items = dao.allProducts()
 
         return items.toMutableList()
@@ -24,7 +24,7 @@ class CatalogRepositoryRetrofit(
     override suspend fun getById(id: String): Product? {
         return try {
             dao.getById(id)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             null
         } ?: return null
     }

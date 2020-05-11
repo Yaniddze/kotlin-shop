@@ -15,8 +15,8 @@ class ActiveSearchFragment(
     private val getProducts: (query: String) -> Unit,
     private val getHints: (query: String) -> Unit,
     private val searchAdapter: ArrayAdapter<String>
-): Fragment(R.layout.search_active_layout) {
-    companion object{
+) : Fragment(R.layout.search_active_layout) {
+    companion object {
         var query = ""
     }
 
@@ -33,7 +33,7 @@ class ActiveSearchFragment(
             query = ""
         }
 
-        actvSearch.addTextChangedListener(object: TextWatcher{
+        actvSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -44,11 +44,10 @@ class ActiveSearchFragment(
         })
         actvSearch.setText(query)
         actvSearch.setOnEditorActionListener { _, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 getProducts(query)
                 true
-            }
-            else
+            } else
                 false
         }
         actvSearch.setAdapter(searchAdapter)

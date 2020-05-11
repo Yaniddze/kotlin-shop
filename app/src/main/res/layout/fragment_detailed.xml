@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,66 +8,66 @@
 
     <ScrollView
         android:id="@+id/svDetailedScroll"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnToCart"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:background="@android:color/white"
-        android:layout_height="0dp">
+        app:layout_constraintBottom_toTopOf="@id/btnToCart"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDetailedPhotos"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tvDetailedTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
-                />
+                app:layout_constraintBottom_toTopOf="@id/tvDetailedTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvDetailedTitle"
-                app:layout_constraintTop_toBottomOf="@id/rvDetailedPhotos"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:padding="10dp"
                 android:textColor="@android:color/black"
-                android:layout_marginTop="5dp"
                 android:textSize="20sp"
-                tools:text="Название товара"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvDetailedPhotos"
+                tools:text="Название товара" />
 
             <TextView
                 android:id="@+id/tvDetailedGenre"
-                app:layout_constraintTop_toBottomOf="@id/tvDetailedTitle"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/clDetailedPrice"
                 android:layout_width="match_parent"
-                tools:text = "Жанр"
-                android:textColor="@android:color/black"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintBottom_toTopOf="@id/clDetailedPrice"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailedTitle"
+                tools:text="Жанр" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clDetailedPrice"
-                android:paddingBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_bottom_layout"
-                app:layout_constraintTop_toBottomOf="@id/tvDetailedGenre"
-                app:layout_constraintLeft_toLeftOf="parent">
+                android:paddingBottom="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailedGenre">
 
                 <TextView
                     android:id="@+id/tvDetailedFullPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/tvDetailedPrice"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvDetailedPrice"
@@ -93,14 +92,14 @@
 
                 <TextView
                     android:id="@+id/tvDetailedPrice"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/tvDetailedFullPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:textColor="@android:color/black"
                     android:textSize="25sp"
-                    tools:text="Цена"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintLeft_toRightOf="@id/tvDetailedFullPrice"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Цена" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -122,14 +121,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDetailedViewed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clDetailedPrice"
-                app:layout_constraintVertical_bias="0.8"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toBottomOf="@id/clDetailedPrice"
+                app:layout_constraintVertical_bias="0.8" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -138,8 +137,8 @@
         android:id="@+id/ivFavoriteDetailed"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:padding="10dp"
         android:contentDescription="@string/to_iv_favorite_placeholder"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btnToCart"

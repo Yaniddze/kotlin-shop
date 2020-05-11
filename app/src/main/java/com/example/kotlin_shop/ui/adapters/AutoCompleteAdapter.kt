@@ -12,23 +12,21 @@ class AutoCompleteAdapter(
     @LayoutRes resource: Int,
     @IdRes textViewResourceId: Int = 0,
     internal var items: MutableList<String> = mutableListOf()
-)
-    : ArrayAdapter<String>(context, resource, textViewResourceId, items) {
+) : ArrayAdapter<String>(context, resource, textViewResourceId, items) {
 
 
     internal var tempItems: MutableList<String> = mutableListOf()
     internal var suggestions: MutableList<String> = mutableListOf()
 
-    /**
-     * Custom Filter implementation for custom suggestions we provide.
-     */
     private var filter: Filter = object : Filter() {
 
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             return if (constraint != null) {
                 suggestions.clear()
                 tempItems.forEach {
-                    if (it.toLowerCase(Locale.getDefault()).contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
+                    if (it.toLowerCase(Locale.getDefault())
+                            .contains(constraint.toString().toLowerCase(Locale.getDefault()))
+                    ) {
                         suggestions.add(it)
                     }
                 }
@@ -60,7 +58,7 @@ class AutoCompleteAdapter(
         suggestions = ArrayList()
     }
 
-    fun loadItems(items: List<String>){
+    fun loadItems(items: List<String>) {
         tempItems = items.toMutableList()
         notifyDataSetChanged()
     }

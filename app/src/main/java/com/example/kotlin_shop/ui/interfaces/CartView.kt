@@ -5,7 +5,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface CartView: MvpView {
+interface CartView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showProducts(products: MutableList<CartItem>)

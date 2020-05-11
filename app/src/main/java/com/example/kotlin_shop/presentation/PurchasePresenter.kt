@@ -3,10 +3,10 @@ package com.example.kotlin_shop.presentation
 import com.example.kotlin_shop.ui.interfaces.PurchaseView
 import javax.inject.Inject
 
-class PurchasePresenter @Inject constructor(): BasePresenter<PurchaseView>() {
+class PurchasePresenter @Inject constructor() : BasePresenter<PurchaseView>() {
 
-    fun validatePhone(phone: String){
-        val validationResult = if(phone.startsWith("8"))
+    fun validatePhone(phone: String) {
+        val validationResult = if (phone.startsWith("8"))
             phone.length == 11
         else
             phone.startsWith("+7") && phone.length == 12

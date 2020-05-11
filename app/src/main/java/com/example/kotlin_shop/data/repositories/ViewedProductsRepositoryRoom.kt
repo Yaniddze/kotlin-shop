@@ -10,14 +10,14 @@ import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 class ViewedProductsRepositoryRoom(
     private val dao: ViewedProductsDao,
     private val factory: ViewedProductFactory
-): ViewedProductsRepository {
+) : ViewedProductsRepository {
 
-    companion object{
+    companion object {
         private var products: MutableList<ViewedProduct>? = null
     }
 
     override suspend fun getAll(): MutableList<ViewedProduct> {
-        if(products == null){
+        if (products == null) {
             val dbItems = dao.getAll()
             products = dbItems.map {
                 factory(it.productId.toString(), it.imageUrl, it.title)
@@ -37,7 +37,7 @@ class ViewedProductsRepositoryRoom(
 
         val founded = tempProducts.firstOrNull { it.productId == product.id }
 
-        if(founded != null){
+        if (founded != null) {
             dao.delete(founded.productId.toInt())
             tempProducts.remove(founded)
         }
@@ -47,7 +47,7 @@ class ViewedProductsRepositoryRoom(
 
 
         // Max - 7 viewed products
-        while(tempProducts.size > 7){
+        while (tempProducts.size > 7) {
             val lastProduct = tempProducts.last()
 
             dao.delete(lastProduct.productId.toInt())

@@ -22,16 +22,16 @@ class CatalogPresenter @Inject constructor(
     private val hintsGetter: GetHintsUseCase,
 
     private val favoriteAdder: AddFavoriteUseCase,
-    
+
     private val favoriteDeleter: DeleteFavoriteUseCase,
 
     private val refreshFavoriteUseCase: RefreshFavoriteUseCase
 
-    ) : BasePresenter<CatalogView>() {
+) : BasePresenter<CatalogView>() {
 
     private var i = 12
 
-    companion object{
+    companion object {
         private const val MAX_RESULTS = 5
     }
 
@@ -49,11 +49,10 @@ class CatalogPresenter @Inject constructor(
         )
 
         launch {
-            try{
+            try {
                 catalogAdder(itemToAdd)
                 viewState.onAddCatalogItem(itemToAdd)
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 viewState.showError("Add to server is not working")
             }
         }
@@ -62,35 +61,35 @@ class CatalogPresenter @Inject constructor(
 
     fun getProducts(query: String = "") {
         launch {
-            try{
+            try {
                 val items = catalogGetter().filter {
                     it.name.toLowerCase(Locale.getDefault())
                         .contains(query.toLowerCase(Locale.getDefault()))
                 }.toMutableList()
                 viewState.showProducts(items)
-            } catch (e: UnknownHostException){
+            } catch (e: UnknownHostException) {
                 viewState.showNetworkError()
-            } catch (e: SocketTimeoutException){
+            } catch (e: SocketTimeoutException) {
                 viewState.showNetworkError()
             }
         }
     }
 
-    fun getHints(query: String){
+    fun getHints(query: String) {
 
-        if(query != "")
+        if (query != "")
             launch {
-                try{
+                try {
                     val hints = hintsGetter(query, MAX_RESULTS)
 
                     viewState.showHints(hints)
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     viewState.showNetworkError()
                 }
             }
     }
 
-    fun addToFavorite(product: Product){
+    fun addToFavorite(product: Product) {
         launch {
             favoriteAdder(product)
             product.isFavorite = true

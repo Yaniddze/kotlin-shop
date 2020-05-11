@@ -7,13 +7,13 @@ import kotlinx.coroutines.launch
 import moxy.MvpPresenter
 import moxy.MvpView
 
-abstract class BasePresenter<T : MvpView>: MvpPresenter<T>() {
+abstract class BasePresenter<T : MvpView> : MvpPresenter<T>() {
 
     private val job = SupervisorJob()
 
     private val scope = CoroutineScope(Dispatchers.Main + job)
 
-    protected fun launch(action: suspend () -> Unit){
+    protected fun launch(action: suspend () -> Unit) {
         scope.launch {
             action()
         }

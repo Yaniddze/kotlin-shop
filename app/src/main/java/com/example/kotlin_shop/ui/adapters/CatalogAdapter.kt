@@ -20,8 +20,9 @@ class CatalogAdapter(
 
     var dataSet: MutableList<Product> = mutableListOf()
 
-    inner class ViewHolder(private val layout: View) : RecyclerView.ViewHolder(layout){
-        fun bind(product: Product){
+    inner class ViewHolder(private val layout: View) : RecyclerView.ViewHolder(layout) {
+        fun bind(product: Product) {
+
             val layout = layout.findViewById<ConstraintLayout>(R.id.clCartItemLayout)
 
             layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.name
@@ -30,15 +31,14 @@ class CatalogAdapter(
             val discountView = layout.findViewById<TextView>(R.id.tvCatalogDiscount)
             val fullPrice = layout.findViewById<TextView>(R.id.tvCatalogItemFullPrice)
 
-            if(product.discountPercent > 0){
+            if (product.discountPercent > 0) {
                 discountView.text = "- ${product.discountPercent}%"
                 discountView.background =
                     discountView.resources.getDrawable(R.drawable.sale_layout, null)
 
                 fullPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 fullPrice.text = product.getRoundedFullPrice()
-            }
-            else{
+            } else {
                 discountView.background = null
                 discountView.text = ""
                 fullPrice.text = ""
@@ -64,7 +64,8 @@ class CatalogAdapter(
             }
 
             layout.findViewById<ImageView>(R.id.ivCatalogFavorite).apply {
-                background = picture.context.getDrawable(if(product.isFavorite) R.drawable.ic_favorite else R.drawable.ic_unfavorite)
+                background =
+                    picture.context.getDrawable(if (product.isFavorite) R.drawable.ic_favorite else R.drawable.ic_unfavorite)
                 setOnClickListener {
                     onFavoriteClick(product)
                 }
@@ -92,7 +93,7 @@ class CatalogAdapter(
         notifyDataSetChanged()
     }
 
-    fun addItem(product: Product){
+    fun addItem(product: Product) {
         dataSet.add(product)
         notifyItemInserted(dataSet.size - 1)
     }
@@ -104,7 +105,7 @@ class CatalogAdapter(
     fun notifyProductChanged(product: Product) {
         val index = dataSet.indexOf(product)
 
-        if(index != -1){
+        if (index != -1) {
             notifyItemChanged(index)
         }
     }

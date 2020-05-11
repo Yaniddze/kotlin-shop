@@ -18,14 +18,14 @@ import javax.inject.Provider
 
 class FavoriteFragment : MvpAppCompatFragment(R.layout.fragment_favorites), FavoriteView {
 
-    companion object{
+    companion object {
         private var recyclerState: Parcelable? = null
     }
 
     @Inject
     lateinit var providerPresenter: Provider<FavoritePresenter>
 
-    private val presenter by moxyPresenter {providerPresenter.get()}
+    private val presenter by moxyPresenter { providerPresenter.get() }
 
     init {
         App.appComponent.inject(this)

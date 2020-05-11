@@ -6,7 +6,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface DetailedView: MvpView {
+interface DetailedView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun onAddToCart()

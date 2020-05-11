@@ -20,7 +20,8 @@ class FavoriteProductsRepositoryImpl(
         if (favorites == null) {
             val items = dao.getAll()
 
-            favorites = items.map { factory(it.productId.toString(), it.imageUrl, it.title) }.toMutableList()
+            favorites = items.map { factory(it.productId.toString(), it.imageUrl, it.title) }
+                .toMutableList()
         }
         return favorites!!
     }

@@ -7,7 +7,7 @@ import com.example.kotlin_shop.R
 
 class DisabledSearchLayout(
     private val onActive: () -> Unit
-): Fragment(R.layout.disabled_search_layout) {
+) : Fragment(R.layout.disabled_search_layout) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

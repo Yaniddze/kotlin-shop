@@ -9,8 +9,8 @@ data class CartItem(
     val price: Double,
     val discountPercent: Int,
     var count: Int
-){
-    companion object{
+) {
+    companion object {
         private val format = DecimalFormat("#.##")
     }
 
@@ -27,13 +27,13 @@ data class CartItem(
     }
 
     override fun equals(other: Any?): Boolean {
-        if(other is String){
+        if (other is String) {
             return other == id
         }
-        if(other is Int){
+        if (other is Int) {
             return other == id.toInt()
         }
-        if(other is CartItem){
+        if (other is CartItem) {
             return other.id == id
         }
         return super.equals(other)

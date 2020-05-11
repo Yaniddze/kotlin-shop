@@ -16,6 +16,16 @@ class ProductFactory {
         category: SubCategory,
         otherPhotos: List<String>
     ): Product {
-        return Product(id.toString(), title, price, salePercent, description, imageUrl, attributes, category, otherPhotos)
+        return Product(
+            id.toString(),
+            title,
+            price,
+            salePercent,
+            description,
+            imageUrl,
+            attributes,
+            category,
+            otherPhotos
+        )
     }
 }

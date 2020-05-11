@@ -3,7 +3,7 @@ package com.example.kotlin_shop.domain
 import java.io.Serializable
 import java.text.DecimalFormat
 
-data class Product (
+data class Product(
 
     val id: String,
     val name: String,
@@ -15,10 +15,10 @@ data class Product (
     val category: SubCategory,
     val otherPhotos: List<String>
 
-    ):Serializable {
+) : Serializable {
     var isFavorite = false
 
-    companion object{
+    companion object {
         private val format = DecimalFormat("#.##")
     }
 

@@ -9,10 +9,10 @@ import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 class ViewedProductsRepositoryShared(
     private val sharedPreferences: SharedPreferences,
     private val factory: ViewedProductFactory
-): ViewedProductsRepository {
+) : ViewedProductsRepository {
 
     init {
-        if(savedProducts == null)
+        if (savedProducts == null)
             savedProducts = sharedPreferences.getString(PRODUCT_TAG, null)
                 ?.split("|")
                 ?.map {
@@ -35,18 +35,17 @@ class ViewedProductsRepositoryShared(
 
         var currentValue = ""
 
-        if(productInList != null) {
+        if (productInList != null) {
             sharedValue
                 ?.split("|")
                 ?.forEach {
-                    if(it.split(";")[0] != product.id)
+                    if (it.split(";")[0] != product.id)
                         currentValue = "$currentValue|$it"
                 }
 
             savedProducts?.remove(productInList)
-        }
-        else{
-            currentValue = if(sharedValue == null) "" else "|$sharedValue"
+        } else {
+            currentValue = if (sharedValue == null) "" else "|$sharedValue"
         }
 
         val productString = "${product.id};${product.imageUrl};${product.name}"
@@ -56,7 +55,7 @@ class ViewedProductsRepositoryShared(
         savedProducts?.add(0, factory(product.id, product.imageUrl, product.name))
     }
 
-    companion object{
+    companion object {
 
         private const val PRODUCT_TAG: String = "PRODUCT_TAG"
 

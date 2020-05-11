@@ -1,13 +1,12 @@
 package com.example.kotlin_shop
 
 import android.app.Application
-import com.example.kotlin_shop.data.AppDatabase
 import com.example.kotlin_shop.di.AppComponent
 import com.example.kotlin_shop.di.DaggerAppComponent
 
-class App: Application() {
+class App : Application() {
 
-    companion object{
+    companion object {
         lateinit var appComponent: AppComponent
     }
 

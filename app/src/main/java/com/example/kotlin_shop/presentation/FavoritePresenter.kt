@@ -4,13 +4,13 @@ import com.example.kotlin_shop.domain.usecases.GetFavoriteUseCase
 import com.example.kotlin_shop.ui.interfaces.FavoriteView
 import javax.inject.Inject
 
-class FavoritePresenter @Inject constructor (
+class FavoritePresenter @Inject constructor(
 
     private val favoriteGetter: GetFavoriteUseCase
 
-): BasePresenter<FavoriteView>() {
+) : BasePresenter<FavoriteView>() {
 
-    fun getFavorites(){
+    fun getFavorites() {
         launch {
             val items = favoriteGetter()
 

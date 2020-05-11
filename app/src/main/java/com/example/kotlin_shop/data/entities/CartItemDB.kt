@@ -8,24 +8,24 @@ import androidx.room.PrimaryKey
 class CartItemDB internal constructor(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
+    @ColumnInfo(name = "id")
     val id: Int,
 
-    @ColumnInfo(name="product_id")
+    @ColumnInfo(name = "product_id")
     val productId: Int,
 
-    @ColumnInfo(name="title")
+    @ColumnInfo(name = "title")
     val title: String,
 
-    @ColumnInfo(name="image_url")
+    @ColumnInfo(name = "image_url")
     val imageUrl: String,
 
-    @ColumnInfo(name="price")
+    @ColumnInfo(name = "price")
     val price: Double,
 
-    @ColumnInfo(name="sale_percent")
+    @ColumnInfo(name = "sale_percent")
     val salePercent: Int,
 
-    @ColumnInfo(name="count")
+    @ColumnInfo(name = "count")
     val count: Int
 )

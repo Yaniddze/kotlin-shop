@@ -9,7 +9,7 @@ class Purchase internal constructor(
 
 )
 
-class PurchaseFactory{
+class PurchaseFactory {
     fun createPurchase(items: Set<Product>, date: Date): Purchase {
         return Purchase(
             items,

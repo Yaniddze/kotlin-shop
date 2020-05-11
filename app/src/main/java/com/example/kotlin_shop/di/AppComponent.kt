@@ -12,7 +12,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Component(
-    modules=[
+    modules = [
         FactoriesModule::class,
         DbModule::class,
         RetrofitModule::class,
@@ -27,7 +27,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
         @BindsInstance
         fun context(context: Context): Builder
         fun build(): AppComponent

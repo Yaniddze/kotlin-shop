@@ -16,11 +16,10 @@ class CartItemRepositoryImpl @Inject constructor(
 ) : CartItemRepository {
 
 
-
     private var items: MutableList<CartItem>? = null
 
-    override suspend fun getItems(): MutableList<CartItem>{
-        if(items == null){
+    override suspend fun getItems(): MutableList<CartItem> {
+        if (items == null) {
             val itemsDB = dao.getCartItems()
 
             items = itemsDB.map {
@@ -38,7 +37,7 @@ class CartItemRepositoryImpl @Inject constructor(
         return items!!
     }
 
-    override suspend fun addItem(product: Product){
+    override suspend fun addItem(product: Product) {
 
         val item = CartItem(
             product.id,
@@ -52,7 +51,7 @@ class CartItemRepositoryImpl @Inject constructor(
         val index = getItems()
             .indexOf(item)
 
-        if(index != -1)
+        if (index != -1)
             return
 
         val productToAdd: CartItemDB = cartItemFactory(
@@ -68,7 +67,7 @@ class CartItemRepositoryImpl @Inject constructor(
         getItems().add(item)
     }
 
-    override suspend fun deleteItem(product: CartItem){
+    override suspend fun deleteItem(product: CartItem) {
         dao.delete(product.id.toInt())
     }
 

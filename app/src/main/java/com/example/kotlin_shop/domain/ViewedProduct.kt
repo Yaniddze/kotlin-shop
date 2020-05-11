@@ -6,7 +6,7 @@ data class ViewedProduct(
     val title: String
 )
 
-class ViewedProductFactory{
+class ViewedProductFactory {
     operator fun invoke(
         productId: String,
         imageUrl: String,

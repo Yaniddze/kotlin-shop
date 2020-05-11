@@ -16,9 +16,10 @@ import com.example.kotlin_shop.domain.CartItem
 class CartAdapter(
     private val onDelete: (item: CartItem) -> Unit,
     private val saveCartItemCount: (productId: Int, count: Int) -> Unit
-): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-    inner class ViewHolder(private val layout: View): RecyclerView.ViewHolder(layout){
-        fun bind(product: CartItem){
+) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+    inner class ViewHolder(private val layout: View) : RecyclerView.ViewHolder(layout) {
+        fun bind(product: CartItem) {
+
             layout.findViewById<TextView>(R.id.tvCartItemTitle).text = product.title
             layout.findViewById<TextView>(R.id.tvCartItemPrice).text =
                 "${product.getRoundedPrice()} Р"
@@ -29,15 +30,14 @@ class CartAdapter(
             val discount = layout.findViewById<TextView>(R.id.tvCartDiscount)
             val fullPrice = layout.findViewById<TextView>(R.id.tvCartFullPrice)
 
-            if(product.discountPercent > 0){
+            if (product.discountPercent > 0) {
                 discount.text = "- ${product.discountPercent}%"
                 discount.background =
                     discount.resources.getDrawable(R.drawable.sale_layout, null)
 
                 fullPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 fullPrice.text = product.getRoundedFullPrice()
-            }
-            else{
+            } else {
                 discount.text = ""
                 discount.background = null
 
@@ -57,14 +57,14 @@ class CartAdapter(
             count.setText(product.count.toString())
             layout.findViewById<Button>(R.id.btnCartAddCount).setOnClickListener {
                 val value = count.text.toString().toInt()
-                if(value < 10){
+                if (value < 10) {
                     saveCartItemCount(product.id.toInt(), value + 1)
                 }
             }
 
             layout.findViewById<Button>(R.id.btnCartDeleteCount).setOnClickListener {
                 val value = count.text.toString().toInt()
-                if(value > 1){
+                if (value > 1) {
                     saveCartItemCount(product.id.toInt(), value - 1)
                 }
             }
@@ -90,15 +90,15 @@ class CartAdapter(
         return dataSet.size
     }
 
-    fun deleteItem(item: CartItem){
+    fun deleteItem(item: CartItem) {
         val index = dataSet.indexOf(item)
-        if(index != -1){
+        if (index != -1) {
             dataSet.removeAt(index)
             notifyItemRemoved(index)
         }
     }
 
-    fun changeItemSource(products: MutableList<CartItem>){
+    fun changeItemSource(products: MutableList<CartItem>) {
         dataSet = products
         notifyDataSetChanged()
     }
@@ -106,7 +106,7 @@ class CartAdapter(
     fun updateCount(productId: Int, count: Int) {
         val item = dataSet.firstOrNull { it.id == productId.toString() }
 
-        if(item != null){
+        if (item != null) {
             item.count = count
             notifyItemChanged(dataSet.indexOf(item))
         }

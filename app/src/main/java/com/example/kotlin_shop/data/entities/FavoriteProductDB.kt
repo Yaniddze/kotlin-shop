@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorites")
-data class FavoriteProductDB (
+data class FavoriteProductDB(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

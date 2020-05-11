@@ -8,11 +8,11 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlCatalogRefresher"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,38 +22,37 @@
 
             <FrameLayout
                 android:id="@+id/flCatalogSearch"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/flCatalogFragment"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <FrameLayout
+                android:id="@+id/flCatalogFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flCatalogSearch"
-                android:id="@+id/flCatalogFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"/>
+                app:layout_constraintTop_toBottomOf="@id/flCatalogSearch" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/btnCatalogAddItem"
-        app:layout_constraintBottom_toBottomOf="@id/srlCatalogRefresher"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="10dp"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:text="@string/catalog_add_item_sign"
+        android:layout_margin="10dp"
         android:background="@drawable/round_btn"
+        android:paddingBottom="5dp"
+        android:text="@string/catalog_add_item_sign"
         android:textColor="@android:color/white"
         android:textSize="35sp"
-        android:paddingBottom="5dp"/>
+        app:layout_constraintBottom_toBottomOf="@id/srlCatalogRefresher"
+        app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,9 +26,9 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favoriteDao(): FavoriteProductsDao
 
-    companion object{
+    companion object {
 
-        private val MIGRATION_1_2 = object: Migration(1, 2){
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "CREATE TABLE IF NOT EXISTS viewed_products(" +
@@ -36,29 +36,32 @@ abstract class AppDatabase : RoomDatabase() {
                             "productId INTEGER NOT NULL, " +
                             "title VARCHAR NOT NULL, " +
                             "imageUrl VARCHAR NOT NULL, " +
-                            "PRIMARY KEY(id))")
+                            "PRIMARY KEY(id))"
+                )
             }
 
         }
 
-        private val MIGRATION_2_3 = object: Migration(2, 3){
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE IF NOT EXISTS favorites(" +
-                        "id INTEGER NOT NULL, " +
-                        "productId INTEGER NOT NULL," +
-                        "PRIMARY KEY(id))")
+                database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS favorites(" +
+                            "id INTEGER NOT NULL, " +
+                            "productId INTEGER NOT NULL," +
+                            "PRIMARY KEY(id))"
+                )
             }
 
         }
 
-        private val MIGRATION_3_4 = object: Migration(3, 4){
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE favorites ADD COLUMN image TEXT NOT NULL DEFAULT '0'")
                 database.execSQL("ALTER TABLE favorites ADD COLUMN title TEXT NOT NULL DEFAULT '0'")
             }
         }
 
-        private val MIGRATION_4_5 = object: Migration(4, 5){
+        private val MIGRATION_4_5 = object : Migration(4, 5) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE cart_item ADD COLUMN count Int NOT NULL DEFAULT 1")
             }
@@ -69,24 +72,22 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
-            if(INSTANCE != null)
+            if (INSTANCE != null)
                 return INSTANCE!!
 
-
-
-            synchronized(this){
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
                 )
-                .addMigrations(
-                    MIGRATION_1_2,
-                    MIGRATION_2_3,
-                    MIGRATION_3_4,
-                    MIGRATION_4_5
-                )
-                .build()
+                    .addMigrations(
+                        MIGRATION_1_2,
+                        MIGRATION_2_3,
+                        MIGRATION_3_4,
+                        MIGRATION_4_5
+                    )
+                    .build()
 
                 INSTANCE = instance
 

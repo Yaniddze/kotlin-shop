@@ -20,47 +20,47 @@ class DetailedPresenter @Inject constructor(
 
     private val favoriteDeleter: DeleteFavoriteUseCase
 
-): BasePresenter<DetailedView>(){
+) : BasePresenter<DetailedView>() {
 
-    fun addToCart(product: Product){
+    fun addToCart(product: Product) {
         launch {
             cartItemAdder(product)
             viewState.onAddToCart()
         }
     }
 
-    fun addToViewed(product: Product){
+    fun addToViewed(product: Product) {
         launch {
             viewedAdder(product)
         }
     }
 
-    fun getProduct(productId: String){
+    fun getProduct(productId: String) {
         launch {
-            try{
+            try {
                 val product = productGetter(productId)
 
-                if(product == null)
+                if (product == null)
                     viewState.showError("Product not found")
                 else {
                     viewedAdder(product)
                     viewState.showProduct(product)
                 }
 
-            }catch (e: UnknownHostException){
+            } catch (e: UnknownHostException) {
                 viewState.showNetworkError()
             }
         }
     }
 
-    fun getViewed(notInclude: String){
+    fun getViewed(notInclude: String) {
         launch {
             val viewed = viewedGetter()
             viewState.showViewed(viewed.filter { it.productId != notInclude }.toMutableList())
         }
     }
 
-    fun addToFavorite(product: Product){
+    fun addToFavorite(product: Product) {
         launch {
             favoriteAdder(product)
             product.isFavorite = true
@@ -68,7 +68,7 @@ class DetailedPresenter @Inject constructor(
         }
     }
 
-    fun deleteFromFavorite(product: Product){
+    fun deleteFromFavorite(product: Product) {
         launch {
             favoriteDeleter(product)
             product.isFavorite = false

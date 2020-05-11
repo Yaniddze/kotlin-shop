@@ -12,10 +12,10 @@ import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.ui.MainActivity
 import com.example.kotlin_shop.ui.fragments.DetailedFragmentDirections
 
-class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHolder>() {
+class ViewedProductsAdapter : RecyclerView.Adapter<ViewedProductsAdapter.ViewHolder>() {
 
-    inner class ViewHolder(private val layout: View): RecyclerView.ViewHolder(layout){
-        fun bind(product: ViewedProduct){
+    inner class ViewHolder(private val layout: View) : RecyclerView.ViewHolder(layout) {
+        fun bind(product: ViewedProduct) {
             val image = layout.findViewById<ImageView>(R.id.ivViewedPhoto)
             layout.findViewById<TextView>(R.id.tvViewedTitle).text = product.title
 
@@ -28,7 +28,8 @@ class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHold
             layout.setOnClickListener {
                 val activity = image.context as MainActivity
 
-                val action = DetailedFragmentDirections.actionNavigationDetailedSelf(product.productId)
+                val action =
+                    DetailedFragmentDirections.actionNavigationDetailedSelf(product.productId)
 
                 activity.navigate(action)
             }
@@ -52,7 +53,7 @@ class ViewedProductsAdapter: RecyclerView.Adapter<ViewedProductsAdapter.ViewHold
 
     override fun getItemCount(): Int = dataSet.size
 
-    fun changeItemSource(products: MutableList<ViewedProduct>){
+    fun changeItemSource(products: MutableList<ViewedProduct>) {
         dataSet = products
         notifyDataSetChanged()
     }

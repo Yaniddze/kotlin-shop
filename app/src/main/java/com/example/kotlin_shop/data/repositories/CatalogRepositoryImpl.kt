@@ -8,9 +8,9 @@ import com.example.kotlin_shop.domain.repositories.CatalogRepository
 
 class CatalogRepositoryImpl(
     factory: ProductFactory
-): CatalogRepository {
+) : CatalogRepository {
 
-    companion object{
+    companion object {
         private var myDataSet: MutableList<Product>? = null
         private val images = listOf(
             "https://www.imago-images.de/imagoextern/bilder/stockfotos/imago-images-geniale-luftaufnahmen.jpg",
@@ -23,20 +23,22 @@ class CatalogRepositoryImpl(
     }
 
     init {
-        if(myDataSet == null) {
+        if (myDataSet == null) {
             myDataSet = mutableListOf()
-            for(i in 0..15){
-                myDataSet!!.add(factory(
-                    i,
-                    "someProd$i",
-                    images.random(),
-                    "some description $i",
-                    listOf(),
-                    randomPrice(),
-                    randomPercent(),
-                    SubCategory("other", MainCategory("other")),
-                    listOf()
-                ))
+            for (i in 0..15) {
+                myDataSet!!.add(
+                    factory(
+                        i,
+                        "someProd$i",
+                        images.random(),
+                        "some description $i",
+                        listOf(),
+                        randomPrice(),
+                        randomPercent(),
+                        SubCategory("other", MainCategory("other")),
+                        listOf()
+                    )
+                )
             }
         }
     }

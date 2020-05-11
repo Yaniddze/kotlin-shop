@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlin_shop.R
 
-class PhotosAdapter: RecyclerView.Adapter<PhotosAdapter.Holder>() {
-    inner class Holder(private val view: View): RecyclerView.ViewHolder(view) {
-        fun bind(url: String){
+class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.Holder>() {
+    inner class Holder(private val view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(url: String) {
             Glide.with(view)
                 .load(url)
                 .fitCenter()
@@ -36,7 +36,7 @@ class PhotosAdapter: RecyclerView.Adapter<PhotosAdapter.Holder>() {
 
     override fun getItemCount(): Int = dataSet.size
 
-    fun loadItems(photos: List<String>){
+    fun loadItems(photos: List<String>) {
         dataSet = photos
         notifyDataSetChanged()
     }

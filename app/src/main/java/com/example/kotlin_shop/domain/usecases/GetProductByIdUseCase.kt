@@ -8,13 +8,13 @@ class GetProductByIdUseCase(
     private val productRepository: CatalogRepository,
     private val favoriteRepository: FavoriteProductsRepository
 ) {
-    suspend operator fun invoke(productId: String) : Product? {
+    suspend operator fun invoke(productId: String): Product? {
         val item = productRepository.getById(productId)
-        if(item != null){
+        if (item != null) {
             val favorites = favoriteRepository.getAll()
 
             favorites.forEach {
-                if(it.productId == item.id)
+                if (it.productId == item.id)
                     item.isFavorite = true
             }
         }

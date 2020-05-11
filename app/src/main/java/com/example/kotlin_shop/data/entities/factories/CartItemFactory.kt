@@ -2,7 +2,7 @@ package com.example.kotlin_shop.data.entities.factories
 
 import com.example.kotlin_shop.data.entities.CartItemDB
 
-class CartItemFactory{
+class CartItemFactory {
     operator fun invoke(
         productId: Int,
         title: String,

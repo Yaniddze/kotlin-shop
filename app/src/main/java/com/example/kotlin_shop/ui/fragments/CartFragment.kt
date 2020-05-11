@@ -31,7 +31,7 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
         App.appComponent.inject(this)
     }
 
-    private fun onDelete(item: CartItem){
+    private fun onDelete(item: CartItem) {
         presenter.deleteItem(item)
     }
 
@@ -61,8 +61,8 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
         presenter.getProducts()
     }
 
-    private fun calcTotalPrice(){
-        val totalPrice = recyclerAdapter.dataSet.map {it.calcDiscountPrice() * it.count}.sum()
+    private fun calcTotalPrice() {
+        val totalPrice = recyclerAdapter.dataSet.map { it.calcDiscountPrice() * it.count }.sum()
         val format = DecimalFormat("#.##")
 
         tvCartTotalPrice.text =

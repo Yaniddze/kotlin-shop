@@ -15,7 +15,7 @@ class GetCatalogUseCase(
 
         catalog.forEach { product ->
             favorites.forEach { favorite ->
-                if(favorite.productId == product.id)
+                if (favorite.productId == product.id)
                     product.isFavorite = true
             }
         }

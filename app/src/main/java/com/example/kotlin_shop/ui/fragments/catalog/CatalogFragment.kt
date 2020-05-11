@@ -29,6 +29,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
+
     init {
         App.appComponent.inject(this)
     }
@@ -51,7 +52,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         srlCatalogRefresher.isRefreshing = true
 
         showRecycler()
-        if(isSearchShowed){
+        if (isSearchShowed) {
             showSearchBar()
         } else {
             hideSearchBar()
@@ -64,7 +65,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     override fun onStart() {
         super.onStart()
-        if(!wasFragmentShown){
+        if (!wasFragmentShown) {
             wasFragmentShown = true
             presenter.getProducts("")
         }
@@ -73,12 +74,12 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
     }
 
-    private fun onSearchBtn(query: String){
+    private fun onSearchBtn(query: String) {
         srlCatalogRefresher.isRefreshing = true
         presenter.getProducts(query)
     }
 
-    private fun onDisableSearch(){
+    private fun onDisableSearch() {
         hideSearchBar()
         srlCatalogRefresher.isRefreshing = true
         presenter.getProducts()
@@ -108,7 +109,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
                 R.anim.show_from_bottom,
                 R.anim.hide_from_top
             )
-            .replace(flCatalogSearch.id,
+            .replace(
+                flCatalogSearch.id,
                 ActiveSearchFragment(
                     ::onDisableSearch,
                     ::onSearchBtn,
@@ -121,19 +123,19 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         isSearchShowed = true
     }
 
-    private fun onFavoriteClick(product: Product){
-        if(!product.isFavorite){
+    private fun onFavoriteClick(product: Product) {
+        if (!product.isFavorite) {
             presenter.addToFavorite(product)
-        }
-        else{
+        } else {
             presenter.deleteFromFavorite(product)
         }
     }
 
-    private fun showRecycler(){
+    private fun showRecycler() {
         childFragmentManager
             .beginTransaction()
-            .replace(R.id.flCatalogFragment,
+            .replace(
+                R.id.flCatalogFragment,
                 CatalogRecyclerFragment(
                     catalogAdapter
                 )
@@ -144,7 +146,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showProducts(products: MutableList<Product>) {
-        if(!isRecyclerShowed){
+        if (!isRecyclerShowed) {
             showRecycler()
         }
         srlCatalogRefresher.isRefreshing = false
@@ -165,7 +167,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
         childFragmentManager
             .beginTransaction()
-            .replace(R.id.flCatalogFragment,
+            .replace(
+                R.id.flCatalogFragment,
                 BadInternetFragment()
             )
             .commit()
@@ -187,7 +190,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     override fun onFavoriteRefreshed(changedIds: List<Int>) {
         changedIds.forEach { id ->
-            val founded = catalogAdapter.dataSet.first{ it.id == id.toString()}
+            val founded = catalogAdapter.dataSet.first { it.id == id.toString() }
             catalogAdapter.notifyProductChanged(founded)
         }
     }

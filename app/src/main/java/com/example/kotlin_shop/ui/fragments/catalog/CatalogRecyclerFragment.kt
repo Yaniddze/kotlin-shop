@@ -11,10 +11,10 @@ import kotlinx.android.synthetic.main.fragmnet_catalog_recycler.*
 
 class CatalogRecyclerFragment(
     private val catalogAdapter: CatalogAdapter
-): Fragment(R.layout.fragmnet_catalog_recycler) {
+) : Fragment(R.layout.fragmnet_catalog_recycler) {
 
 
-    companion object{
+    companion object {
         private var recyclerViewState: Parcelable? = null
     }
 
@@ -38,6 +38,7 @@ class CatalogRecyclerFragment(
 
         rvCatalog.layoutManager!!.onRestoreInstanceState(recyclerViewState)
     }
+
     override fun onPause() {
         super.onPause()
 

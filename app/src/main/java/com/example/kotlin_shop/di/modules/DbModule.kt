@@ -1,7 +1,6 @@
 package com.example.kotlin_shop.di.modules
 
 import android.content.Context
-import com.example.kotlin_shop.App
 import com.example.kotlin_shop.data.AppDatabase
 import dagger.Module
 import dagger.Provides
