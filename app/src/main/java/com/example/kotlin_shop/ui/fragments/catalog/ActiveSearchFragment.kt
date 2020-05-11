@@ -24,6 +24,7 @@ class ActiveSearchFragment(
         super.onViewCreated(view, savedInstanceState)
 
         ivBackButton.setOnClickListener {
+            query = ""
             onDisable()
         }
 
@@ -42,7 +43,7 @@ class ActiveSearchFragment(
             }
         })
         actvSearch.setText(query)
-        actvSearch.setOnEditorActionListener { v, actionId, event ->
+        actvSearch.setOnEditorActionListener { _, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
                 getProducts(query)
                 true

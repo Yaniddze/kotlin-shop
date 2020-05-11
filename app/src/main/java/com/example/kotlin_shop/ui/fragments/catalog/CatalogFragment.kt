@@ -7,6 +7,7 @@ import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presentation.CatalogPresenter
+import com.example.kotlin_shop.ui.adapters.AutoCompleteAdapter
 import com.example.kotlin_shop.ui.fragments.BadInternetFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import com.example.kotlin_shop.ui.adapters.CatalogAdapter
@@ -23,7 +24,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     private var isRecyclerShowed = true
     private var isSearchShowed = false
     private var wasFragmentShown: Boolean = false
-    private lateinit var suggestionAdapter: ArrayAdapter<String>
+    private lateinit var suggestionAdapter: AutoCompleteAdapter
 
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
@@ -35,8 +36,12 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        suggestionAdapter = ArrayAdapter<String>(
-            requireContext(), android.R.layout.simple_expandable_list_item_1)
+//        suggestionAdapter = ArrayAdapter<String>(
+//            requireContext(), android.R.layout.simple_expandable_list_item_1)
+
+        suggestionAdapter = AutoCompleteAdapter(
+            requireContext(), android.R.layout.simple_expandable_list_item_1
+        )
 
         srlCatalogRefresher.setOnRefreshListener {
             srlCatalogRefresher.isRefreshing = true
@@ -169,8 +174,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     }
 
     override fun showHints(hints: List<String>) {
-        suggestionAdapter.clear()
-        suggestionAdapter.addAll(hints)
+        suggestionAdapter.loadItems(hints)
     }
 
     override fun onFavoriteAdded(product: Product) {

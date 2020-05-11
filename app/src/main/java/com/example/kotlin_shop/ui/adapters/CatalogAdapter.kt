@@ -27,20 +27,22 @@ class CatalogAdapter(
             layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.name
             layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
                 "${product.getRoundedDiscountPrice()} Р"
+            val discountView = layout.findViewById<TextView>(R.id.tvCatalogDiscount)
+            val fullPrice = layout.findViewById<TextView>(R.id.tvCatalogItemFullPrice)
 
             if(product.discountPercent > 0){
-                val discountView = layout.findViewById<TextView>(R.id.tvCatalogDiscount)
                 discountView.text = "- ${product.discountPercent}%"
                 discountView.background =
                     discountView.resources.getDrawable(R.drawable.sale_layout, null)
 
-                val fullPrice = layout.findViewById<TextView>(R.id.tvCatalogItemFullPrice)
                 fullPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 fullPrice.text = product.getRoundedFullPrice()
             }
-
-
-
+            else{
+                discountView.background = null
+                discountView.text = ""
+                fullPrice.text = ""
+            }
 
             val picture = layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
 
