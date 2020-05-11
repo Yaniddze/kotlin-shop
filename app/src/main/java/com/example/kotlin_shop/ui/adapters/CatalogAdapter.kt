@@ -1,5 +1,6 @@
 package com.example.kotlin_shop.ui.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,21 @@ class CatalogAdapter(
 
             layout.findViewById<TextView>(R.id.tvCatalogItemTitle).text = product.name
             layout.findViewById<TextView>(R.id.tvCatalogItemPrice).text =
-                product.getRoundedDiscountPrice()
+                "${product.getRoundedDiscountPrice()} Р"
+
+            if(product.discountPercent > 0){
+                val discountView = layout.findViewById<TextView>(R.id.tvCatalogDiscount)
+                discountView.text = "- ${product.discountPercent}%"
+                discountView.background =
+                    discountView.resources.getDrawable(R.drawable.sale_layout, null)
+
+                val fullPrice = layout.findViewById<TextView>(R.id.tvCatalogItemFullPrice)
+                fullPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                fullPrice.text = product.getRoundedFullPrice()
+            }
+
+
+
 
             val picture = layout.findViewById<ImageView>(R.id.ivCatalogItemImage)
 
