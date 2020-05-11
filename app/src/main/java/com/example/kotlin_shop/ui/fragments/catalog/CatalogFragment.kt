@@ -69,6 +69,19 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
     }
 
+    private fun onSearchBtn(query: String){
+        searchQuery = query
+        srlCatalogRefresher.isRefreshing = true
+        presenter.getProducts(query)
+    }
+
+    private fun onDisableSearch(){
+        hideSearchBar()
+        searchQuery = ""
+        srlCatalogRefresher.isRefreshing = true
+        presenter.getProducts(searchQuery)
+    }
+
     private fun hideSearchBar() {
         childFragmentManager
             .beginTransaction()
@@ -95,9 +108,10 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             )
             .replace(flCatalogSearch.id,
                 ActiveSearchFragment(
-                    ::hideSearchBar,
+                    ::onDisableSearch,
                     searchQuery,
-                    presenter::getProducts,
+                    ::saveSearchQuery,
+                    ::onSearchBtn,
                     presenter::getHints,
                     suggestionAdapter
                 )
@@ -105,6 +119,10 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             .commit()
 
         isSearchShowed = true
+    }
+
+    private fun saveSearchQuery(query: String){
+        searchQuery = query
     }
 
     private fun onFavoriteClick(product: Product){
@@ -125,6 +143,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
                 )
             )
             .commit()
+
         isRecyclerShowed = true
     }
 
@@ -133,8 +152,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
             showRecycler()
         }
         srlCatalogRefresher.isRefreshing = false
-        catalogAdapter.changeItemSource(products)
 
+        catalogAdapter.changeItemSource(products)
     }
 
     override fun onAddCatalogItem(product: Product) {
@@ -154,8 +173,8 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
                 BadInternetFragment()
             )
             .commit()
-        isRecyclerShowed = false
 
+        isRecyclerShowed = false
     }
 
     override fun showHints(hints: List<String>) {
