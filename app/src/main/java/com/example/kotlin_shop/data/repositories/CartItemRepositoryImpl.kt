@@ -69,6 +69,12 @@ class CartItemRepositoryImpl @Inject constructor(
 
     override suspend fun deleteItem(product: CartItem) {
         dao.delete(product.id.toInt())
+        getItems().remove(product)
+    }
+
+    override suspend fun deleteItem(productId: String) {
+        dao.delete(productId.toInt())
+        getItems().remove(items!!.first { it.id == productId })
     }
 
     override suspend fun update(productId: Int, count: Int) {

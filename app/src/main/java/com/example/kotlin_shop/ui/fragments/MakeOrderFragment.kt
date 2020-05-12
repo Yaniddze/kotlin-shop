@@ -8,15 +8,17 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
+import com.example.kotlin_shop.domain.Order
 import com.example.kotlin_shop.presentation.MakeOrderPresenter
-import com.example.kotlin_shop.ui.interfaces.OrderView
+import com.example.kotlin_shop.ui.MainActivity
+import com.example.kotlin_shop.ui.interfaces.MakeOrderView
 import kotlinx.android.synthetic.main.fragment_purchase.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), OrderView {
+class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), MakeOrderView {
 
     @Inject
     lateinit var presenterProvider: Provider<MakeOrderPresenter>
@@ -30,10 +32,7 @@ class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), Orde
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setListeners()
-    }
-
-    private fun setListeners() {
+        rgOrderPayment.check(rbOrderOnlineCard.id)
 
         etPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -46,20 +45,9 @@ class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), Orde
 
         })
 
-        etThirdName.addTextChangedListener(object : TextWatcher {
+        etSerName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                presenter.validateSecondName(etThirdName.text.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-        })
-
-        etSecondName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                presenter.validateSerName(etSecondName.text.toString())
+                presenter.validateSerName(etSerName.text.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -80,7 +68,19 @@ class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), Orde
         })
 
         btnBuy.setOnClickListener {
-            Toast.makeText(context, "Покупка...", Toast.LENGTH_LONG).show()
+            val checked = rgOrderPayment.checkedRadioButtonId
+            var paymentType = Order.PaymentType.CardOnReceiving
+
+            if(checked == rbOrderOfflineMoney.id){
+                paymentType = Order.PaymentType.CashOnReceiving
+            }
+
+            presenter.makeOrder(
+                etFirstName.text.toString(),
+                etSerName.text.toString(),
+                etPhone.text.toString(),
+                paymentType
+            )
         }
     }
 
@@ -90,19 +90,24 @@ class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), Orde
         this.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, drawable, 0)
     }
 
-    override fun showErrorForSecondName(visible: Boolean) {
-        etThirdName.showError(!visible)
-    }
-
     override fun showErrorForFirstName(visible: Boolean) {
         etFirstName.showError(!visible)
     }
 
     override fun showErrorForSerName(visible: Boolean) {
-        etSecondName.showError(!visible)
+        etSerName.showError(!visible)
     }
 
     override fun showErrorForPhone(visible: Boolean) {
         etPhone.showError(!visible)
+    }
+
+    override fun onOrderAdded() {
+        Toast.makeText(context, "Заказ создан", Toast.LENGTH_LONG).show()
+        (context as MainActivity).onBackPressed()
+    }
+
+    override fun showMakeOrderError(errorMessage: String) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
     }
 }

@@ -7,5 +7,6 @@ interface CartItemRepository {
     suspend fun getItems(): MutableList<CartItem>
     suspend fun addItem(product: Product)
     suspend fun deleteItem(product: CartItem)
+    suspend fun deleteItem(productId: String)
     suspend fun update(productId: Int, count: Int)
 }

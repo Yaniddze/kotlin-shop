@@ -1,10 +1,17 @@
 package com.example.kotlin_shop.domain.usecases.order
 
 import com.example.kotlin_shop.domain.Order
+import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.repositories.OrderRepository
 
 class AddOrderUseCase(
-    private val repository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val cartItemRepository: CartItemRepository
 ) {
-    suspend operator fun invoke(order: Order) = repository.addOrder(order)
+    suspend operator fun invoke(order: Order) {
+        orderRepository.addOrder(order)
+        order.items.forEach {
+            cartItemRepository.deleteItem(it.productId)
+        }
+    }
 }

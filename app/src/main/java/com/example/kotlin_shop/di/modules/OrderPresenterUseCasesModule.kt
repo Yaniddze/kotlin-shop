@@ -1,5 +1,6 @@
 package com.example.kotlin_shop.di.modules
 
+import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.repositories.OrderRepository
 import com.example.kotlin_shop.domain.usecases.order.AddOrderUseCase
 import dagger.Module
@@ -12,8 +13,9 @@ class OrderPresenterUseCasesModule {
     @Provides
     @Singleton
     fun provideAddOrderUseCase(
-        repository: OrderRepository
+        orderRepository: OrderRepository,
+        cartItemRepository: CartItemRepository
     ): AddOrderUseCase =
-        AddOrderUseCase(repository)
+        AddOrderUseCase(orderRepository, cartItemRepository)
 
 }
