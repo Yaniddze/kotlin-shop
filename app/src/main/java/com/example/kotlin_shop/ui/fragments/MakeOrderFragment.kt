@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
-import com.example.kotlin_shop.presentation.OrderPresenter
+import com.example.kotlin_shop.presentation.MakeOrderPresenter
 import com.example.kotlin_shop.ui.interfaces.OrderView
 import kotlinx.android.synthetic.main.fragment_purchase.*
 import moxy.MvpAppCompatFragment
@@ -16,10 +16,10 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class OrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), OrderView {
+class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), OrderView {
 
     @Inject
-    lateinit var presenterProvider: Provider<OrderPresenter>
+    lateinit var presenterProvider: Provider<MakeOrderPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     init {

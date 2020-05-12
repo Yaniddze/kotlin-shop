@@ -10,8 +10,8 @@
         android:id="@+id/navigation_catalog"
         android:name="com.example.kotlin_shop.ui.fragments.catalog.CatalogFragment"
         android:label="@string/menu_catalog_title"
-        tools:layout="@layout/fragment_catalog"
-        app:startDestination="@id/action_navigation_catalog_to_naigation_detailed">
+        app:startDestination="@id/action_navigation_catalog_to_naigation_detailed"
+        tools:layout="@layout/fragment_catalog">
         <action
             android:id="@+id/action_navigation_catalog_to_naigation_detailed"
             app:destination="@id/navigation_detailed"
@@ -23,7 +23,7 @@
         android:id="@+id/navigation_favorite"
         android:name="com.example.kotlin_shop.ui.fragments.FavoriteFragment"
         android:label="@string/favorite_menu_title"
-        tools:layout="@layout/fragment_favorites" >
+        tools:layout="@layout/fragment_favorites">
         <action
             android:id="@+id/action_navigation_favorite_to_navigation_detailed"
             app:destination="@id/navigation_detailed" />
@@ -33,7 +33,7 @@
         android:id="@+id/navigation_cart"
         android:name="com.example.kotlin_shop.ui.fragments.CartFragment"
         android:label="@string/menu_cart_title"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_navigation_cart_to_purchaseFragment"
             app:destination="@id/navigation_purchase"
@@ -54,7 +54,12 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_purchase"
-        android:name="com.example.kotlin_shop.ui.fragments.OrderFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.MakeOrderFragment"
         android:label="Оформление заказа"
-        tools:layout="@layout/fragment_purchase"/>
+        tools:layout="@layout/fragment_purchase" />
+    <fragment
+        android:id="@+id/navigation_orders"
+        android:name="com.example.kotlin_shop.ui.fragments.OrdersFragment"
+        android:label="Заказы"
+        tools:layout="@layout/fragment_orders" />
 </navigation>

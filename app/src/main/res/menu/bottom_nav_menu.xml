@@ -12,6 +12,11 @@
         android:title="@string/favorite_menu_title" />
 
     <item
+        android:id="@+id/navigation_orders"
+        android:icon="@drawable/ic_order"
+        android:title="@string/orders"/>
+
+    <item
         android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_cart"
         android:title="@string/menu_cart_title" />

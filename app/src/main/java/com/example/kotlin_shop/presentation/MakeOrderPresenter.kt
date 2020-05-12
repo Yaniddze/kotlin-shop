@@ -5,7 +5,7 @@ import com.example.kotlin_shop.domain.usecases.cart.GetCartItemsUseCase
 import com.example.kotlin_shop.ui.interfaces.OrderView
 import javax.inject.Inject
 
-class OrderPresenter @Inject constructor(
+class MakeOrderPresenter @Inject constructor(
 
     private val cartGetter: GetCartItemsUseCase,
     private val ordersAdder: AddOrderUseCase
