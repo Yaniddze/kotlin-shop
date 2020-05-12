@@ -2,6 +2,11 @@ package com.example.kotlin_shop.presentation
 
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.usecases.*
+import com.example.kotlin_shop.domain.usecases.cart.AddCartItemUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.AddFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.DeleteFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.viewed.AddViewedProductUseCase
+import com.example.kotlin_shop.domain.usecases.viewed.GetViewedProductsUseCase
 import com.example.kotlin_shop.ui.interfaces.DetailedView
 import java.net.UnknownHostException
 import javax.inject.Inject

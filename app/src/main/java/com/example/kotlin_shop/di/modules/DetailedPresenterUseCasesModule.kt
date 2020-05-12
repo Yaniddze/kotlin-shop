@@ -5,6 +5,8 @@ import com.example.kotlin_shop.domain.repositories.CatalogRepository
 import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 import com.example.kotlin_shop.domain.usecases.*
+import com.example.kotlin_shop.domain.usecases.cart.AddCartItemUseCase
+import com.example.kotlin_shop.domain.usecases.viewed.AddViewedProductUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,13 +17,18 @@ class DetailedPresenterUseCasesModule {
     @Provides
     @Singleton
     fun provideAddCartItemUseCase(repository: CartItemRepository): AddCartItemUseCase =
-        AddCartItemUseCase(repository)
+        AddCartItemUseCase(
+            repository
+        )
 
     @Provides
     @Singleton
     fun provideAddViewedProductUseCases(
         repository: ViewedProductsRepository
-    ): AddViewedProductUseCase = AddViewedProductUseCase(repository)
+    ): AddViewedProductUseCase =
+        AddViewedProductUseCase(
+            repository
+        )
 
     @Provides
     @Singleton

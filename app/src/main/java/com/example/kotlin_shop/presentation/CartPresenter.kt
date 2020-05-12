@@ -1,9 +1,9 @@
 package com.example.kotlin_shop.presentation
 
 import com.example.kotlin_shop.domain.CartItem
-import com.example.kotlin_shop.domain.usecases.DeleteCartItemUseCase
-import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
-import com.example.kotlin_shop.domain.usecases.UpdateCartItemUseCase
+import com.example.kotlin_shop.domain.usecases.cart.DeleteCartItemUseCase
+import com.example.kotlin_shop.domain.usecases.cart.GetCartItemsUseCase
+import com.example.kotlin_shop.domain.usecases.cart.UpdateCartItemUseCase
 import com.example.kotlin_shop.ui.interfaces.CartView
 import javax.inject.Inject
 

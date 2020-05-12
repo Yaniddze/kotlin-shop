@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.domain.usecases
+package com.example.kotlin_shop.domain.usecases.cart
 
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.repositories.CartItemRepository

@@ -1,6 +1,6 @@
 package com.example.kotlin_shop.presentation
 
-import com.example.kotlin_shop.domain.usecases.GetFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.GetFavoriteUseCase
 import com.example.kotlin_shop.ui.interfaces.FavoriteView
 import javax.inject.Inject
 

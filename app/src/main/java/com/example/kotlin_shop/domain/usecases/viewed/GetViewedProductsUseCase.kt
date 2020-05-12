@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.domain.usecases
+package com.example.kotlin_shop.domain.usecases.viewed
 
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository

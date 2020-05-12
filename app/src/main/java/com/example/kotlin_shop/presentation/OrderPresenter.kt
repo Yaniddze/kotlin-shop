@@ -1,7 +1,7 @@
 package com.example.kotlin_shop.presentation
 
-import com.example.kotlin_shop.domain.usecases.AddOrderUseCase
-import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
+import com.example.kotlin_shop.domain.usecases.order.AddOrderUseCase
+import com.example.kotlin_shop.domain.usecases.cart.GetCartItemsUseCase
 import com.example.kotlin_shop.ui.interfaces.OrderView
 import javax.inject.Inject
 

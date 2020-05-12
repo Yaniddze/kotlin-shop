@@ -2,10 +2,10 @@ package com.example.kotlin_shop.di.modules
 
 import com.example.kotlin_shop.domain.repositories.CartItemRepository
 import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
-import com.example.kotlin_shop.domain.usecases.AddFavoriteUseCase
-import com.example.kotlin_shop.domain.usecases.DeleteFavoriteUseCase
-import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
-import com.example.kotlin_shop.domain.usecases.GetFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.AddFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.DeleteFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.cart.GetCartItemsUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.GetFavoriteUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,22 +16,33 @@ class GeneralUseCases {
     @Singleton
     fun provideAddFavoriteUseCase(
         repository: FavoriteProductsRepository
-    ): AddFavoriteUseCase = AddFavoriteUseCase(repository)
+    ): AddFavoriteUseCase =
+        AddFavoriteUseCase(
+            repository
+        )
 
     @Provides
     @Singleton
     fun provideDeleteFavoriteUseCase(
         repository: FavoriteProductsRepository
-    ): DeleteFavoriteUseCase = DeleteFavoriteUseCase(repository)
+    ): DeleteFavoriteUseCase =
+        DeleteFavoriteUseCase(
+            repository
+        )
 
     @Provides
     @Singleton
     fun provideGetFavoriteUseCase(
         repository: FavoriteProductsRepository
-    ): GetFavoriteUseCase = GetFavoriteUseCase(repository)
+    ): GetFavoriteUseCase =
+        GetFavoriteUseCase(
+            repository
+        )
 
     @Provides
     @Singleton
     fun getGetCartItemUseCase(repository: CartItemRepository): GetCartItemsUseCase =
-        GetCartItemsUseCase(repository)
+        GetCartItemsUseCase(
+            repository
+        )
 }

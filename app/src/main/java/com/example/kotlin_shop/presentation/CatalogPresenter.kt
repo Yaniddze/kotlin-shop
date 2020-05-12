@@ -5,6 +5,11 @@ import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.SubCategory
 import com.example.kotlin_shop.domain.factories.ProductFactory
 import com.example.kotlin_shop.domain.usecases.*
+import com.example.kotlin_shop.domain.usecases.catalog.AddCatalogItemUseCase
+import com.example.kotlin_shop.domain.usecases.catalog.GetCatalogUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.AddFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.DeleteFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.RefreshFavoriteUseCase
 import com.example.kotlin_shop.ui.interfaces.CatalogView
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

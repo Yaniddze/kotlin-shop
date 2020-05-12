@@ -4,6 +4,10 @@ import com.example.kotlin_shop.domain.repositories.CatalogRepository
 import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 import com.example.kotlin_shop.domain.usecases.*
+import com.example.kotlin_shop.domain.usecases.catalog.AddCatalogItemUseCase
+import com.example.kotlin_shop.domain.usecases.catalog.GetCatalogUseCase
+import com.example.kotlin_shop.domain.usecases.favorite.RefreshFavoriteUseCase
+import com.example.kotlin_shop.domain.usecases.viewed.GetViewedProductsUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,20 +19,30 @@ class CatalogPresenterUseCasesModule {
     @Singleton
     fun provideGetViewedProductsUseCase(
         repository: ViewedProductsRepository
-    ): GetViewedProductsUseCase = GetViewedProductsUseCase(repository)
+    ): GetViewedProductsUseCase =
+        GetViewedProductsUseCase(
+            repository
+        )
 
     @Provides
     @Singleton
     fun provideMainGetCatalogUseCase(
         catalogRepository: CatalogRepository,
         favoriteProductsRepository: FavoriteProductsRepository
-    ): GetCatalogUseCase = GetCatalogUseCase(catalogRepository, favoriteProductsRepository)
+    ): GetCatalogUseCase =
+        GetCatalogUseCase(
+            catalogRepository,
+            favoriteProductsRepository
+        )
 
     @Provides
     @Singleton
     fun provideMainAddCatalogItemUseCase(
         repository: CatalogRepository
-    ): AddCatalogItemUseCase = AddCatalogItemUseCase(repository)
+    ): AddCatalogItemUseCase =
+        AddCatalogItemUseCase(
+            repository
+        )
 
     @Provides
     @Singleton
@@ -40,5 +54,8 @@ class CatalogPresenterUseCasesModule {
     @Singleton
     fun provideRefreshFavoriteUseCase(
         repository: FavoriteProductsRepository
-    ): RefreshFavoriteUseCase = RefreshFavoriteUseCase(repository)
+    ): RefreshFavoriteUseCase =
+        RefreshFavoriteUseCase(
+            repository
+        )
 }
