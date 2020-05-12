@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_purchase"
-        android:name="com.example.kotlin_shop.ui.fragments.PurchaseFragment"
+        android:name="com.example.kotlin_shop.ui.fragments.OrderFragment"
         android:label="Оформление заказа"
         tools:layout="@layout/fragment_purchase"/>
 </navigation>

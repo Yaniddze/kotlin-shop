@@ -13,11 +13,6 @@ class CartPresenterUseCasesModule {
 
     @Provides
     @Singleton
-    fun getGetCartItemUseCase(repository: CartItemRepository): GetCartItemsUseCase =
-        GetCartItemsUseCase(repository)
-
-    @Provides
-    @Singleton
     fun getDeleteCartItemUseCase(repository: CartItemRepository): DeleteCartItemUseCase =
         DeleteCartItemUseCase(repository)
 

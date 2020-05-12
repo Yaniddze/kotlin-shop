@@ -26,6 +26,12 @@ data class CartItem(
         return format.format(price).replace(',', '.')
     }
 
+    fun toOrderItem(): Order.Item{
+        return Order.Item(
+            id, count
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (other is String) {
             return other == id

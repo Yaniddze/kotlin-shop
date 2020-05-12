@@ -1,9 +1,16 @@
 package com.example.kotlin_shop.presentation
 
-import com.example.kotlin_shop.ui.interfaces.PurchaseView
+import com.example.kotlin_shop.domain.usecases.AddOrderUseCase
+import com.example.kotlin_shop.domain.usecases.GetCartItemsUseCase
+import com.example.kotlin_shop.ui.interfaces.OrderView
 import javax.inject.Inject
 
-class PurchasePresenter @Inject constructor() : BasePresenter<PurchaseView>() {
+class OrderPresenter @Inject constructor(
+
+    private val cartGetter: GetCartItemsUseCase,
+    private val ordersAdder: AddOrderUseCase
+
+) : BasePresenter<OrderView>() {
 
     fun validatePhone(phone: String) {
         val validationResult = if (phone.startsWith("8"))

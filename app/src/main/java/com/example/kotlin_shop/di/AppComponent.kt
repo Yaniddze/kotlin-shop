@@ -6,7 +6,7 @@ import com.example.kotlin_shop.ui.fragments.CartFragment
 import com.example.kotlin_shop.ui.fragments.catalog.CatalogFragment
 import com.example.kotlin_shop.ui.fragments.DetailedFragment
 import com.example.kotlin_shop.ui.fragments.FavoriteFragment
-import com.example.kotlin_shop.ui.fragments.PurchaseFragment
+import com.example.kotlin_shop.ui.fragments.OrderFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,7 +20,8 @@ import javax.inject.Singleton
         DetailedPresenterUseCasesModule::class,
         CatalogPresenterUseCasesModule::class,
         CartPresenterUseCasesModule::class,
-        GeneralUseCases::class
+        GeneralUseCases::class,
+        OrderPresenterUseCasesModule::class
     ]
 )
 @Singleton
@@ -36,7 +37,7 @@ interface AppComponent {
     fun inject(base: DetailedFragment)
     fun inject(base: CatalogFragment)
     fun inject(base: CartFragment)
-    fun inject(base: PurchaseFragment)
+    fun inject(base: OrderFragment)
     fun inject(base: FavoriteFragment)
 
 }

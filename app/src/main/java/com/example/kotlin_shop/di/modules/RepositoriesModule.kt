@@ -3,15 +3,13 @@ package com.example.kotlin_shop.di.modules
 import com.example.kotlin_shop.data.AppDatabase
 import com.example.kotlin_shop.data.dao.CartItemDao
 import com.example.kotlin_shop.data.dao.FavoriteProductsDao
+import com.example.kotlin_shop.data.dao.OrderDao
 import com.example.kotlin_shop.data.dao.ProductsDao
 import com.example.kotlin_shop.data.entities.factories.CartItemFactory
 import com.example.kotlin_shop.data.repositories.*
 import com.example.kotlin_shop.domain.FavoriteProductFactory
 import com.example.kotlin_shop.domain.ViewedProductFactory
-import com.example.kotlin_shop.domain.repositories.CartItemRepository
-import com.example.kotlin_shop.domain.repositories.CatalogRepository
-import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
-import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
+import com.example.kotlin_shop.domain.repositories.*
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -62,4 +60,16 @@ class RepositoriesModule {
     ): CatalogRepository = CatalogRepositoryRetrofit(
         retrofit.create(ProductsDao::class.java)
     )
+
+    @Provides
+    @Singleton
+    fun provideOrderDao(
+        retrofit: Retrofit
+    ): OrderDao = retrofit.create(OrderDao::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOrderRepository(
+        dao: OrderDao
+    ): OrderRepository = OrderRepositoryImpl(dao)
 }
