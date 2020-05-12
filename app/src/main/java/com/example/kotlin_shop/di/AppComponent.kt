@@ -21,7 +21,8 @@ import javax.inject.Singleton
         CatalogPresenterUseCasesModule::class,
         CartPresenterUseCasesModule::class,
         GeneralUseCases::class,
-        OrderPresenterUseCasesModule::class
+        OrderPresenterUseCasesModule::class,
+        ValidatorsModule::class
     ]
 )
 @Singleton
