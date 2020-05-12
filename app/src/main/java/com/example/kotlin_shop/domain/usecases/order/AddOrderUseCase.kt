@@ -9,9 +9,9 @@ class AddOrderUseCase(
     private val cartItemRepository: CartItemRepository
 ) {
     suspend operator fun invoke(order: Order) {
-        orderRepository.addOrder(order)
         order.items.forEach {
             cartItemRepository.deleteItem(it.productId)
         }
+        orderRepository.addOrder(order)
     }
 }

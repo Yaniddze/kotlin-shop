@@ -50,4 +50,8 @@
     <string name="online_bank_card">Онлайн банковской картой</string>
     <string name="offline_by_money">Наличными при получении</string>
     <string name="choose_payment_type">Выберите способ оплаты</string>
+    <string name="customer">Покупатель:</string>
+    <string name="payment_type">Способ оплаты:</string>
+    <string name="total">Итог:</string>
+    <string name="phone">Телефон:</string>
 </resources>
