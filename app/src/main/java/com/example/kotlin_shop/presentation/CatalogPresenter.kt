@@ -78,6 +78,34 @@ class CatalogPresenter @Inject constructor(
         }
     }
 
+    fun getProductsBySubCategory(subCategory: String){
+        launch {
+            try {
+                val items = catalogGetter().filter {
+                    it.category.name == subCategory
+                }.toMutableList()
+                viewState.showProducts(items)
+            }
+            catch (e: Exception){
+                viewState.showNetworkError()
+            }
+        }
+    }
+
+    fun getProductsByMainCategory(mainCategory: String){
+        launch {
+            try {
+                val items = catalogGetter().filter {
+                    it.category.mainCategory.name == mainCategory
+                }.toMutableList()
+                viewState.showProducts(items)
+            }
+            catch (e: Exception){
+                viewState.showNetworkError()
+            }
+        }
+    }
+
     fun getHints(query: String) {
 
         if (query != "")
@@ -115,6 +143,4 @@ class CatalogPresenter @Inject constructor(
             viewState.onFavoriteRefreshed(changed)
         }
     }
-
-
 }

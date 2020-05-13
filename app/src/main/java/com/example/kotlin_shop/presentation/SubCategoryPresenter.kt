@@ -19,7 +19,7 @@ class SubCategoryPresenter @Inject constructor(
             }
             catch (e: Exception){
                 viewState.showNetworkError()
-//                viewState.showGenres(listOf(SubCategory("sub 1", MainCategory("asd")), SubCategory("sub 2", MainCategory("asd"))))
+                viewState.showGenres(listOf(SubCategory("sub 1", MainCategory("asd")), SubCategory("sub 2", MainCategory("asd"))))
             }
         }
     }

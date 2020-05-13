@@ -27,6 +27,9 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     private var wasFragmentShown: Boolean = false
     private lateinit var suggestionAdapter: AutoCompleteAdapter
 
+    private var subCategory: String? = null
+    private var mainCategory: String? = null
+
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
@@ -43,9 +46,13 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
                 requireContext(), android.R.layout.simple_expandable_list_item_1
             )
 
+        subCategory = requireArguments().get("sub_category") as String?
+        mainCategory = requireArguments().get("main_category") as String?
+
+
         srlCatalogRefresher.setOnRefreshListener {
             srlCatalogRefresher.isRefreshing = true
-            presenter.getProducts(ActiveSearchFragment.query)
+            getProducts()
         }
 
         srlCatalogRefresher.isRefreshing = true
@@ -62,11 +69,28 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         super.onStart()
         if (!wasFragmentShown) {
             wasFragmentShown = true
-            presenter.getProducts("")
+            getProducts()
         }
         view?.clearFocus()
 
         presenter.refreshFavorites(catalogAdapter.dataSet.toMutableList())
+    }
+
+    private fun getProducts(){
+        when {
+            subCategory != null -> {
+                presenter.getProductsBySubCategory(subCategory.toString())
+                Toast.makeText(context, "Sub", Toast.LENGTH_SHORT).show()
+            }
+            mainCategory != null -> {
+                presenter.getProductsByMainCategory(mainCategory.toString())
+                Toast.makeText(context, "Main", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                presenter.getProducts(ActiveSearchFragment.query)
+                Toast.makeText(context, "None", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onSearchBtn(query: String) {

@@ -18,7 +18,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class SubCategoryFragment: MvpAppCompatFragment(R.layout.fragment_sub_category), SubCategoryView {
+class SubCategoryFragment : MvpAppCompatFragment(R.layout.fragment_sub_category), SubCategoryView {
 
     @Inject
     lateinit var presenterProvider: Provider<SubCategoryPresenter>
@@ -51,7 +51,10 @@ class SubCategoryFragment: MvpAppCompatFragment(R.layout.fragment_sub_category),
             val activity = context as MainActivity
 
             val action =
-                SubCategoryFragmentDirections.actionNavigationSubCategoryToNavigationCatalog()
+                SubCategoryFragmentDirections.actionNavigationSubCategoryToNavigationCatalog(
+                    mainCategory,
+                    null
+                )
 
             action.mainCategory = mainCategory
 

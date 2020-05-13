@@ -18,9 +18,11 @@ class SubCategoryAdapter : RecyclerView.Adapter<SubCategoryAdapter.Holder>() {
                 val activity = view.context as MainActivity
 
                 val action =
-                    SubCategoryFragmentDirections.actionNavigationSubCategoryToNavigationCatalog()
+                    SubCategoryFragmentDirections.actionNavigationSubCategoryToNavigationCatalog(
+                        null,
+                        text
+                    )
 
-                action.subCategory = text
 
                 activity.navigate(action)
             }

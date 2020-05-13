@@ -20,7 +20,7 @@ class MainCategoryPresenter @Inject constructor(
             }
             catch (e: Exception){
                 viewState.showNetworkError()
-//                viewState.showGenres(listOf(MainCategory("category1"), MainCategory("category2")))
+                viewState.showGenres(listOf(MainCategory("category1"), MainCategory("category2")))
             }
         }
     }

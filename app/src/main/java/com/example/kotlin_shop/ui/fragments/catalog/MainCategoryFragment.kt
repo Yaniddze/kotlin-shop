@@ -47,7 +47,10 @@ class MainCategoryFragment :
             val activity = context as MainActivity
 
             val action =
-                MainCategoryFragmentDirections.actionNavigationMainCategoryToNavigationCatalog()
+                MainCategoryFragmentDirections.actionNavigationMainCategoryToNavigationCatalog(
+                    null,
+                    null
+                )
 
             activity.navigate(action)
         }

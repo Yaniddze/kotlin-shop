@@ -19,11 +19,11 @@
         <argument
             android:name="main_category"
             app:argType="string"
-            android:defaultValue='""' />
+            app:nullable="true" />
         <argument
             android:name="sub_category"
             app:argType="string"
-            android:defaultValue='""' />
+            app:nullable="true" />
     </fragment>
 
     <fragment
