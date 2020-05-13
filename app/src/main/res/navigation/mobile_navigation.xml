@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-
-    app:startDestination="@+id/navigation_catalog">
+    app:startDestination="@id/navigation_main_category">
 
     <fragment
         android:id="@+id/navigation_catalog"
@@ -17,6 +16,14 @@
             app:destination="@id/navigation_detailed"
             app:enterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="main_category"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="sub_category"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 
     <fragment
@@ -62,4 +69,28 @@
         android:name="com.example.kotlin_shop.ui.fragments.OrdersFragment"
         android:label="Заказы"
         tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/navigation_main_category"
+        android:name="com.example.kotlin_shop.ui.fragments.catalog.MainCategoryFragment"
+        tools:layout="@layout/fragment_main_category"
+        android:label="Категории" >
+        <action
+            android:id="@+id/action_navigation_main_category_to_navigation_catalog"
+            app:destination="@id/navigation_catalog" />
+        <action
+            android:id="@+id/action_navigation_main_category_to_navigation_sub_category2"
+            app:destination="@id/navigation_sub_category" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_sub_category"
+        android:name="com.example.kotlin_shop.ui.fragments.catalog.SubCategoryFragment"
+        android:label="Подкатегории"
+        tools:layout="@layout/fragment_sub_category">
+        <argument
+            android:name="main_category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_sub_category_to_navigation_catalog"
+            app:destination="@id/navigation_catalog" />
+    </fragment>
 </navigation>

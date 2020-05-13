@@ -59,10 +59,4 @@ class CatalogPresenterUseCasesModule {
         RefreshFavoriteUseCase(
             repository
         )
-
-    @Provides
-    @Singleton
-    fun provideGetGenreUseCase(
-        repository: GenreRepository
-    ): GetAllGenresUseCase = GetAllGenresUseCase(repository)
 }

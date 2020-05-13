@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.ui.adapters
+package com.example.kotlin_shop.ui.adapters.catalog
 
 import android.content.Context
 import android.widget.ArrayAdapter

@@ -7,10 +7,10 @@ import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.presentation.CatalogPresenter
-import com.example.kotlin_shop.ui.adapters.AutoCompleteAdapter
+import com.example.kotlin_shop.ui.adapters.catalog.AutoCompleteAdapter
 import com.example.kotlin_shop.ui.fragments.BadInternetFragment
 import com.example.kotlin_shop.ui.interfaces.CatalogView
-import com.example.kotlin_shop.ui.adapters.CatalogAdapter
+import com.example.kotlin_shop.ui.adapters.catalog.CatalogAdapter
 import kotlinx.android.synthetic.main.fragment_catalog.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -19,7 +19,8 @@ import javax.inject.Provider
 
 class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), CatalogView {
 
-    private val catalogAdapter = CatalogAdapter(::onFavoriteClick)
+    private val catalogAdapter =
+        CatalogAdapter(::onFavoriteClick)
 
     private var isRecyclerShowed = true
     private var isSearchShowed = false
@@ -37,12 +38,10 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        suggestionAdapter = ArrayAdapter<String>(
-//            requireContext(), android.R.layout.simple_expandable_list_item_1)
-
-        suggestionAdapter = AutoCompleteAdapter(
-            requireContext(), android.R.layout.simple_expandable_list_item_1
-        )
+        suggestionAdapter =
+            AutoCompleteAdapter(
+                requireContext(), android.R.layout.simple_expandable_list_item_1
+            )
 
         srlCatalogRefresher.setOnRefreshListener {
             srlCatalogRefresher.isRefreshing = true

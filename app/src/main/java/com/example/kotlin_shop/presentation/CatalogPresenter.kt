@@ -30,9 +30,7 @@ class CatalogPresenter @Inject constructor(
 
     private val favoriteDeleter: DeleteFavoriteUseCase,
 
-    private val refreshFavoriteUseCase: RefreshFavoriteUseCase,
-
-    private val getGenresUseCase: GetAllGenresUseCase
+    private val refreshFavoriteUseCase: RefreshFavoriteUseCase
 
 ) : BasePresenter<CatalogView>() {
 
@@ -74,9 +72,7 @@ class CatalogPresenter @Inject constructor(
                         .contains(query.toLowerCase(Locale.getDefault()))
                 }.toMutableList()
                 viewState.showProducts(items)
-            } catch (e: UnknownHostException) {
-                viewState.showNetworkError()
-            } catch (e: SocketTimeoutException) {
+            } catch (e: Exception) {
                 viewState.showNetworkError()
             }
         }

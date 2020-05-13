@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.ui.adapters
+package com.example.kotlin_shop.ui.adapters.order
 
 import android.view.LayoutInflater
 import android.view.View

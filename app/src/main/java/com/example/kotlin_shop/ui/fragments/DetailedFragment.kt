@@ -3,8 +3,6 @@ package com.example.kotlin_shop.ui.fragments
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
-import android.widget.ExpandableListView.OnGroupCollapseListener
-import android.widget.SimpleExpandableListAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,9 +11,9 @@ import com.example.kotlin_shop.R
 import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.DetailedPresenter
-import com.example.kotlin_shop.ui.adapters.PhotosAdapter
-import com.example.kotlin_shop.ui.adapters.TechAdapter
-import com.example.kotlin_shop.ui.adapters.ViewedProductsAdapter
+import com.example.kotlin_shop.ui.adapters.detailed.PhotosAdapter
+import com.example.kotlin_shop.ui.adapters.detailed.TechAdapter
+import com.example.kotlin_shop.ui.adapters.detailed.ViewedProductsAdapter
 import com.example.kotlin_shop.ui.interfaces.DetailedView
 import kotlinx.android.synthetic.main.fragment_detailed.*
 import moxy.MvpAppCompatFragment
@@ -35,8 +33,10 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
         App.appComponent.inject(this)
     }
 
-    private val viewedAdapter = ViewedProductsAdapter()
-    private val photosAdapter = PhotosAdapter()
+    private val viewedAdapter =
+        ViewedProductsAdapter()
+    private val photosAdapter =
+        PhotosAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -4,6 +4,8 @@ import android.content.Context
 import com.example.kotlin_shop.di.modules.*
 import com.example.kotlin_shop.ui.fragments.*
 import com.example.kotlin_shop.ui.fragments.catalog.CatalogFragment
+import com.example.kotlin_shop.ui.fragments.catalog.MainCategoryFragment
+import com.example.kotlin_shop.ui.fragments.catalog.SubCategoryFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,7 +22,9 @@ import javax.inject.Singleton
         GeneralUseCases::class,
         MakeOrderPresenterUseCasesModule::class,
         ValidatorsModule::class,
-        OrderPresenterUseCaseModule::class
+        OrderPresenterUseCaseModule::class,
+        MainCategoryPresenterUseCasesModule::class,
+        SubCategoryUseCasesModule::class
     ]
 )
 @Singleton
@@ -39,5 +43,7 @@ interface AppComponent {
     fun inject(base: MakeOrderFragment)
     fun inject(base: FavoriteFragment)
     fun inject(base: OrdersFragment)
+    fun inject(base: MainCategoryFragment)
+    fun inject(base: SubCategoryFragment)
 
 }

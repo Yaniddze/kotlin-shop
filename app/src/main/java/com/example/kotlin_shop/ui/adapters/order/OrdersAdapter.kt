@@ -1,4 +1,4 @@
-package com.example.kotlin_shop.ui.adapters
+package com.example.kotlin_shop.ui.adapters.order
 
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +30,10 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.Holder>() {
             view.findViewById<RecyclerView>(R.id.rvOrderItems).apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
-                adapter = OrderItemAdapter(order.items)
+                adapter =
+                    OrderItemAdapter(
+                        order.items
+                    )
             }
         }
     }
