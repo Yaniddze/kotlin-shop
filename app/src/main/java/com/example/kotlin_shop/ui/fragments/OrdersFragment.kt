@@ -2,6 +2,7 @@ package com.example.kotlin_shop.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin_shop.App
 import com.example.kotlin_shop.R
@@ -42,5 +43,9 @@ class OrdersFragment: MvpAppCompatFragment(R.layout.fragment_orders), OrdersView
 
     override fun showOrders(orders: List<FullOrder>) {
         ordersAdapter.changeItems(orders)
+    }
+
+    override fun showNetworkError() {
+        Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show()
     }
 }

@@ -110,4 +110,8 @@ class MakeOrderFragment : MvpAppCompatFragment(R.layout.fragment_purchase), Make
     override fun showMakeOrderError(errorMessage: String) {
         Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
     }
+
+    override fun showNetworkError() {
+        Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
+    }
 }

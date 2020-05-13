@@ -21,4 +21,7 @@ interface MakeOrderView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showMakeOrderError(errorMessage: String)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showNetworkError()
 }

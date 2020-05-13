@@ -9,8 +9,12 @@ class OrdersPresenter @Inject constructor(
 ): BasePresenter<OrdersView>() {
     fun getOrders(){
         launch {
-            val items = getAllOrdersUseCase()
-            viewState.showOrders(items)
+            try{
+                val items = getAllOrdersUseCase()
+                viewState.showOrders(items)
+            }catch (e: Exception){
+                viewState.showNetworkError()
+            }
         }
     }
 }

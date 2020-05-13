@@ -11,8 +11,6 @@ import com.example.kotlin_shop.domain.usecases.favorite.AddFavoriteUseCase
 import com.example.kotlin_shop.domain.usecases.favorite.DeleteFavoriteUseCase
 import com.example.kotlin_shop.domain.usecases.favorite.RefreshFavoriteUseCase
 import com.example.kotlin_shop.ui.interfaces.CatalogView
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import java.util.*
 import javax.inject.Inject
 

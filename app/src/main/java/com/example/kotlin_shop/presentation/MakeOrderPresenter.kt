@@ -53,14 +53,19 @@ class MakeOrderPresenter @Inject constructor(
         }
 
         launch {
-            val orderItems = cartGetter().map { it.toOrderItem() }
-            if(orderItems.isNotEmpty()){
-                val order = Order(name, serName, phone, paymentType, orderItems)
-                ordersAdder(order)
-                viewState.onOrderAdded()
+            try{
+                val orderItems = cartGetter().map { it.toOrderItem() }
+                if(orderItems.isNotEmpty()){
+                    val order = Order(name, serName, phone, paymentType, orderItems)
+                    ordersAdder(order)
+                    viewState.onOrderAdded()
+                }
+                else{
+                    viewState.showMakeOrderError("Корзина пуста!")
+                }
             }
-            else{
-                viewState.showMakeOrderError("Корзина пуста!")
+            catch (e: Exception){
+                viewState.showNetworkError()
             }
         }
     }

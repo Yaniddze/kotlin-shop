@@ -52,12 +52,6 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
             adapter = recyclerAdapter
         }
 
-        btnApply.setOnClickListener {
-            val action = CartFragmentDirections.actionNavigationCartToPurchaseFragment()
-
-            (context as MainActivity).navigate(action)
-        }
-
         presenter.getProducts()
     }
 
@@ -72,6 +66,13 @@ class CartFragment : MvpAppCompatFragment(R.layout.fragment_cart), CartView {
     override fun showProducts(products: MutableList<CartItem>) {
         recyclerAdapter.changeItemSource(products)
         calcTotalPrice()
+        if(products.isNotEmpty()){
+            btnApply.setOnClickListener {
+                val action = CartFragmentDirections.actionNavigationCartToPurchaseFragment()
+
+                (context as MainActivity).navigate(action)
+            }
+        }
     }
 
     override fun onItemDeleted(item: CartItem) {
