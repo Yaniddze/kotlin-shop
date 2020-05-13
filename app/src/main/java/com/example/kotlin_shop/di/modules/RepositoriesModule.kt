@@ -1,10 +1,7 @@
 package com.example.kotlin_shop.di.modules
 
 import com.example.kotlin_shop.data.AppDatabase
-import com.example.kotlin_shop.data.dao.CartItemDao
-import com.example.kotlin_shop.data.dao.FavoriteProductsDao
-import com.example.kotlin_shop.data.dao.OrderDao
-import com.example.kotlin_shop.data.dao.ProductsDao
+import com.example.kotlin_shop.data.dao.*
 import com.example.kotlin_shop.data.entities.factories.CartItemFactory
 import com.example.kotlin_shop.data.repositories.*
 import com.example.kotlin_shop.domain.FavoriteProductFactory
@@ -72,4 +69,10 @@ class RepositoriesModule {
     fun provideOrderRepository(
         dao: OrderDao
     ): OrderRepository = OrderRepositoryImpl(dao)
+
+    @Provides
+    @Singleton
+    fun provideGenreRepository(
+        retrofit: Retrofit
+    ): GenreRepository = GenreRepositoryImpl(retrofit.create(GenresDao::class.java))
 }

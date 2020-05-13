@@ -30,7 +30,9 @@ class CatalogPresenter @Inject constructor(
 
     private val favoriteDeleter: DeleteFavoriteUseCase,
 
-    private val refreshFavoriteUseCase: RefreshFavoriteUseCase
+    private val refreshFavoriteUseCase: RefreshFavoriteUseCase,
+
+    private val getGenresUseCase: GetAllGenresUseCase
 
 ) : BasePresenter<CatalogView>() {
 
@@ -117,4 +119,6 @@ class CatalogPresenter @Inject constructor(
             viewState.onFavoriteRefreshed(changed)
         }
     }
+
+
 }

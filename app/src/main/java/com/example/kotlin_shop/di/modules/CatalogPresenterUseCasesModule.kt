@@ -2,6 +2,7 @@ package com.example.kotlin_shop.di.modules
 
 import com.example.kotlin_shop.domain.repositories.CatalogRepository
 import com.example.kotlin_shop.domain.repositories.FavoriteProductsRepository
+import com.example.kotlin_shop.domain.repositories.GenreRepository
 import com.example.kotlin_shop.domain.repositories.ViewedProductsRepository
 import com.example.kotlin_shop.domain.usecases.*
 import com.example.kotlin_shop.domain.usecases.catalog.AddCatalogItemUseCase
@@ -58,4 +59,10 @@ class CatalogPresenterUseCasesModule {
         RefreshFavoriteUseCase(
             repository
         )
+
+    @Provides
+    @Singleton
+    fun provideGetGenreUseCase(
+        repository: GenreRepository
+    ): GetAllGenresUseCase = GetAllGenresUseCase(repository)
 }
