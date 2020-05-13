@@ -56,7 +56,7 @@
                 android:id="@+id/clDetailedPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border_bottom_layout"
+                android:background="@drawable/border_top_bottom_layout"
                 android:paddingBottom="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvDetailedGenre">
@@ -103,6 +103,109 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clDetailedTech"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tvDetailedViewedTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clDetailedPrice"
+                app:layout_constraintVertical_bias="1.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDetailedDescriptionTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivDetailedDescriptionImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_more"
+                        android:contentDescription="@string/arrow"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDetailedDescriptionTitle"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/tvDetailedDescriptionTitle"
+                        app:layout_constraintTop_toTopOf="@id/tvDetailedDescriptionTitle" />
+
+                    <TextView
+                        android:id="@+id/tvDetailedDescriptionTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/description"
+                        android:textColor="@android:color/black"
+                        android:textSize="24sp"
+                        app:layout_constraintLeft_toRightOf="@id/ivDetailedDescriptionImage"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvDetailedDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="fill"
+                    android:padding="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clDetailedDescriptionTitle"
+                    tools:text="description description description description description " />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clDetailedTechTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDetailedDescription">
+
+                    <ImageView
+                        android:id="@+id/ivDetailedTechImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_more"
+                        app:layout_constraintBottom_toBottomOf="@id/tvDetailedTechTitle"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/tvDetailedTechTitle"
+                        app:layout_constraintTop_toTopOf="@id/tvDetailedTechTitle" />
+
+                    <TextView
+                        android:id="@+id/tvDetailedTechTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/tech"
+                        android:textColor="@android:color/black"
+                        android:textSize="24sp"
+                        app:layout_constraintLeft_toRightOf="@id/ivDetailedTechImage"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDetailedTech"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clDetailedTechTitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/tvDetailedViewedTitle"
@@ -115,7 +218,9 @@
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@id/rvDetailedViewed"
-                app:layout_constraintTop_toBottomOf="@id/clDetailedPrice"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clDetailedTech"
                 app:layout_constraintVertical_bias="0.0" />
 
 
@@ -127,7 +232,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clDetailedPrice"
+                app:layout_constraintTop_toBottomOf="@id/tvDetailedViewedTitle"
                 app:layout_constraintVertical_bias="0.8" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

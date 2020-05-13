@@ -54,4 +54,7 @@
     <string name="payment_type">Способ оплаты:</string>
     <string name="total">Итог:</string>
     <string name="phone">Телефон:</string>
+    <string name="description">Описание</string>
+    <string name="tech">Характеристики</string>
+    <string name="arrow">arrow</string>
 </resources>

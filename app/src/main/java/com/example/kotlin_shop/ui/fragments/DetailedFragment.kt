@@ -3,6 +3,8 @@ package com.example.kotlin_shop.ui.fragments
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
+import android.widget.ExpandableListView.OnGroupCollapseListener
+import android.widget.SimpleExpandableListAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.example.kotlin_shop.domain.Product
 import com.example.kotlin_shop.domain.ViewedProduct
 import com.example.kotlin_shop.presentation.DetailedPresenter
 import com.example.kotlin_shop.ui.adapters.PhotosAdapter
+import com.example.kotlin_shop.ui.adapters.TechAdapter
 import com.example.kotlin_shop.ui.adapters.ViewedProductsAdapter
 import com.example.kotlin_shop.ui.interfaces.DetailedView
 import kotlinx.android.synthetic.main.fragment_detailed.*
@@ -19,6 +22,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
+
 
 class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), DetailedView {
 
@@ -108,6 +112,44 @@ class DetailedFragment() : MvpAppCompatFragment(R.layout.fragment_detailed), Det
 
         ivFavoriteDetailed.setOnClickListener {
             onFavoriteClick(product)
+        }
+
+        tvDetailedDescription.text = product.description
+
+        clDetailedDescriptionTitle.setOnClickListener {
+            tvDetailedDescription.apply {
+                visibility = if (visibility == View.GONE)
+                    View.VISIBLE
+                else
+                    View.GONE
+            }
+
+            ivDetailedDescriptionImage.apply {
+                background = if (tvDetailedDescription.visibility == View.GONE)
+                    resources.getDrawable(R.drawable.ic_more, null)
+                else
+                    resources.getDrawable(R.drawable.ic_less, null)
+            }
+        }
+
+        rvDetailedTech.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = TechAdapter().apply { loadItems(product.attributes) }
+        }
+
+        clDetailedTechTitle.setOnClickListener {
+            rvDetailedTech.visibility = if (rvDetailedTech.visibility == View.GONE)
+                View.VISIBLE
+            else
+                View.GONE
+
+            ivDetailedTechImage.apply {
+                background = if (rvDetailedTech.visibility == View.GONE)
+                    resources.getDrawable(R.drawable.ic_more, null)
+                else
+                    resources.getDrawable(R.drawable.ic_less, null)
+            }
         }
     }
 
