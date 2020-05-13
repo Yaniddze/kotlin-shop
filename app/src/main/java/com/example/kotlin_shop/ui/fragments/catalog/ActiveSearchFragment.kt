@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.search_active_layout.*
 
 class ActiveSearchFragment(
     private val onDisable: () -> Unit,
-    private val getProducts: (query: String) -> Unit,
+    private val getProducts: () -> Unit,
     private val getHints: (query: String) -> Unit,
     private val searchAdapter: ArrayAdapter<String>
 ) : Fragment(R.layout.search_active_layout) {
@@ -45,7 +45,7 @@ class ActiveSearchFragment(
         actvSearch.setText(query)
         actvSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                getProducts(query)
+                getProducts()
                 true
             } else
                 false

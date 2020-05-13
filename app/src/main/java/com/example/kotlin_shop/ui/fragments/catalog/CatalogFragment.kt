@@ -78,30 +78,25 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     private fun getProducts(){
         when {
+            ActiveSearchFragment.query != "" -> {
+                presenter.getProducts(ActiveSearchFragment.query)
+            }
             subCategory != null -> {
                 presenter.getProductsBySubCategory(subCategory.toString())
-                Toast.makeText(context, "Sub", Toast.LENGTH_SHORT).show()
             }
             mainCategory != null -> {
                 presenter.getProductsByMainCategory(mainCategory.toString())
-                Toast.makeText(context, "Main", Toast.LENGTH_SHORT).show()
             }
             else -> {
-                presenter.getProducts(ActiveSearchFragment.query)
-                Toast.makeText(context, "None", Toast.LENGTH_SHORT).show()
+                presenter.getProducts()
             }
         }
-    }
-
-    private fun onSearchBtn(query: String) {
-        srlCatalogRefresher.isRefreshing = true
-        presenter.getProducts(query)
     }
 
     private fun onDisableSearch() {
         hideSearchBar()
         srlCatalogRefresher.isRefreshing = true
-        presenter.getProducts()
+        getProducts()
     }
 
     private fun hideSearchBar() {
@@ -132,7 +127,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
                 flCatalogSearch.id,
                 ActiveSearchFragment(
                     ::onDisableSearch,
-                    ::onSearchBtn,
+                    ::getProducts,
                     presenter::getHints,
                     suggestionAdapter
                 )
