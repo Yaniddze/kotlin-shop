@@ -20,7 +20,7 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.Holder>() {
             val fullPrice = order.items.map { it.product.calcDiscountPrice() * it.count }.sum()
             val format = DecimalFormat("#.##")
             view.findViewById<TextView>(R.id.tvOrderTotal).text =
-                "${format.format(fullPrice).toString()} руб"
+                "${format.format(fullPrice)} руб"
 
             view.findViewById<TextView>(R.id.tvOrderPayment).text =
                 if(order.paymentType == Order.PaymentType.CashOnReceiving)

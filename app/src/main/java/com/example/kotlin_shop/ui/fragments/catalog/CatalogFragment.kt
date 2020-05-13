@@ -57,10 +57,6 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
         } else {
             hideSearchBar()
         }
-
-        view.findViewById<Button>(R.id.btnCatalogAddItem).setOnClickListener {
-            presenter.addItem()
-        }
     }
 
     override fun onStart() {
