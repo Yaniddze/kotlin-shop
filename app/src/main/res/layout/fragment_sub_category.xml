@@ -35,7 +35,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/ivCatalogSubCategoryArrow"
             app:layout_constraintTop_toBottomOf="@id/tvCatalogSubCategoryText"
-            tools:text="Категория: какая-то" />
+            tools:text="Категория: какая-то"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:gravity="center"/>
 
         <ImageView
             android:id="@+id/ivCatalogSubCategoryArrow"
