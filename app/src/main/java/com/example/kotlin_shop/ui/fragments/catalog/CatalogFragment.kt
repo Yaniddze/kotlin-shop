@@ -36,6 +36,7 @@ class CatalogFragment : MvpAppCompatFragment(R.layout.fragment_catalog), Catalog
 
     init {
         App.appComponent.inject(this)
+        ActiveSearchFragment.query = ""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
