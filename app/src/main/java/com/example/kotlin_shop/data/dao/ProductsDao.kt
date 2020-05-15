@@ -8,10 +8,10 @@ import retrofit2.http.Path
 
 interface ProductsDao {
 
-    @GET("products/all/Zinevich")
+    @GET("products/withCategoryAndPhoto/all/Zinevich")
     suspend fun allProducts(): List<Product>
 
-    @GET("products/all/Zinevich/{id}")
+    @GET("products/withCategoryAndPhoto/all/Zinevich/{id}")
     suspend fun getById(@Path("id") id: String): Product?
 
     @POST("products/all/Zinevich/")
